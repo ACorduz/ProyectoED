@@ -1,14 +1,14 @@
 
-package Data;
+package Estructure_DoubleLinkedList;
 
 
-public class LinkedList <T extends Comparable<T>> implements EstructureLinkedList<T>{
+public class DoubleLinkedList <T> implements EstructureDoubleLinkedList<T>{
+    // esta estrcutura esta hecha para soportar objetos
     private Node head;
     private Node tail; 
     private int counter;
-    private  T reference;
     
-    public LinkedList(){
+    public DoubleLinkedList(){
         counter = 0;
         head = new Node(null);
         tail = new Node(null);
@@ -16,15 +16,16 @@ public class LinkedList <T extends Comparable<T>> implements EstructureLinkedLis
     
     // add to front
     public void pushFront(T value){
-        Node node = new Node(value);
-        // el nuevo nodo tener el next del head
-        node.setNext(head.getNext());
-        // ponerle el next al head
-        head.setNext(node);
-        if(tail.getNext() == null){
-            // verificar esto
-            tail.setNext(node);
-           
+        // si la cabeza es nula
+        Node nodeNew = new Node(value);
+        if(head.getNext()== null){
+            head.setNext(nodeNew);
+            tail.setNext(nodeNew);
+        }else{
+            // ponerle el prev
+            head.getNext().setPrev(nodeNew);
+            nodeNew.setNext(head.getNext());
+            head.setNext(nodeNew);
         }
         counter++;
     }
@@ -44,13 +45,15 @@ public class LinkedList <T extends Comparable<T>> implements EstructureLinkedLis
         if(empty()){
             throw new RuntimeException("empty list, null head");
         }
-        // sino es null obtner el valor del nodo a hacer pop
+        // ponemos la cabeza en el nuevo 
         Node nodePop = head.getNext();
         head.setNext(nodePop.getNext());
+        // si head es null solo hay un elemento
         if(head.getNext() == null){
            tail.setNext(null);
+        }else{
+            nodePop.getNext().setPrev(null);
         }
-        //return(T) (nodePop.getData()); 
         counter--;
     }
      
@@ -58,16 +61,15 @@ public class LinkedList <T extends Comparable<T>> implements EstructureLinkedLis
     public void pushBack(T value){
         // crear el nodo nuevo
         Node nodeNew = new Node(value);
-        nodeNew.setNext(null);
         // si tail es igual a null no hay valores 
         if(tail.getNext()== null){
             head.setNext(nodeNew);
             tail.setNext(nodeNew);
         }else{
             tail.getNext().setNext(nodeNew);
+            nodeNew.setPrev(tail.getNext());
             tail.setNext(nodeNew);
         }
-        //System.out.println("Push back correcto=" + head.getNext().getData());
         counter++;
     }
     
@@ -83,42 +85,47 @@ public class LinkedList <T extends Comparable<T>> implements EstructureLinkedLis
     // remove back item 
     public void popBack(){
         //Node nodePop = null;
-        if(head.getNext() == null){
+        if(empty()){
             throw new RuntimeException("empty list, null head");
         }
         else if(head.getNext() == tail.getNext()){
-            //nodePop = tail.getNext();
             head.setNext(null);
             head.setNext(null);
         }
         // es o(n) no sabemos cual es el anterior al tail 
         else{
-            // p es el nodo anterior al final
-            Node current = head;
-            Node prev = new Node();
-            prev.setNext(null);
-            
-            while(current.getNext().getNext() != null){
-                prev = current; 
-                current = current.getNext();
-            }
-            //nodePop = tail.getNext();
-            current.setNext(null);
-            tail.setNext(current);
+            tail.setNext(tail.getNext().getPrev());
+            tail.getNext().setNext(null);
         }
         counter--;
-        //return(T) (nodePop.getData());
     }
     
     // ojo con este probar
     public void addAfter(Node node,T key){
         Node nodeNew = new Node(key);
         nodeNew.setNext(node.getNext());
+        nodeNew.setPrev(node);
         node.setNext(nodeNew);
-        if(tail.getNext() == node){
+        if(nodeNew.getNext() != null){
+            nodeNew.getNext().setPrev(nodeNew);
+        }
+        else if(tail.getNext() == node){
             tail.setNext(nodeNew);
         }
         counter++;
+    }
+    
+    public void addBefore(Node node, T key){
+        Node nodeNew = new Node(key);
+        nodeNew.setNext(node);
+        nodeNew.setPrev(node.getPrev());
+        node.setPrev(nodeNew);
+        if(nodeNew.getPrev() != null){
+            nodeNew.getPrev().setNext(nodeNew);
+        }
+        else if(head.getNext() == node){
+            head.setNext(nodeNew);
+        }
     }
     
     public boolean empty(){
@@ -140,37 +147,21 @@ public class LinkedList <T extends Comparable<T>> implements EstructureLinkedLis
                 prev.setNext(null);
 
                 while(current.getNext() != null){
-                    prev = current; 
                     current = current.getNext();
-                    Comparable i = (Comparable) current.getData();
+                    T i = (T) current.getData();
                     //System.out.println("El comparable es asi:"+i.compareTo(key));
-                    if(i.compareTo(key) == 0){
+                    if(i == key){
                         return(true);
                     }
                 }
-                if(tail.getNext().getData() == key){
-                    found = true; 
-                }
             }
+            if(tail.getNext().getData() == key){
+                    found = true; 
+            }
+        }
             return(found);
-        }
-         
     }
-    
-        public int compareTo(T item){
-        int result;
-        // la referencia hace como decir a lo que se va a llamar
-        if(reference.compareTo(item) > 0){
-            result = 1;
-        }else if(reference.compareTo(item) < 0){
-            result = -1;
-        }
-        else{
-            result =0;
-        }
-        return(result);
-    }
-    
+           
         
     public Node getNodeForKeyWhioutCheck(T key){
         if(empty()){
@@ -183,11 +174,9 @@ public class LinkedList <T extends Comparable<T>> implements EstructureLinkedLis
             Node prev = new Node();
             prev.setNext(null);
             while(current.getNext() != null){
-                prev = current; 
                 current = current.getNext();
-                Comparable i = (Comparable) current.getData();
-                //System.out.println("El comparable es asi:"+i.compareTo(key));
-                if(i.compareTo(key) == 0){
+                T i = (T) current.getData();
+                if(i == key){
                     return(current);
                 }
             }
