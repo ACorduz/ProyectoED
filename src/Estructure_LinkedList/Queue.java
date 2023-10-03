@@ -1,4 +1,4 @@
-package Data;
+package Estructure_LinkedList;
 
 public class Queue<T> extends LinkedList implements EstructureQueue<T> {
     
@@ -7,8 +7,7 @@ public class Queue<T> extends LinkedList implements EstructureQueue<T> {
     }
     
     
-    public void enqueue(T item){
-        Comparable key = (Comparable) item; 
+    public void enqueue(T key){
         pushBack(key);
 
     }
