@@ -1,8 +1,10 @@
 
 package Estructure_LinkedList;
 
+import java.io.Serializable;
 
-public class LinkedList <T> implements EstructureLinkedList<T>{
+
+public class LinkedList <T> implements EstructureLinkedList<T>, Serializable{
     // Esta Implementacion esta diseñada para soportar objetos
     private Node head;
     private Node tail; 

@@ -17,22 +17,28 @@ import java.io.ObjectInputStream;
 public class serialization <T>{
     String[] arrayRouteFiles = {"listForChooseProductSerialization.obj", "listOfProductsSerialization.obj", "listOfBeneficiariesSerialization.obj", "listOfDonorsSerialization.obj"};
 
-    public boolean fileExist(String nombreArchivo){
-        File archivo = new File(nombreArchivo);
-        return archivo.exists() && !archivo.isDirectory();
+    public boolean fileExist(String nameFile){
+        File file = new File(nameFile);
+        return file.exists() && !file.isDirectory();
     }
     
-    public void borrarArchivo(String nombreArchivo){
-        File archivo = new File(nombreArchivo);
+    public void deleteFile(String nameFile){
+        File archivo = new File(nameFile);
         if (archivo.delete())
            System.out.println("El archivo ha sido borrado satisfactoriamente");
         else
            System.out.println("El archivo no puede ser borrado");
     }
+    
+    public void deleteAllFiles(){
+        for(int i = 0; i < arrayRouteFiles.length; i++){
+            deleteFile(arrayRouteFiles[i]);
+        }
+    }
 
     // el siguiente metodo es para crear los archivos o ver si ya estan creados; 
     public boolean WriteSerializationInicialFile(int indexArrayRouteFile){
-        // se le pasa el indice del archivo y se verifica
+        // se le pasa el indice del file y se verifica
         String fileName = arrayRouteFiles[indexArrayRouteFile]; 
         boolean isFileCreated = fileExist(fileName);
         if(!isFileCreated){
@@ -40,7 +46,8 @@ public class serialization <T>{
                 // si compradores_ser no esta creado lo crea, file output stream sabe como crear y conectar archivos
                 FileOutputStream fos= new FileOutputStream(fileName);
                 ObjectOutputStream oos= new ObjectOutputStream(fos);
-                boolean notErrorWrite = true; 
+                boolean notErrorWrite = true;
+                // System.out.println("aqui llego antes switch");
                 switch(indexArrayRouteFile){
                     case 0:
                         Queue  listForChooseProduct = Main.getListForChooseProduct();
@@ -48,6 +55,7 @@ public class serialization <T>{
                         break;
                     case 1:
                         DoubleLinkedList<Product> listOfProducts = Main.getListOfProducts();
+                        //System.out.println("aqui llego");
                         oos.writeObject(listOfProducts);
                         break;
                     case 2:
@@ -66,21 +74,27 @@ public class serialization <T>{
                 
                 oos.close();
                 fos.close();
-                return(notErrorWrite); // regresa true si se pudo crear el archivo
+                return(notErrorWrite); // regresa true si se pudo crear el file
             }catch(IOException ioe){
                 System.out.print("Hubo un error tratando de serializar el array de compradores" + ioe);
             }        
         }
-        // si el archivo ya ha sido creado entonces regresa false
+        // si el file ya ha sido creado entonces regresa false
         return(false);
     }
     
-     //FALTA     
-    // crear metodos para sacar el archivos, ya
+    // para crear todos los archivos incialmente ; 
+    public void WriteSerializationInicial_AllFiles(){
+        for(int i = 0; i < arrayRouteFiles.length; i++){
+            System.out.print("file"+ i+ ", is writeCorrectly="+WriteSerializationInicialFile(i)+";");
+        }
+        System.out.println();
+    
+    }
     
     // Este metodo devuelve un objeto de los archivos serializados por lo que hay que hacerle un casting 
     public T getObjectFromSerializationFile(int indexArrayRouteFile){
-        // se le pasa el indice del archivo y se verifica
+        // se le pasa el indice del file y se verifica
         String fileName = arrayRouteFiles[indexArrayRouteFile];
         T object = null;
         try{
@@ -102,17 +116,71 @@ public class serialization <T>{
         return(null);
     }
     
-    public void guardarEstadoAgenda(){
-        // necesitamos cambiar los archivos serializados entonces vamos a sobreescribirlos(borrar y volver a escribir). porque no sabemos si se borraron archivos, o agregaron. Se podria saber pero para ahorrar trabajo se hace de esta manera.
-        // sin embargo, puede haber otra forma de optimizar esta parte, pues si no se cambia un archivo porque borrarlo;
-        // ojo los metodos iniciales nos sirven, porque, primero debimos haber sacado las listas, luego si les agregamos algo, solo debemos traerlas otra vez y guardarlas
-        for(int i = 0; i < arrayRouteFiles.length; i++){
-            borrarArchivo(arrayRouteFiles[i]);
-            WriteSerializationInicialFile(i);
-        }
-   
+    // guardar una lista del programa
+    public void saveStatusListProgram(int indexArray){
+        deleteFile(arrayRouteFiles[indexArray]);
+        WriteSerializationInicialFile(indexArray);
     }
     
+    // guardar todas las listas del programa
+    public void saveStatusOfAllListProgram(){
+        // necesitamos cambiar los archivos serializados entonces vamos a sobreescribirlos(borrar y volver a escribir). porque no sabemos si se borraron archivos, o agregaron. Se podria saber pero para ahorrar trabajo se hace de esta manera.
+        // sin embargo, puede haber otra forma de optimizar esta parte, pues si no se cambia un file porque borrarlo;
+        // ojo los metodos iniciales nos sirven, porque, primero debimos haber sacado las listas, luego si les agregamos algo, solo debemos traerlas otra vez y guardarlas
+        for(int i = 0; i < arrayRouteFiles.length; i++){
+            deleteFile(arrayRouteFiles[i]);
+            WriteSerializationInicialFile(i);
+        }
+        
+    }
+    
+    public String getNameArray(int indexArray){
+        return(arrayRouteFiles[indexArray]);
+    }
+    
+    // este metodo pone la lista del file que necesite en el programa, Es decir pone la lista del file que busque en las lista Main, para que luego pueda ser trabajada
+    public boolean SetListInProgramFromFile(int indexArray){
+        T object = null;
+        if(indexArray >=0 && indexArray< arrayRouteFiles.length){
+            object = getObjectFromSerializationFile(indexArray);
+        }else{
+            System.out.println("hubo un error indice incorrecto");
+            return(false);
+        }
+        
+        switch(indexArray){
+            case 0:
+                Queue listForChooseProduct =  (Queue) object;
+                Main.setListForChooseProduct(listForChooseProduct);
+                break;
+            case 1:
+                DoubleLinkedList<Product> listOfProducts = (DoubleLinkedList<Product>) object; 
+                Main.setListOfProducts(listOfProducts);
+                break;
+            case 2:
+                LinkedList<Beneficiary> listOfBeneficiaries = (LinkedList<Beneficiary>) object;
+                Main.setListOfBeneficiaries(listOfBeneficiaries);
+                break;
+            case 3:
+                LinkedList<Donnor> listOfDonors = (LinkedList<Donnor>) object;
+                Main.setListOfDonors(listOfDonors);
+                break;
+            default:
+                System.out.println("Hubo un problema casting SetListInProgramFromFile ");
+                return(false);
+                
+        }
+        return(true);
+        
+    }
+    
+    //Este metodo configura todas la listas del file dentro del programa
+    public void SetAll_ListInProgramFromFile(){
+        for(int i = 0; i < arrayRouteFiles.length; i++){
+            System.out.print("lista"+ i+ ", is set="+SetListInProgramFromFile(i)+";");
+        }
+        System.out.println();
+    }
     
     
 }

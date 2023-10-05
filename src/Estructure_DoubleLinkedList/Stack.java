@@ -1,6 +1,8 @@
 package Estructure_DoubleLinkedList ;
 
-public class Stack<T> extends DoubleLinkedList implements EstructureStack<T>{
+import java.io.Serializable;
+
+public class Stack<T> extends DoubleLinkedList implements EstructureStack<T>, Serializable{
     
     
     public Stack(){

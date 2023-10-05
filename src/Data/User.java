@@ -1,8 +1,10 @@
 
 package Data;
 
+import java.io.Serializable;
 
-public class User {
+
+public class User implements Serializable{
     // la clase usuario es una superclase de las empresas donadores, y beneficiarios
     //Primero los atributos
     private String names; 

@@ -2,11 +2,12 @@ package Data;
 
 import Estructure_LinkedList.Queue;
 import Estructure_LinkedList.Stack;
+import java.io.Serializable;
 
 
 
 
-public class Donnor extends User {
+public class Donnor extends User implements Serializable {
     // la clase donador es hijo de la clase usurio y a la vez superclase
     private String adress;
     private String locality;

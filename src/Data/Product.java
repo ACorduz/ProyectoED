@@ -1,7 +1,9 @@
 
 package Data;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     //  Es la superclase
     
     // metodos constructores

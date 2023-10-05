@@ -1,6 +1,8 @@
 package Estructure_LinkedList ;
 
-public class Stack<T> extends LinkedList implements EstructureStack<T>{
+import java.io.Serializable;
+
+public class Stack<T> extends LinkedList implements EstructureStack<T>,  Serializable{
     
     public Stack(){
         super();

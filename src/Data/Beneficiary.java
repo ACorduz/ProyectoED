@@ -1,7 +1,9 @@
 package Data;
 
+import java.io.Serializable;
 
-public class Beneficiary extends User{
+
+public class Beneficiary extends User implements Serializable{
     // esta es la clase beneficiario, clase hija de usuario 
     
     // sus atributos 
