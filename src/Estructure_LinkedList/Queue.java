@@ -1,6 +1,8 @@
 package Estructure_LinkedList;
 
-public class Queue<T> extends LinkedList implements EstructureQueue<T> {
+import java.io.Serializable;
+
+public class Queue<T> extends LinkedList implements EstructureQueue<T>,  Serializable {
     
     public Queue(){
         super();

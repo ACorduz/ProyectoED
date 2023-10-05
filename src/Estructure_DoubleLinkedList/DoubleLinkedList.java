@@ -1,8 +1,10 @@
 
 package Estructure_DoubleLinkedList;
 
+import java.io.Serializable;
 
-public class DoubleLinkedList <T> implements EstructureDoubleLinkedList<T>{
+
+public class DoubleLinkedList <T> implements EstructureDoubleLinkedList<T> ,Serializable{
     // esta estrcutura esta hecha para soportar objetos
     private Node head;
     private Node tail; 
@@ -219,6 +221,11 @@ public class DoubleLinkedList <T> implements EstructureDoubleLinkedList<T>{
 
     public void setTail(Node tail) {
         this.tail = tail;
+    }
+
+    @Override
+    public String toString() {
+        return "DoubleLinkedList{" + "head=" + head + ", tail=" + tail + ", counter=" + counter + '}';
     }
     
     

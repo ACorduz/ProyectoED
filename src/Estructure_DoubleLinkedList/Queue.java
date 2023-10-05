@@ -1,6 +1,8 @@
 package Estructure_DoubleLinkedList;
 
-public class Queue<T> extends DoubleLinkedList implements EstructureQueue<T> {
+import java.io.Serializable;
+
+public class Queue<T> extends DoubleLinkedList implements EstructureQueue<T>, Serializable {
     
     public Queue(){
         super();

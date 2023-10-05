@@ -1,8 +1,10 @@
 
 package Data;
 
+import java.io.Serializable;
 
-public class Food extends Product{
+
+public class Food extends Product implements Serializable{
     // la clase comida es la clase hija de producto
     
     public Food(String typeProduct,String nameProduct, int quantity,String emailDonor, int expirationDateYear, int expirationDateMonth, int expirationDateDay){
