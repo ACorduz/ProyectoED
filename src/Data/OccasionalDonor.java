@@ -8,9 +8,11 @@ import java.io.Serializable;
 
 public class OccasionalDonor extends Donnor implements Serializable{
 
-    public OccasionalDonor(String names, String lastNames, String email, String document, String password, String TypeUser, String adress, String locality, Queue<Product> ListDonations, Stack<Product> HistoryOfDonations) {
-        super(names, lastNames, email, document, password, TypeUser, adress, locality, ListDonations, HistoryOfDonations);
+    public OccasionalDonor(String name,String lastName, String email, String document, String password, String adress, String locality) {
+        super(name, lastName, email, document, password, adress, locality);
     }
+
+    
 
     
     //Esta clase esta por si se quieren poner mas funcionalidades al donadorOcasional

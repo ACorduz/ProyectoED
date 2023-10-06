@@ -7,41 +7,44 @@ import java.io.Serializable;
 public class User implements Serializable{
     // la clase usuario es una superclase de las empresas donadores, y beneficiarios
     //Primero los atributos
-    private String names; 
-    private String lastNames;
+    private String name;
+    private String lastName;
     private String email;
     private String document;
     private String password;
     private String TypeUser;
-
-    public User(String names, String lastNames, String email, String document, String password, String TypeUser) {
-        this.names = names;
-        this.lastNames = lastNames;
+    // los tipos de usuarios podrian ser los siguientes; 
+    // "Donador", "Beneficiario"
+    
+    
+    public User(String name,String lastName, String email, String document, String password, String TypeUser) {
+        this.name = name; 
         this.email = email;
+        this.lastName = lastName; 
         this.document = document;
         this.password = password;
         this.TypeUser = TypeUser;
     }
 
     
-    
     // metodos setter y getters
-    public String getNames() {
-        return names;
+    public String getName() {
+        return name;
     }
 
-    public void setNames(String names) {
-        this.names = names;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastNames() {
-        return lastNames;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastNames(String lastNames) {
-        this.lastNames = lastNames;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
+    
     public String getEmail() {
         return email;
     }
@@ -76,7 +79,7 @@ public class User implements Serializable{
 
     @Override
     public String toString() {
-        return "User{" + "names=" + names + ", lastNames=" + lastNames + ", email=" + email + ", document=" + document + ", password=" + password + ", TypeUser=" + TypeUser + '}';
+        return "User{" + "name=" + name+ ", email=" + email + ", document=" + document + ", password=" + password + ", TypeUser=" + TypeUser + '}';
     }
     
     

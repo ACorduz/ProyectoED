@@ -18,8 +18,8 @@ public class Donnor extends User implements Serializable {
     
     // metodos constructores
 
-    public Donnor(String names, String lastNames, String email, String document, String password, String TypeUser, String adress, String locality, Queue<Product> ListDonations, Stack<Product> HistoryOfDonations) {
-        super(names,lastNames,email,document,password,TypeUser);
+    public Donnor(String name,String lastName,  String email, String document, String password, String adress, String locality, Queue<Product> ListDonations, Stack<Product> HistoryOfDonations) {
+        super(name,lastName, email,document,password,"Donador");
         this.adress = adress;
         this.locality = locality;
         this.ListDonations = ListDonations;
@@ -27,6 +27,13 @@ public class Donnor extends User implements Serializable {
         this.numberDonates = 0;
     }
     
+    
+    public Donnor(String name,String lastName, String email, String document, String password, String adress, String locality){
+        super(name,lastName,email,document,password,"Donador"); 
+        this.adress = adress;
+        this.locality = locality;
+        this.numberDonates = 0;
+    }
     
     
     //ED = Expiration Day
