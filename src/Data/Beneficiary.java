@@ -13,8 +13,8 @@ public class Beneficiary extends User implements Serializable{
     
     // constructor
 
-    public Beneficiary(int NumberProductSelect, int QuantityAllow, String names, String lastNames, String email, String document, String password, String TypeUser) {
-        super(names, lastNames, email, document, password, TypeUser);
+    public Beneficiary(int NumberProductSelect, int QuantityAllow, String name,String lastName, String email, String document, String password) {
+        super(name, lastName ,email, document, password, "Beneficiario");
         NumberProductSelect=0;
         this.QuantityAllow = QuantityAllow;
     }

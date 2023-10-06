@@ -7,6 +7,7 @@ import Estructure_LinkedList.Queue;
 import Estructure_LinkedList.LinkedList;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Data.serialization;
+import Logic.ConectionAPI;
 
 
 public class Main <T>{
@@ -57,6 +58,11 @@ public class Main <T>{
         // luego SI FUNCIONA
         ser.WriteSerializationInicial_AllFiles();// Va a decir que la 2 no se creo porque ya fue creada anteriormente para la prueba anterior
         ser.deleteAllFiles();
+        
+        // conecccion API pruebas
+        ConectionAPI conApi = new ConectionAPI();
+        conApi.getDataUsers();
+        
     }
     
     // setter y getter de Main
