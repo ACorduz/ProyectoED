@@ -1,0 +1,104 @@
+{
+    "productFood": [
+        {
+            "index": 1,
+            "typeProduct": "Food",
+            "nameProduct": "Frutas enlatadas",
+            "quantity": 97,
+            "emailDonor": null,
+            "expirationDateYear": 2025,
+            "expirationDateMonth": 3,
+            "expirationDateDay": 23
+        },
+        {
+            "index": 2,
+            "typeProduct": "Food",
+            "nameProduct": "Mostaza",
+            "quantity": 53,
+            "emailDonor": null,
+            "expirationDateYear": 2023,
+            "expirationDateMonth": 6,
+            "expirationDateDay": 20
+        },
+        {
+            "index": 3,
+            "typeProduct": "Food",
+            "nameProduct": "Cerveza",
+            "quantity": 35,
+            "emailDonor": null,
+            "expirationDateYear": 2024,
+            "expirationDateMonth": 5,
+            "expirationDateDay": 4
+        },
+        {
+            "index": 4,
+            "typeProduct": "Food",
+            "nameProduct": "Aceite de cocina",
+            "quantity": 95,
+            "emailDonor": null,
+            "expirationDateYear": 2023,
+            "expirationDateMonth": 11,
+            "expirationDateDay": 7
+        },
+        {
+            "index": 5,
+            "typeProduct": "Food",
+            "nameProduct": "Ajo",
+            "quantity": 27,
+            "emailDonor": null,
+            "expirationDateYear": 2024,
+            "expirationDateMonth": 10,
+            "expirationDateDay": 3
+        },
+        {
+            "index": 6,
+            "typeProduct": "Food",
+            "nameProduct": "Cereal",
+            "quantity": 92,
+            "emailDonor": null,
+            "expirationDateYear": 2024,
+            "expirationDateMonth": 1,
+            "expirationDateDay": 3
+        },
+        {
+            "index": 7,
+            "typeProduct": "Food",
+            "nameProduct": "Cereales",
+            "quantity": 96,
+            "emailDonor": null,
+            "expirationDateYear": 2023,
+            "expirationDateMonth": 7,
+            "expirationDateDay": 17
+        },
+        {
+            "index": 8,
+            "typeProduct": "Food",
+            "nameProduct": "Pasta de tomate",
+            "quantity": 31,
+            "emailDonor": null,
+            "expirationDateYear": 2025,
+            "expirationDateMonth": 2,
+            "expirationDateDay": 11
+        },
+        {
+            "index": 9,
+            "typeProduct": "Food",
+            "nameProduct": "Aceite de cocina",
+            "quantity": 22,
+            "emailDonor": null,
+            "expirationDateYear": 2023,
+            "expirationDateMonth": 2,
+            "expirationDateDay": 24
+        },
+        {
+            "index": 10,
+            "typeProduct": "Food",
+            "nameProduct": "Ajo",
+            "quantity": 36,
+            "emailDonor": null,
+            "expirationDateYear": 2023,
+            "expirationDateMonth": 10,
+            "expirationDateDay": 17
+        }
+    ]
+}
