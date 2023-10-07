@@ -1,5 +1,5 @@
 
-package Data;
+package Estructure_LinkedList;
 
 public interface EstructureLinkedList<T>{
     void pushFront(T value);

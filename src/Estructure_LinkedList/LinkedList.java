@@ -1,12 +1,14 @@
 
-package Data;
+package Estructure_LinkedList;
+
+import java.io.Serializable;
 
 
-public class LinkedList <T extends Comparable<T>> implements EstructureLinkedList<T>{
+public class LinkedList <T> implements EstructureLinkedList<T>, Serializable{
+    // Esta Implementacion esta diseñada para soportar objetos
     private Node head;
     private Node tail; 
     private int counter;
-    private  T reference;
     
     public LinkedList(){
         counter = 0;
@@ -22,7 +24,6 @@ public class LinkedList <T extends Comparable<T>> implements EstructureLinkedLis
         // ponerle el next al head
         head.setNext(node);
         if(tail.getNext() == null){
-            // verificar esto
             tail.setNext(node);
            
         }
@@ -50,7 +51,6 @@ public class LinkedList <T extends Comparable<T>> implements EstructureLinkedLis
         if(head.getNext() == null){
            tail.setNext(null);
         }
-        //return(T) (nodePop.getData()); 
         counter--;
     }
      
@@ -67,7 +67,6 @@ public class LinkedList <T extends Comparable<T>> implements EstructureLinkedLis
             tail.getNext().setNext(nodeNew);
             tail.setNext(nodeNew);
         }
-        //System.out.println("Push back correcto=" + head.getNext().getData());
         counter++;
     }
     
@@ -82,7 +81,6 @@ public class LinkedList <T extends Comparable<T>> implements EstructureLinkedLis
     
     // remove back item 
     public void popBack(){
-        //Node nodePop = null;
         if(head.getNext() == null){
             throw new RuntimeException("empty list, null head");
         }
@@ -93,7 +91,6 @@ public class LinkedList <T extends Comparable<T>> implements EstructureLinkedLis
         }
         // es o(n) no sabemos cual es el anterior al tail 
         else{
-            // p es el nodo anterior al final
             Node current = head;
             Node prev = new Node();
             prev.setNext(null);
@@ -102,12 +99,10 @@ public class LinkedList <T extends Comparable<T>> implements EstructureLinkedLis
                 prev = current; 
                 current = current.getNext();
             }
-            //nodePop = tail.getNext();
             current.setNext(null);
             tail.setNext(current);
         }
         counter--;
-        //return(T) (nodePop.getData());
     }
     
     // ojo con este probar
@@ -138,13 +133,11 @@ public class LinkedList <T extends Comparable<T>> implements EstructureLinkedLis
                 Node current = head;
                 Node prev = new Node();
                 prev.setNext(null);
-
                 while(current.getNext() != null){
-                    prev = current; 
                     current = current.getNext();
-                    Comparable i = (Comparable) current.getData();
+                    T i = (T) current.getData();
                     //System.out.println("El comparable es asi:"+i.compareTo(key));
-                    if(i.compareTo(key) == 0){
+                    if(i == key){
                         return(true);
                     }
                 }
@@ -157,22 +150,9 @@ public class LinkedList <T extends Comparable<T>> implements EstructureLinkedLis
          
     }
     
-        public int compareTo(T item){
-        int result;
-        // la referencia hace como decir a lo que se va a llamar
-        if(reference.compareTo(item) > 0){
-            result = 1;
-        }else if(reference.compareTo(item) < 0){
-            result = -1;
-        }
-        else{
-            result =0;
-        }
-        return(result);
-    }
-    
         
     public Node getNodeForKeyWhioutCheck(T key){
+        // Este metodo devuelve el nodo de una llave y si no lo encuentra entonces devuelve un nulo
         if(empty()){
             return(null);
         }
@@ -183,11 +163,10 @@ public class LinkedList <T extends Comparable<T>> implements EstructureLinkedLis
             Node prev = new Node();
             prev.setNext(null);
             while(current.getNext() != null){
-                prev = current; 
                 current = current.getNext();
-                Comparable i = (Comparable) current.getData();
+                T i = (T) current.getData();
                 //System.out.println("El comparable es asi:"+i.compareTo(key));
-                if(i.compareTo(key) == 0){
+                if(i == key){
                     return(current);
                 }
             }
@@ -200,6 +179,7 @@ public class LinkedList <T extends Comparable<T>> implements EstructureLinkedLis
     
     
     public Node getNodeForakey(T key){
+        // Este metodo devuelve el nodo De una llave pero Hace un find primero para ver si la llave existe
         if(find(key)){
             return(getNodeForKeyWhioutCheck(key));
         }else{
@@ -230,6 +210,11 @@ public class LinkedList <T extends Comparable<T>> implements EstructureLinkedLis
 
     public void setTail(Node tail) {
         this.tail = tail;
+    }
+
+    @Override
+    public String toString() {
+        return "LinkedList{" + "head=" + head + ", tail=" + tail + ", counter=" + counter + '}';
     }
     
     
