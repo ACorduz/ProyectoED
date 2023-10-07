@@ -3,11 +3,13 @@ package Business;
 import Data.Product;
 import Data.Beneficiary;
 import Data.Donnor;
+import Data.Food;
 import Estructure_LinkedList.Queue;
 import Estructure_LinkedList.LinkedList;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Data.serialization;
 import Logic.ConectionAPI;
+import Logic.InputDataDB;
 
 
 public class Main <T>{
@@ -23,7 +25,9 @@ public class Main <T>{
     
     public static void main(String[] args) {
         //Pruebas para ver que el codigo funcione bien 
-        // prueba lista de objetos
+        
+        
+        // PRUEBA LISTA DE OBJETOS
         Product producto = new Product("FOOD", "Harina", 5,"@gmail");
         Product producto2 = new Product("FOOD", "Frijol", 5,"@gmail");
         Queue<Product> cola = new Queue();
@@ -34,7 +38,8 @@ public class Main <T>{
         System.out.println(cola.find(producto2));
         
         
-        // Pruebas de serializacion
+        
+        // PRUEBAS DE SERIALIZACION
         // se crea un objeto para utilizar los metodos
         serialization ser = new serialization();
         
@@ -57,11 +62,51 @@ public class Main <T>{
         System.out.println("listaMain es igual a = "+ Main.listOfProducts.topFront().toString());
         // luego SI FUNCIONA
         ser.WriteSerializationInicial_AllFiles();// Va a decir que la 2 no se creo porque ya fue creada anteriormente para la prueba anterior
-        ser.deleteAllFiles();
+        //ser.deleteAllFiles();
         
+        
+        
+        /*
+        // PRUEBAS DE CONEXION API
         // conecccion API pruebas
         ConectionAPI conApi = new ConectionAPI();
         conApi.getDataUsers();
+        */
+        
+        /*
+        // PRUEBAS TRAIDA DE DATOS JSON  
+        // que se debe de hacer, primero crear un objeto 
+        InputDataDB jsonEntrada = new InputDataDB(10000,0);
+        InputDataDB jsonEntrada2 = new InputDataDB("C:\\Users\\JHOAN FRANCO\\OneDrive\\respaldo datos\\Documentos\\PROGRAMACION\\proyectoEstructuras\\ProyectoED\\data/",10000, 0 );
+        
+        //// con el objeto jsonEntrada
+        // primero configuro la ruta de la carpeta ya la tengo guardada en el programa si no hacer lo mismo, guardar su path y ya hacer esto 
+        jsonEntrada.setYourComputer_pathToCarpet_fileJson(jsonEntrada.PathJhoanComputer);
+        System.out.println(jsonEntrada.getYourComputer_pathToCarpet_fileJson()); // mostrar el path 
+        
+        // luego si se coloco bien el path y existe un archivo de esos de 10000 datos entonces
+        // para ver que los datos si se puedan obtener
+        jsonEntrada.ShowJson_User();
+        // si queremos ver los datos del otro json hay que cambiar el TypeOfFileRead y otras cosas con este metodo
+        jsonEntrada.change_TypeOfFileRead(1);
+        jsonEntrada.ShowJson_Food();
+        
+        //Ahora probar otros metodos
+        DoubleLinkedList listadoble = jsonEntrada.ofJson_getListProductsFood();
+        System.out.println(listadoble.toString());
+        Food f1 = (Food) listadoble.topFront();
+        System.out.println(f1.getNameProduct());
+        
+        System.out.println("\n\n PRUEBA 2");
+        // ahora cambiar de archivo otra vez
+        jsonEntrada.change_TypeOfFileRead(0);
+        
+        LinkedList listaSimple = jsonEntrada.ofJson_getListDonnor();
+        System.out.println(listaSimple.toString());
+        Donnor d1 = (Donnor) listaSimple.topFront();
+        System.out.println(d1.getEmail()+ "  "+d1.getLocality());
+        
+     */   
         
     }
     
