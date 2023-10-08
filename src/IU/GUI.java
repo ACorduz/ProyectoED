@@ -65,6 +65,20 @@ public class GUI {
         return opcion;
     }
     
+    public static void mostrarMenu(){
+        System.out.println("--------------Menu General-------------------");
+        System.out.println("Ingresa (1) para Crear Usuario o (2) para Iniciar Sesion");
+        int opcion= readIntegerOption("Ingresa una opcion: ");
+        if (opcion==1){
+            //crearUsuario();
+        }else if(opcion==2){
+            //IniciarSesion();
+        }else{
+            System.out.println("Opcion no valida, vuelve a intentarlo");
+            mostrarMenu();
+        }
+    }
+    
     public static void salirMenu(){
         System.out.println("Gracias por utilizar el programa");
         System.exit(0); // ACA HUBO CAMBIO

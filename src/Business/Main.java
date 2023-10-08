@@ -7,6 +7,7 @@ import Estructure_LinkedList.Queue;
 import Estructure_LinkedList.LinkedList;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Data.serialization;
+import static IU.GUI.mostrarMenu;
 import Logic.ConectionAPI;
 
 
@@ -32,6 +33,7 @@ public class Main <T>{
         Product product2 =cola.dequeue();
         System.out.println(product2.toString());
         System.out.println(cola.find(producto2));
+        mostrarMenu();
         
         
         // Pruebas de serializacion
