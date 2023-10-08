@@ -9,12 +9,13 @@ import Estructure_LinkedList.LinkedList;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Data.serialization;
 import Logic.ConectionAPI;
-import Logic.InputDataDB;
+import Logic.InputDataJSON;
+import functionalities.RegistroComida;
 
 
 public class Main <T>{
     private static Queue listForChooseProduct = new Queue(); // primero una cola para poner los beneficiarios por orden de llegada
-    private static DoubleLinkedList<Product> listOfProducts = new DoubleLinkedList(); // segundo una lista donde se van a poner todos los productos
+    private static DoubleLinkedList<Food> listOfProducts = new DoubleLinkedList(); // segundo una lista donde se van a poner todos los productos
     private static LinkedList<Beneficiary> listOfBeneficiaries= new LinkedList();
     private static LinkedList<Donnor> listOfDonors = new LinkedList(); 
 
@@ -24,9 +25,60 @@ public class Main <T>{
     
     
     public static void main(String[] args) {
+
+    InputDataJSON jsonEntrada2 = new InputDataJSON("C:\\Users\\JHOAN FRANCO\\OneDrive\\respaldo datos\\Documentos\\PROGRAMACION\\proyectoEstructuras\\ProyectoED\\data/",10, 0 );
+    String[] a = jsonEntrada2.ofJson_getArrayUser();
+    System.out.println(a[1]);
+    
+    serialization ser = new serialization();
+    ser.deleteAllFiles();
+    ser.WriteSerializationInicial_AllFiles(); // Crear todas las listas inciales vacias por si no lo estan
+    RegistroComida Rcomida = new RegistroComida(10);
+    Rcomida.CreateFood();
+    
+    }
+    
+    // setter y getter de Main
+
+    public static Queue getListForChooseProduct() {
+        return listForChooseProduct;
+    }
+
+    public static void setListForChooseProduct(Queue listForChooseProduct) {
+        Main.listForChooseProduct = listForChooseProduct;
+    }
+
+    public static DoubleLinkedList<Food> getListOfProducts() {
+        return listOfProducts;
+    }
+
+    public static void setListOfProducts(DoubleLinkedList<Food> listOfProducts) {
+        Main.listOfProducts = listOfProducts;
+    }
+
+    public static LinkedList<Beneficiary> getListOfBeneficiaries() {
+        return listOfBeneficiaries;
+    }
+
+    public static void setListOfBeneficiaries(LinkedList<Beneficiary> listOfBeneficiaries) {
+        Main.listOfBeneficiaries = listOfBeneficiaries;
+    }
+
+    public static LinkedList<Donnor> getListOfDonors() {
+        return listOfDonors;
+    }
+
+    public static void setListOfDonors(LinkedList<Donnor> listOfDonors) {
+        Main.listOfDonors = listOfDonors;
+    }
+
+    
+    
+}
+
         //Pruebas para ver que el codigo funcione bien 
         
-        
+        /*
         // PRUEBA LISTA DE OBJETOS
         Product producto = new Product("FOOD", "Harina", 5,"@gmail");
         Product producto2 = new Product("FOOD", "Frijol", 5,"@gmail");
@@ -109,43 +161,3 @@ public class Main <T>{
         System.out.println(d1.getEmail()+ "  "+d1.getLocality());
         
      */   
-        
-    }
-    
-    // setter y getter de Main
-
-    public static Queue getListForChooseProduct() {
-        return listForChooseProduct;
-    }
-
-    public static void setListForChooseProduct(Queue listForChooseProduct) {
-        Main.listForChooseProduct = listForChooseProduct;
-    }
-
-    public static DoubleLinkedList<Product> getListOfProducts() {
-        return listOfProducts;
-    }
-
-    public static void setListOfProducts(DoubleLinkedList<Product> listOfProducts) {
-        Main.listOfProducts = listOfProducts;
-    }
-
-    public static LinkedList<Beneficiary> getListOfBeneficiaries() {
-        return listOfBeneficiaries;
-    }
-
-    public static void setListOfBeneficiaries(LinkedList<Beneficiary> listOfBeneficiaries) {
-        Main.listOfBeneficiaries = listOfBeneficiaries;
-    }
-
-    public static LinkedList<Donnor> getListOfDonors() {
-        return listOfDonors;
-    }
-
-    public static void setListOfDonors(LinkedList<Donnor> listOfDonors) {
-        Main.listOfDonors = listOfDonors;
-    }
-
-    
-    
-}

@@ -215,6 +215,62 @@ public class InputDataJSON {
         
     }
     
+    // metodo para obtener correos de usuarios
+    public String[] ofJson_getArrayUser(){
+        JSONObject jsonObject = null;
+        String[] arrayUser = new String[NumberRowsRead];
+        
+        try {
+            // ver si el archivo existe y crear nombre de la ruta
+            boolean exist = FileExist();
+            if(!exist){
+                throw new RuntimeException("ERROR: File Doesn't exist");
+            }
+            if(TypeOfFileRead != 0){
+                throw new RuntimeException("ERROR: TypeOfFileRead incorrect for use method ofJson_getArrayUser");
+            }
+            
+            // Especifica la ruta del archivo JSON que deseas leer
+            String pathFileJSON = finalPath_fileJson;
+
+            // Crea un FileReader para leer el archivo JSON
+            FileReader ReaderJSON = new FileReader(pathFileJSON);
+
+            // Crea un JSONTokener para analizar el contenido del archivo JSON
+            JSONTokener tokener = new JSONTokener(ReaderJSON);
+
+            // Crea un objeto JSONObject o JSONArray según la estructura del JSON
+            jsonObject = new JSONObject(tokener);
+
+            // Obtiene el array "users"
+            JSONArray usuarios = jsonObject.getJSONArray("users");
+            
+            // Iterar sobre los objetos de los usuarios
+            int counterLoop = 0;
+            for (int i = usuarios.length()-1; i >=0; i--) { // para no obtener correos iguales
+                JSONObject usuario = usuarios.getJSONObject(i);
+                
+                // Accede a los campos del usuario
+                String email = usuario.getString("email");
+  
+                // agregar el email al array
+                arrayUser[counterLoop] = email;
+                // sumar al contador
+                counterLoop += 1;
+
+            }
+            // Cierra el lector de archivo
+            ReaderJSON.close();
+            // se retorna la lista
+            return(arrayUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // si la lista es nula este metodo no esta funcionando bien o algo paso
+        throw new RuntimeException("ERROR: Tratando de escribir la lista  en el metodo ofJson_getListBeneficiary");
+  
+        
+    }
     
     // Este metodo da una linkedlist de beneficiarios para utilzarlos como prueba
     public LinkedList ofJson_getListBeneficiary(){
