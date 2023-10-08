@@ -77,8 +77,8 @@ public class Main <T>{
         // PRUEBAS TRAIDA DE DATOS JSON  
         // que se debe de hacer, primero crear un objeto 
         InputDataDB jsonEntrada = new InputDataDB(10000,0);
-        InputDataDB jsonEntrada2 = new InputDataDB("C:\\Users\\JHOAN FRANCO\\OneDrive\\respaldo datos\\Documentos\\PROGRAMACION\\proyectoEstructuras\\ProyectoED\\data/",10000, 0 );
-        
+        //InputDataDB jsonEntrada2 = new InputDataDB("C:\\Users\\JHOAN FRANCO\\OneDrive\\respaldo datos\\Documentos\\PROGRAMACION\\proyectoEstructuras\\ProyectoED\\data/",10000, 0 );
+
         //// con el objeto jsonEntrada
         // primero configuro la ruta de la carpeta ya la tengo guardada en el programa si no hacer lo mismo, guardar su path y ya hacer esto 
         jsonEntrada.setYourComputer_pathToCarpet_fileJson(jsonEntrada.PathJhoanComputer);
@@ -87,16 +87,18 @@ public class Main <T>{
         // luego si se coloco bien el path y existe un archivo de esos de 10000 datos entonces
         // para ver que los datos si se puedan obtener
         jsonEntrada.ShowJson_User();
+        jsonEntrada.ShowUserByName("Jose");//Muestra la información de las personas llamadas 'Jose'
         // si queremos ver los datos del otro json hay que cambiar el TypeOfFileRead y otras cosas con este metodo
         jsonEntrada.change_TypeOfFileRead(1);
         jsonEntrada.ShowJson_Food();
+        jsonEntrada.ShowFoodByName("Pasta");//Muestra la información de todos los productos con nombre 'Pasta'
         
         //Ahora probar otros metodos
         DoubleLinkedList listadoble = jsonEntrada.ofJson_getListProductsFood();
         System.out.println(listadoble.toString());
         Food f1 = (Food) listadoble.topFront();
         System.out.println(f1.getNameProduct());
-        
+        /*
         System.out.println("\n\n PRUEBA 2");
         // ahora cambiar de archivo otra vez
         jsonEntrada.change_TypeOfFileRead(0);
