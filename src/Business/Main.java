@@ -57,7 +57,7 @@ public class Main <T>{
         System.out.println("listaMain es igual a = "+ Main.listOfProducts.topFront().toString());
         // luego SI FUNCIONA
         ser.WriteSerializationInicial_AllFiles();// Va a decir que la 2 no se creo porque ya fue creada anteriormente para la prueba anterior
-        ser.deleteAllFiles();
+        //ser.deleteAllFiles();
         
         // conecccion API pruebas
         ConectionAPI conApi = new ConectionAPI();
