@@ -7,6 +7,7 @@ import Data.Food;
 import Estructure_LinkedList.Queue;
 import Estructure_LinkedList.LinkedList;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
+import Estructure_DinamicArray.DinamicArray;
 import Data.serialization;
 import Logic.ConectionAPI;
 import Logic.InputDataJSON;
@@ -15,7 +16,10 @@ import functionalities.RegistroComida;
 
 public class Main <T>{
     private static Queue listForChooseProduct = new Queue(); // primero una cola para poner los beneficiarios por orden de llegada
+    
     private static DoubleLinkedList<Food> listOfProducts = new DoubleLinkedList(); // segundo una lista donde se van a poner todos los productos
+    private static DinamicArray<Food> listOfProducts_DA = new DinamicArray();
+    
     private static LinkedList<Beneficiary> listOfBeneficiaries= new LinkedList();
     private static LinkedList<Donnor> listOfDonors = new LinkedList(); 
 
@@ -26,15 +30,17 @@ public class Main <T>{
     
     public static void main(String[] args) {
 
+    /*    
     InputDataJSON jsonEntrada2 = new InputDataJSON("C:\\Users\\JHOAN FRANCO\\OneDrive\\respaldo datos\\Documentos\\PROGRAMACION\\proyectoEstructuras\\ProyectoED\\data/",10, 0 );
     String[] a = jsonEntrada2.ofJson_getArrayUser();
     System.out.println(a[1]);
+    */
     
     serialization ser = new serialization();
     ser.deleteAllFiles();
     ser.WriteSerializationInicial_AllFiles(); // Crear todas las listas inciales vacias por si no lo estan
     RegistroComida Rcomida = new RegistroComida(10);
-    Rcomida.CreateFood();
+    Rcomida.proofInsertFood(10);
     
     }
     
@@ -72,6 +78,13 @@ public class Main <T>{
         Main.listOfDonors = listOfDonors;
     }
 
+    public static DinamicArray<Food> getListOfProducts_DA() {
+        return listOfProducts_DA;
+    }
+
+    public static void setListOfProducts_DA(DinamicArray<Food> listOfProducts_DA) {
+        Main.listOfProducts_DA = listOfProducts_DA;
+    }
     
     
 }

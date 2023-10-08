@@ -153,7 +153,59 @@ public class InputDataJSON {
             e.printStackTrace();
         }
     }
-    
+        public void ShowUserByName(String name){
+        JSONObject jsonObject = null;
+        try {
+            boolean exist = FileExist();
+            if(!exist){
+                throw new RuntimeException("ERROR: File Doesn't exist");
+            }
+            
+            String pathFileJSON = finalPath_fileJson;
+            FileReader ReaderJSON = new FileReader(pathFileJSON);
+
+            JSONTokener tokener = new JSONTokener(ReaderJSON);
+
+            jsonObject = new JSONObject(tokener);
+
+            JSONArray usuarios = jsonObject.getJSONArray("users");
+            
+            
+            
+            for (int i = 0; i < usuarios.length(); i++) {
+                JSONObject usuario = usuarios.getJSONObject(i);
+                
+                String firstName = usuario.getString("firs_name");
+                if(firstName.equals(name)){
+                    int index = usuario.getInt("index");
+                    String lastName = usuario.getString("last_name");
+                    String email = usuario.getString("email");
+                    String document = usuario.getString("document");
+                    String password = usuario.getString("password");
+                    String address = usuario.getString("adress"); 
+                    String locality = usuario.getString("locality");
+
+                    // Imprime los datos de los usuarios
+                    System.out.print("Usuario #" + index+"  ");
+                    System.out.print("Nombre: " + firstName+"  ");
+                    System.out.print("Apellido: " + lastName+"  ");
+                    System.out.print("Email: " + email+"  ");
+                    System.out.print("Documento: " + document+"  ");
+                    System.out.print("Contraseña: " + password+"  ");
+                    System.out.print("Dirección: " + address+"  ");
+                    System.out.print("Localidad: " + locality+"  ");
+                    System.out.println("");
+                }
+                
+            }
+            
+            // Cierra el lector de archivo
+            ReaderJSON.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+        
     // metodo para mostrar los datos del archivo json con print
     public void ShowJson_Food(){
         JSONObject jsonObject = null;
@@ -208,6 +260,56 @@ public class InputDataJSON {
             }
 
             // Cierra el lector de archivo
+            ReaderJSON.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+    // metodo para mostrar la comida por nombre
+    public void ShowFoodByName(String name){
+        JSONObject jsonObject = null;
+        try {
+            boolean exist = FileExist();
+            if(!exist){
+                throw new RuntimeException("ERROR: File Doesn't exist");
+            }
+            String pathFileJSON = finalPath_fileJson;
+
+            FileReader ReaderJSON = new FileReader(pathFileJSON);
+
+            JSONTokener tokener = new JSONTokener(ReaderJSON);
+
+            jsonObject = new JSONObject(tokener);
+
+            JSONArray productFood = jsonObject.getJSONArray("productFood");
+            
+
+            for (int i = 0; i < productFood.length(); i++) {
+                JSONObject comida = productFood.getJSONObject(i);
+
+                String nameProduct = comida.getString("nameProduct");
+                if(nameProduct.equals(name)){ 
+                    //unicamente imprime los productos que tengan el mismo nombre 
+                    int index = comida.getInt("index");
+                    String typeProduct = comida.getString("typeProduct");  
+                    int quantity = comida.getInt("quantity");
+                    String emailDonor = null;
+                    int expirationDateYear = comida.getInt("expirationDateYear");
+                    int expirationDateMonth = comida.getInt("expirationDateMonth"); 
+                    int expirationDateDay = comida.getInt("expirationDateDay");
+
+                    System.out.print("Usuario #" + index+"  ");
+                    System.out.print("typeProduct: " + typeProduct+"  ");
+                    System.out.print("nameProduct: " + nameProduct+ "  ");
+                    System.out.print("quantity: " + quantity +"  ");
+                    System.out.print("emailDonor: " + emailDonor+"  ");
+                    System.out.print("expirationDateYear: " + expirationDateYear+"  ");
+                    System.out.print("expirationDateMonth: " + expirationDateMonth+"  ");
+                    System.out.print("expirationDateDay: " + expirationDateDay+"  ");
+                    System.out.println("");
+                }   
+            }
             ReaderJSON.close();
         } catch (Exception e) {
             e.printStackTrace();
