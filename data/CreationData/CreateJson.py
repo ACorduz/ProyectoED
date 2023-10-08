@@ -3,6 +3,12 @@ import json
 #primero se crea un diccionario
 data = {} 
 
+def emptyDic():
+    global data
+    data2 = {}
+    data = data2
+
+
 # Metodo para luego crer una lista dentro del dic
 def createListInsideDic(name:str):
     data[name] = []

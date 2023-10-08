@@ -1,0 +1,104 @@
+{
+    "users": [
+        {
+            "index": 1,
+            "firs_name": "Robinson",
+            "last_name": "Quiroz",
+            "email": "castromaria@example.com",
+            "document": "CE 56285125",
+            "password": "~*&/a`TyRXKr",
+            "adress": "Dg. 8\u00aa # 42-11 Sur",
+            "locality": "Palmar"
+        },
+        {
+            "index": 2,
+            "firs_name": "Milena",
+            "last_name": "Reyes",
+            "email": "javier40@example.org",
+            "document": "RC 08434474",
+            "password": "TAVP=^pauxI",
+            "adress": "Tr. 5M # 2-8 Este",
+            "locality": "Maceo"
+        },
+        {
+            "index": 3,
+            "firs_name": "Martha",
+            "last_name": "Pabon",
+            "email": "rhoyos@example.com",
+            "document": "CC 48317099",
+            "password": "&).j_!M,1tM7",
+            "adress": "Calle 77 # 66-7 Sur",
+            "locality": "Sucre"
+        },
+        {
+            "index": 4,
+            "firs_name": "Alvaro",
+            "last_name": "Burbano",
+            "email": "anguloantonio@example.com",
+            "document": "TI 96113452",
+            "password": "cT(K6OxiD6=",
+            "adress": "Cl. 105 # 7-5 Este",
+            "locality": "La Victoria"
+        },
+        {
+            "index": 5,
+            "firs_name": "Milena",
+            "last_name": "Restrepo",
+            "email": "antoniomartinez@example.com",
+            "document": "TI 60265612",
+            "password": "eB#aE?4+{f",
+            "adress": "Cr. 39 # 65-9 Este",
+            "locality": "Marquetalia"
+        },
+        {
+            "index": 6,
+            "firs_name": "Leonor",
+            "last_name": "Vargas",
+            "email": "nsalgado@example.org",
+            "document": "CC 48666134",
+            "password": "+_t$aR3k&H",
+            "adress": "Diagonal 25 # 6-99",
+            "locality": "San Vicente Ferrer"
+        },
+        {
+            "index": 7,
+            "firs_name": "Carlos",
+            "last_name": "Rojas",
+            "email": "rafael59@example.net",
+            "document": "PA 10486218",
+            "password": "ZpAlVQ9s2",
+            "adress": "Cr. 97 # 82W-92 Sur",
+            "locality": "Chiscas"
+        },
+        {
+            "index": 8,
+            "firs_name": "Jose",
+            "last_name": "Guerra",
+            "email": "claudiagaitan@example.com",
+            "document": "RC 74976805",
+            "password": "MwPMV)na|Szg",
+            "adress": "Carrera 97 Bis O # 69-48",
+            "locality": "Cocorna"
+        },
+        {
+            "index": 9,
+            "firs_name": "Mario",
+            "last_name": "Nu\u00f1ez",
+            "email": "gladysgarzon@example.org",
+            "document": "RC 91627086",
+            "password": "zRHTJMtfs",
+            "adress": "Av. Carlos Pinto # 94-36 Sur",
+            "locality": "Montebello"
+        },
+        {
+            "index": 10,
+            "firs_name": "Alberto",
+            "last_name": "Bautista",
+            "email": "alfredo39@example.com",
+            "document": "RC 75401963",
+            "password": "O:HG}PBM=W?W",
+            "adress": "Cr. 119M Sur # 71-8",
+            "locality": "Arauquita"
+        }
+    ]
+}
