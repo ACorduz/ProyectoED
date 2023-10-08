@@ -197,7 +197,38 @@ public class DoubleLinkedList <T> implements EstructureDoubleLinkedList<T> ,Seri
             return(null);
         }
     }
-     
+    
+    public boolean updateNode(T keySearch,T valueUpdate ){
+        boolean found = false;
+        if(empty()){
+            return(found);
+            //throw new RuntimeException("empty list, null head");
+        }else{
+            if(tail == head && head.getNext().getData() == keySearch){
+                found = true;
+            }
+            else{
+                Node current = head;
+                Node prev = new Node();
+                prev.setNext(null);
+
+                while(current.getNext() != null){
+                    current = current.getNext();
+                    T i = (T) current.getData();
+                    //System.out.println("El comparable es asi:"+i.compareTo(key));
+                    if(i == keySearch){
+                        current.setData(valueUpdate);
+                        return(true);
+                    }
+                }
+            }
+            if(tail.getNext().getData() == keySearch){
+                    tail.getNext().setData(valueUpdate);
+                    found = true; 
+            }
+        }
+            return(found);
+    }
     
     public int getCounter(){
         return(counter);

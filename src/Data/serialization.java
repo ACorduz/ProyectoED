@@ -3,7 +3,6 @@ package Data;
 
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Estructure_LinkedList.LinkedList;
-import Estructure_LinkedList.Queue;
 import Business.Main;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -12,14 +11,26 @@ import java.io.ObjectOutputStream;
 import Estructure_LinkedList.Queue;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
+import Estructure_DinamicArray.DinamicArray;
+
 
 
 public class serialization <T>{
-    String[] arrayRouteFiles = {"listForChooseProductSerialization.obj", "listOfProductsSerialization.obj", "listOfBeneficiariesSerialization.obj", "listOfDonorsSerialization.obj"};
+    String[] arrayRouteFiles = {"listForChooseProductSerialization.obj", "listOfProductsSerialization.obj", "listOfBeneficiariesSerialization.obj", "listOfDonorsSerialization.obj", "listOfProducts_DASerialization.obj"};
 
     public boolean fileExist(String nameFile){
         File file = new File(nameFile);
         return file.exists() && !file.isDirectory();
+    }
+    
+    public int getIndexNamesFiles(String nameFile){
+        
+        for(int i=0; i < arrayRouteFiles.length; i++){
+            if(arrayRouteFiles[i].equals(nameFile)){
+                return(i);
+            }
+        }
+        throw new RuntimeException("WRONG NAME in method getIndexNamesFiles");
     }
     
     public void deleteFile(String nameFile){
@@ -54,7 +65,7 @@ public class serialization <T>{
                         oos.writeObject(listForChooseProduct);
                         break;
                     case 1:
-                        DoubleLinkedList<Product> listOfProducts = Main.getListOfProducts();
+                        DoubleLinkedList<Food> listOfProducts = Main.getListOfProducts();
                         //System.out.println("aqui llego");
                         oos.writeObject(listOfProducts);
                         break;
@@ -65,6 +76,10 @@ public class serialization <T>{
                     case 3:
                         LinkedList<Donnor> listOfDonors = Main.getListOfDonors();
                         oos.writeObject(listOfDonors);
+                        break;
+                    case 4: // nueva pruebas
+                        DinamicArray <Food> ListOfProducts_DA = Main.getListOfProducts_DA();
+                        oos.writeObject(ListOfProducts_DA);
                         break;
                     default:
                         System.out.println("hubo un error escribirSerializacion_inicialArchivo--");
@@ -154,7 +169,7 @@ public class serialization <T>{
                 Main.setListForChooseProduct(listForChooseProduct);
                 break;
             case 1:
-                DoubleLinkedList<Product> listOfProducts = (DoubleLinkedList<Product>) object; 
+                DoubleLinkedList<Food> listOfProducts = (DoubleLinkedList<Food>) object; 
                 Main.setListOfProducts(listOfProducts);
                 break;
             case 2:
@@ -164,6 +179,10 @@ public class serialization <T>{
             case 3:
                 LinkedList<Donnor> listOfDonors = (LinkedList<Donnor>) object;
                 Main.setListOfDonors(listOfDonors);
+                break;
+            case 4:
+                DinamicArray<Food> listOfProducts_DA = (DinamicArray<Food> ) object;
+                Main.setListOfProducts_DA(listOfProducts_DA);
                 break;
             default:
                 System.out.println("Hubo un problema casting SetListInProgramFromFile ");

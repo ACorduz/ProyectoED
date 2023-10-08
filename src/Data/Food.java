@@ -66,6 +66,7 @@ public class Food extends Product implements Serializable{
         this.expirationDateDay = expirationDateDay;
     }
 
+    
     @Override
     public String toString() {
         return "Food{" + "expirationDateYear=" + expirationDateYear + ", expirationDateMonth=" + expirationDateMonth + ", expirationDateDay=" + expirationDateDay + '}';
