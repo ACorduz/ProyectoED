@@ -2,7 +2,9 @@
 package Business;
 import Data.Product;
 import Data.Beneficiary;
+import Data.CompanyDonor;
 import Data.Donnor;
+import Data.Serializador;
 import Estructure_LinkedList.Queue;
 import Estructure_LinkedList.LinkedList;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
@@ -15,7 +17,8 @@ public class Main <T>{
     private static Queue listForChooseProduct = new Queue(); // primero una cola para poner los beneficiarios por orden de llegada
     private static DoubleLinkedList<Product> listOfProducts = new DoubleLinkedList(); // segundo una lista donde se van a poner todos los productos
     private static LinkedList<Beneficiary> listOfBeneficiaries= new LinkedList();
-    private static LinkedList<Donnor> listOfDonors = new LinkedList(); 
+    private static LinkedList<Donnor> listOfDonors = new LinkedList();
+    private static LinkedList<CompanyDonor> listaEmpresas = new LinkedList();
 
     // lo de historial de acciones esta en la clase donador
     // luego cada donador tiene enlazado un producto
@@ -33,9 +36,26 @@ public class Main <T>{
         Product product2 =cola.dequeue();
         System.out.println(product2.toString());
         System.out.println(cola.find(producto2));
+        
+        // Agregar empresas a la lista
+        //CompanyDonor empresa1 = new CompanyDonor("Surtifruver","545645-6","calle 43","Kennedy","super","surti@gmail.com","12345");
+        //listaEmpresas.pushBack(empresa1);
+        // Guardar la lista de empresas en un archivo serializable
+        //Serializador.serializarObjeto(listaEmpresas, "empresas.dat");
+        //Agregar Beneficiarios a la lista
+        //Beneficiary beneficiario=new Beneficiary("Felipe","Alvarez Ramirez","felalvarez@gmail.com","52483767","12345");
+        //listOfBeneficiaries.pushBack(beneficiario);
+        // Guardar la lista de beneficiarios en un archivo serializable
+        //Serializador.serializarObjeto(listOfBeneficiaries, "beneficiarios.dat");
+        
+        //Agregar Donadores a la lista
+        //Donnor donador=new Donnor("Alberto","Murillo Ramirez","murrami@gmail.com","52484567","12345","calle 45#13-45","Kennedy");
+        //listOfDonors.pushBack(donador);
+        // Guardar la lista de beneficiarios en un archivo serializable
+        //Serializador.serializarObjeto(listOfDonors, "donadores.dat");
         mostrarMenu();
         
-        
+        /*
         // Pruebas de serializacion
         // se crea un objeto para utilizar los metodos
         serialization ser = new serialization();
@@ -64,7 +84,7 @@ public class Main <T>{
         // conecccion API pruebas
         ConectionAPI conApi = new ConectionAPI();
         conApi.getDataUsers();
-        
+        */
     }
     
     // setter y getter de Main

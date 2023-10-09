@@ -3,6 +3,11 @@ package IU;
 
 
 import Business.Main;
+import Data.Beneficiary;
+import Data.CompanyDonor;
+import Data.Donnor;
+import Data.Serializador;
+import Estructure_LinkedList.LinkedList;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.File;
@@ -70,12 +75,159 @@ public class GUI {
         System.out.println("Ingresa (1) para Crear Usuario o (2) para Iniciar Sesion");
         int opcion= readIntegerOption("Ingresa una opcion: ");
         if (opcion==1){
-            //crearUsuario();
+            crearUsuario();
         }else if(opcion==2){
-            //IniciarSesion();
+            IniciarSesion();
         }else{
             System.out.println("Opcion no valida, vuelve a intentarlo");
             mostrarMenu();
+        }
+    }
+    public static void crearUsuario(){
+        System.out.println("Ingresa como quieres registrarte, 1 como beneficiario, 2 como Donador ocasional y 3 como empresa");
+        int opcion = readIntegerOption("Porfavor, ingrese alguna opcion: "); 
+        if (opcion==1){
+            MenuBeneficiario_Donador(1);
+        }
+        else if(opcion==2){
+            MenuBeneficiario_Donador(2);
+        }
+        else if (opcion==3){
+             MenuEmpresa();
+        }
+        else{
+            System.out.println("Opcion no valida, vuelve a intentarlo");
+            crearUsuario();
+        }
+    }
+    public static void MenuBeneficiario_Donador(int tipo){
+        String nombre=readOptionString("Ingresa tu nombre");
+        String apellido=readOptionString("Ingresa tu Apellido");
+        String email=readOptionString("Ingresa tu Correo");
+        String documento = readOptionString("Ingresa tu documento: ");
+        String clave=readOptionString("Ingresa una clave");
+        if(tipo==1){
+            // Obtener los datos existentes del archivo (si los hay)
+            LinkedList<Beneficiary> listaBeneficiarios = (LinkedList<Beneficiary>) Serializador.deserializarObjeto("beneficiarios.dat");
+            Beneficiary beneficiario=new Beneficiary(nombre,apellido,email,documento,clave);
+            if (listaBeneficiarios == null) {
+            listaBeneficiarios = new LinkedList<>();
+            }
+        listaBeneficiarios.pushBack(beneficiario);
+
+        // Guardar la lista actualizada en el archivo
+        Serializador.serializarObjeto(listaBeneficiarios, "beneficiarios.dat");
+        }
+        
+        else{
+            String direccion =readOptionString("Ingresa una direccion:");
+            String localidad=readOptionString("Ingresa la localidad");
+            LinkedList<Donnor> listaDonadores = (LinkedList<Donnor>) Serializador.deserializarObjeto("donadores.dat");
+            Donnor donador=new Donnor(nombre,apellido,email,documento,clave,direccion,localidad);
+            if (listaDonadores == null) {
+                listaDonadores = new LinkedList<>();
+            }
+        listaDonadores.pushBack(donador);
+
+        // Guardar la lista actualizada en el archivo
+        Serializador.serializarObjeto(listaDonadores, "donadores.dat");
+        }      
+    }
+    public static void MenuEmpresa(){
+        // Obtener los datos existentes del archivo (si los hay)
+        LinkedList<CompanyDonor> listaEmpresas = (LinkedList<CompanyDonor>) Serializador.deserializarObjeto("empresas.dat");
+        //LinkedList<CompanyDonor> listaEmpresas = (LinkedList<CompanyDonor>) Serializador.deserializarObjeto("empresa.dat");
+        String nombre=readOptionString("Ingresa el nombre de la empresa:");
+        String NIT=readOptionString("Ingresa el NIT:");
+        String direccion=readOptionString("Ingresa la direccion");
+        String localidad=readOptionString("Ingresa la localidad");
+        String tipo=readOptionString("Ingresa el tipo de empresa ");
+        String email=readOptionString("Ingresa el correo electronico: ");   
+        String clave=readOptionString("Ingresa una clave");
+        CompanyDonor empresa=new CompanyDonor(nombre,NIT,direccion,localidad,tipo,email, clave);
+        //Guardar compañia serializable
+         // Agregar la nueva instancia a la lista de datos existentes
+        if (listaEmpresas == null) {
+            listaEmpresas = new LinkedList<>();
+        }
+        listaEmpresas.pushBack(empresa);
+
+    // Guardar la lista actualizada en el archivo
+    Serializador.serializarObjeto(listaEmpresas, "empresas.dat");
+    }
+    
+    public static void IniciarSesion(){
+        int rol = readIntegerOption("Ingresa 1 para ingresar como beneficiario, 2 como donador y 3 como empresa ");
+        if (rol==1){
+            //verificar los objetos de beneficiarios y guardarlos en un linkedList
+            LinkedList<Beneficiary> listaBeneficiarios = Serializador.deserializarObjeto("beneficiarios.dat");
+            VerificacionLogin(listaBeneficiarios,null,null);
+        }else if(rol==2){
+            //verificar los objetos de donadores y guardarlos en un linkedList
+            LinkedList<Donnor> listaDonadores = Serializador.deserializarObjeto("donadores.dat");
+            VerificacionLogin(null,listaDonadores,null);
+            
+        }else if (rol==3){
+            //verificar los objetos de empresas y guardarlos en un linkedList
+            LinkedList<CompanyDonor> listaEmpresas = Serializador.deserializarObjeto("empresas.dat");
+            VerificacionLogin(null,null,listaEmpresas);
+        }
+        
+        
+    }
+    public static void VerificacionLogin(LinkedList<Beneficiary> listaBeneficiarios,LinkedList<Donnor> listaDonadores,LinkedList<CompanyDonor> listaEmpresas){
+        boolean continuar = true;
+        while (continuar) {
+            String email = readOptionString("Ingresa el correo electronico: ");
+            String clave = readOptionString("Ingresa la clave");
+
+            boolean autenticado = false;
+
+            // Verificar en la lista de empresas
+            if (listaEmpresas != null && !listaEmpresas.empty()) {
+                for (int i = 0; i < listaEmpresas.size(); i++) {
+                    CompanyDonor empresa = listaEmpresas.get(i);
+                    if (empresa.getEmail().equals(email) && empresa.getPassword().equals(clave)) {
+                        autenticado = true;
+                        System.out.println("Inicio de sesion exitoso para empresas.");
+                        continuar = false;
+                        break; // Si se encuentra una coincidencia, no es necesario seguir buscando.
+                    }
+                }
+                System.out.println("Correo o contrasena, incorrecto.Volver a intentarlo");
+            }
+
+            // Si no se autenticó como empresa, verificar en la lista de beneficiarios
+            else if (!autenticado && listaBeneficiarios != null && !listaBeneficiarios.empty()) {
+                for (int i = 0; i < listaBeneficiarios.size(); i++) {
+                    Beneficiary beneficiario = listaBeneficiarios.get(i);
+                    if (beneficiario.getEmail().equals(email) && beneficiario.getPassword().equals(clave)) {
+                        autenticado = true;
+                        System.out.println("Inicio de sesion exitoso para beneficiarios.");
+                        //Lo lleva al menu de ver los productos de la pila
+                        continuar = false;
+                        break; // Si se encuentra una coincidencia, no es necesario seguir buscando.
+                    }
+                }
+                System.out.println("Correo o contrasena, incorrecto.Volver a intentarlo");
+            }
+            
+
+            // Si no se autenticó como beneficiario, verificar en la lista de donadores
+            else if (!autenticado && listaDonadores != null && !listaDonadores.empty()) {
+                for (int i = 0; i < listaDonadores.size(); i++) {
+                    Donnor donador = listaDonadores.get(i);
+                    if (donador.getEmail().equals(email) && donador.getPassword().equals(clave)) {
+                        autenticado = true;
+                        System.out.println("Inicio de sesion exitoso para donadores.");
+                        continuar = false;
+                        break; // Si se encuentra una coincidencia, no es necesario seguir buscando.
+                    }
+                }
+                System.out.println("Correo o contrasena, incorrecto.Volver a intentarlo");
+          
+            }
+
         }
     }
     

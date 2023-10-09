@@ -211,7 +211,21 @@ public class LinkedList <T> implements EstructureLinkedList<T>, Serializable{
     public void setTail(Node tail) {
         this.tail = tail;
     }
+    public int size() {
+    return counter;
+    }
+    public T get(int i) {
+    if (i < 0 || i >= counter) {
+        throw new IndexOutOfBoundsException("Índice fuera de los límites de la lista");
+    }
 
+    Node current = head.getNext();
+    for (int index = 0; index < i; index++) {
+        current = current.getNext();
+    }
+
+    return (T) current.getData();
+    }
     @Override
     public String toString() {
         return "LinkedList{" + "head=" + head + ", tail=" + tail + ", counter=" + counter + '}';

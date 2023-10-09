@@ -18,6 +18,10 @@ public class Beneficiary extends User implements Serializable{
         NumberProductSelect=0;
         this.QuantityAllow = QuantityAllow;
     }
+    public Beneficiary(String name,String lastName, String email, String document, String password) {
+        super(name, lastName ,email, document, password, "Beneficiario");
+        NumberProductSelect=0;
+    }
     
     
     public boolean selectProduct(String nameProduct, String emailDonor,int Quantity){

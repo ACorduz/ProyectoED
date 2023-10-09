@@ -180,7 +180,5 @@ public class serialization <T>{
             System.out.print("lista"+ i+ ", is set="+SetListInProgramFromFile(i)+";");
         }
         System.out.println();
-    }
-    
-    
+    }    
 }
