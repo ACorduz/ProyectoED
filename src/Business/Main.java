@@ -17,17 +17,19 @@ import Logic.ConectionAPI;
 import Logic.InputDataJSON;
 import functionalities.RegistroComida;
 import Logic.InputDataJSON;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 
 public class Main <T>{
 
-    private static Queue listForChooseProduct = new Queue(); // primero una cola para poner los beneficiarios por orden de llegada
-
+    private static Queue<Beneficiary> listForChooseProduct = new Queue(); // primero una cola para poner los beneficiarios por orden de llegada
+    private static Stack<String> listActivity=new Stack(); //Registro de Actividades
     private static DoubleLinkedList<Product> listOfProducts = new DoubleLinkedList(); // segundo una lista donde se van a poner todos los productos
     private static DinamicArray<Food> listOfProducts_DA = new DinamicArray();
 
-    private static LinkedList<Beneficiary> listOfBeneficiaries= new LinkedList();
+    //private static LinkedList<Beneficiary> listOfBeneficiaries= new LinkedList();
     private static LinkedList<Donnor> listOfDonors = new LinkedList();
     private static LinkedList<CompanyDonor> listaEmpresas = new LinkedList();
 
@@ -44,23 +46,29 @@ public class Main <T>{
         Product producto3 = new Product("Ropa", "Camiseta", 1, "antonio@gmail");
         //agregar productos
         listOfProducts.pushFront(producto);
+        listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+producto.getEmailDonor()+ " agrego un producto");
         listOfProducts.pushFront(producto2);
+        listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+producto2.getEmailDonor()+ " agrego un producto");
         listOfProducts.pushFront(producto3);
+        listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+producto3.getEmailDonor()+ " agrego un producto");
         //Serializador.serializarObjeto(listOfProducts, "productos.dat");
          // Agregar empresas a la lista
         CompanyDonor empresa1 = new CompanyDonor("Surtifruver","545645-6","calle 43","Kennedy","super","surti@gmail.com","12345");
         listaEmpresas.pushBack(empresa1);
+        listActivity.push(obtenerFechaHoraActualString()+": Se registo la empresa, "+empresa1.getName());
         // Guardar la lista de empresas en un archivo serializable
         //Serializador.serializarObjeto(listaEmpresas, "empresas.dat");
         //Agregar Beneficiarios a la lista
         Beneficiary beneficiario=new Beneficiary("Felipe","Alvarez Ramirez","felalvarez@gmail.com","52483767","12345");
-        //listOfBeneficiaries.pushBack(beneficiario);
+        listForChooseProduct.enqueue(beneficiario);
+        listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+beneficiario.getEmail()+ " se registro como beneficiario");
         // Guardar la lista de beneficiarios en un archivo serializable
-        //Serializador.serializarObjeto(listOfBeneficiaries, "beneficiarios.dat");
-        
+        //Serializador.serializarObjeto(listForChooseProduct, "beneficiarios.dat");
         //Agregar Donador a la lista
-        Donnor donador=new Donnor("Alberto","Murilllo Ramirez","murrami@gmail.com","3424242","12345","calle 45#56","Kennedy");
+        Donnor donador=new Donnor("Alberto","Murillo Ramirez","murrami@gmail.com","3424242","12345","calle 45#56","Kennedy");
+        listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+donador.getEmail()+ " se registro como donador ocasional");
         //Serializador.serializarObjeto(listOfDonors, "donador.dat");
+        Serializador.serializarObjeto(listActivity, "actividades.dat");
         mostrarMenu();
         
         
@@ -108,7 +116,7 @@ public class Main <T>{
     public static void setListOfProducts(DoubleLinkedList<Product> listOfProducts) {
         Main.listOfProducts = listOfProducts;
     }
-
+/*
     public static LinkedList<Beneficiary> getListOfBeneficiaries() {
         return listOfBeneficiaries;
     }
@@ -116,7 +124,7 @@ public class Main <T>{
     public static void setListOfBeneficiaries(LinkedList<Beneficiary> listOfBeneficiaries) {
         Main.listOfBeneficiaries = listOfBeneficiaries;
     }
-
+*/
     public static LinkedList<Donnor> getListOfDonors() {
         return listOfDonors;
     }
@@ -132,7 +140,18 @@ public class Main <T>{
     public static void setListOfProducts_DA(DinamicArray<Food> listOfProducts_DA) {
         Main.listOfProducts_DA = listOfProducts_DA;
     }
+    public static String obtenerFechaHoraActualString() {
+        // Obtener la fecha y hora actuales
+        LocalDateTime fechaYHoraActual = LocalDateTime.now();
 
+        // Crear un formateador de fecha y hora
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        // Formatear la fecha y hora actual como una cadena
+        String fechaHoraFormateada = fechaYHoraActual.format(formateador);
+
+        return fechaHoraFormateada;
+    }
 
 }
 

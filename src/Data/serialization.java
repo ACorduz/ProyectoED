@@ -70,8 +70,8 @@ public class serialization <T>{
                         oos.writeObject(listOfProducts);
                         break;
                     case 2:
-                        LinkedList<Beneficiary> listOfBeneficiaries = Main.getListOfBeneficiaries();
-                        oos.writeObject(listOfBeneficiaries);
+                        //LinkedList<Beneficiary> listOfBeneficiaries = Main.getListOfBeneficiaries();
+                        //oos.writeObject(listOfBeneficiaries);
                         break;
                     case 3:
                         LinkedList<Donnor> listOfDonors = Main.getListOfDonors();
@@ -174,7 +174,7 @@ public class serialization <T>{
                 break;
             case 2:
                 LinkedList<Beneficiary> listOfBeneficiaries = (LinkedList<Beneficiary>) object;
-                Main.setListOfBeneficiaries(listOfBeneficiaries);
+                //Main.setListOfBeneficiaries(listOfBeneficiaries);
                 break;
             case 3:
                 LinkedList<Donnor> listOfDonors = (LinkedList<Donnor>) object;

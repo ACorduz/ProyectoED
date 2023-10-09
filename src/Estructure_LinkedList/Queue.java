@@ -24,6 +24,12 @@ public class Queue<T> extends LinkedList implements EstructureQueue<T>,  Seriali
         }
     }
     
-    
+    public T peek() {
+    if (empty()) {
+        throw new RuntimeException("Queue is empty");
+    } else {
+        return (T) topFront();
+    }
+}
     
 }

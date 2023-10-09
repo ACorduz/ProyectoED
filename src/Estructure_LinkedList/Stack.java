@@ -4,33 +4,29 @@ import java.io.Serializable;
 
 public class Stack<T> extends LinkedList implements EstructureStack<T>,  Serializable{
     
-    public Stack(){
+     public Stack() {
         super();
     }
      
-    public T peek(){
-        boolean empty = empty();
-        if (empty){
+    public T peek() {
+        if (empty()) {
             throw new RuntimeException("Stack is empty");
-        }else{
-            return((T) topFront());
+        } else {
+            return (T) topBack(); // El método peek debe devolver el elemento en la parte superior de la pila
         }
     }
     
-    public void push(T item){
-        pushFront((Comparable) item);
-       
+    public void push(T item) {
+        pushBack((Comparable) item); // El método push debe agregar elementos en la parte superior de la pila
     }
 
-    public T pop(){
-        if (empty()){
+    public T pop() {
+        if (empty()) {
             throw new RuntimeException("Stack is empty");
-        }else{
-            T output = (T) topFront();
-            popFront();
-            return(output);
+        } else {
+            T output = (T) topBack(); // El método pop debe eliminar y devolver el elemento en la parte superior de la pila
+            popBack();
+            return output;
         } 
     }
-    
-
 }

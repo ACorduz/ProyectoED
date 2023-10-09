@@ -3,12 +3,14 @@ package IU;
 
 
 import Business.Main;
+import static Business.Main.obtenerFechaHoraActualString;
 import Data.Beneficiary;
 import Data.CompanyDonor;
 import Data.Donnor;
 import Data.Product;
 import Data.Serializador;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
+import Estructure_DoubleLinkedList.Stack;
 import Estructure_LinkedList.LinkedList;
 import java.util.Scanner;
 import java.io.BufferedReader;
@@ -112,6 +114,7 @@ public class GUI {
         String email=readOptionString("Ingresa tu Correo");
         String documento = readOptionString("Ingresa tu documento: ");
         String clave=readOptionString("Ingresa una clave");
+        Stack<String> listActivity=(Stack<String>) Serializador.deserializarObjeto("actividades.dat");
         if(tipo==1){
             // Obtener los datos existentes del archivo (si los hay)
             LinkedList<Beneficiary> listaBeneficiarios = (LinkedList<Beneficiary>) Serializador.deserializarObjeto("beneficiarios.dat");
@@ -120,10 +123,12 @@ public class GUI {
             listaBeneficiarios = new LinkedList<>();
             }
         listaBeneficiarios.pushBack(beneficiario);
+        listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+beneficiario.getEmail()+ " se registro como Beneficiario");
 
         // Guardar la lista actualizada en el archivo
         Serializador.serializarObjeto(listaBeneficiarios, "beneficiarios.dat");
         System.out.println("Registro exitoso");
+        Serializador.serializarObjeto(listActivity, "actividades.dat");
         mostrarMenu();    
         }
         
@@ -135,16 +140,19 @@ public class GUI {
             if (listaDonadores == null) {
                 listaDonadores = new LinkedList<>();
             }
+        listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+donador.getEmail()+ " se registro como Donador");
         listaDonadores.pushBack(donador);
 
         // Guardar la lista actualizada en el archivo
         Serializador.serializarObjeto(listaDonadores, "donadores.dat");
+        Serializador.serializarObjeto(listActivity, "actividades.dat");
             System.out.println("Registro exitoso");
             mostrarMenu();
         }      
     }
     public static void MenuEmpresa(){
         // Obtener los datos existentes del archivo (si los hay)
+        Stack<String> listActivity=(Stack<String>) Serializador.deserializarObjeto("actividades.dat");
         LinkedList<CompanyDonor> listaEmpresas = (LinkedList<CompanyDonor>) Serializador.deserializarObjeto("empresas.dat");
         //LinkedList<CompanyDonor> listaEmpresas = (LinkedList<CompanyDonor>) Serializador.deserializarObjeto("empresa.dat");
         String nombre=readOptionString("Ingresa el nombre de la empresa:");
@@ -160,10 +168,13 @@ public class GUI {
         if (listaEmpresas == null) {
             listaEmpresas = new LinkedList<>();
         }
+        
         listaEmpresas.pushBack(empresa);
+        listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+empresa.getEmail()+ " se registro como Empresa");
 
     // Guardar la lista actualizada en el archivo
     Serializador.serializarObjeto(listaEmpresas, "empresas.dat");
+    Serializador.serializarObjeto(listActivity, "actividades.dat");
         System.out.println("Registro exitoso");
         mostrarMenu();
     }
@@ -173,6 +184,7 @@ public class GUI {
         if (rol==1){
             //verificar los objetos de beneficiarios y guardarlos en un linkedList
             LinkedList<Beneficiary> listaBeneficiarios = Serializador.deserializarObjeto("beneficiarios.dat");
+            
             VerificacionLogin(listaBeneficiarios,null,null);
         }else if(rol==2){
             //verificar los objetos de donadores y guardarlos en un linkedList
@@ -195,12 +207,15 @@ public class GUI {
 
             boolean autenticado = false;
             // Verificar en la lista de empresas
+            Stack<String> listActivity=(Stack<String>) Serializador.deserializarObjeto("actividades.dat");
             if (listaEmpresas != null && !listaEmpresas.empty()) {
                 for (int i = 0; i < listaEmpresas.size(); i++) {
                     CompanyDonor empresa = listaEmpresas.get(i);
                     if (empresa.getEmail().equals(email) && empresa.getPassword().equals(clave)) {
                         autenticado = true;
                         System.out.println("Inicio de sesion exitoso para empresas.");
+                        listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+empresa.getEmail()+ " Inicio Sesion como Empresa");
+                        Serializador.serializarObjeto(listActivity, "actividades.dat");
                         MenuRegistrarProducto(email);
                         continuar = false;
                         break; // Si se encuentra una coincidencia, no es necesario seguir buscando.
@@ -217,7 +232,9 @@ public class GUI {
                     if (beneficiario.getEmail().equals(email) && beneficiario.getPassword().equals(clave)) {
                         autenticado = true;
                         System.out.println("Inicio de sesion exitoso para beneficiarios.");
-                        menuProductos();
+                        listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+beneficiario.getEmail()+ " Inicio Sesion como Beneficiario");
+                        Serializador.serializarObjeto(listActivity, "actividades.dat");
+                        menuProductos(email);
                         //Lo lleva al menu de ver los productos de la pila
                         continuar = false;
                         break; // Si se encuentra una coincidencia, no es necesario seguir buscando.
@@ -234,6 +251,8 @@ public class GUI {
                     if (donador.getEmail().equals(email) && donador.getPassword().equals(clave)) {
                         autenticado = true;
                         System.out.println("Inicio de sesion exitoso para donadores.");
+                        listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+donador.getEmail()+ " Inicio Sesion como Donador");
+                        Serializador.serializarObjeto(listActivity, "actividades.dat");
                         MenuRegistrarProducto(email);
                         continuar = false;
                         break; // Si se encuentra una coincidencia, no es necesario seguir buscando.
@@ -245,11 +264,11 @@ public class GUI {
 
         }
     }
-    public static void menuProductos(){
+    public static void menuProductos(String email){
         System.out.println("------------Estos son los productos que hay disponibles---------------");
          // Deserializar la lista de productos desde el archivo "productos.dat"
         DoubleLinkedList<Product> listaProductos = Serializador.deserializarObjeto("productos.dat");
-
+        Stack<String> listActivity=(Stack<String>) Serializador.deserializarObjeto("actividades.dat");
         // Verificar si la lista de productos se cargó correctamente
         if (listaProductos != null) {
             // Mostrar la lista de productos
@@ -258,12 +277,15 @@ public class GUI {
             listaProductos.removeProductByQuantity(producto);
             System.out.println("Lista actualizada:");
             System.out.println(listaProductos.toString());
-             Serializador.serializarObjeto(listaProductos, "productos.dat");
-             System.out.println("Ya quedo apartado, te puedes contactar con el donador ");
+            Serializador.serializarObjeto(listaProductos, "productos.dat");
+            System.out.println("Ya quedo apartado, te puedes contactar con el donador ");
+            listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+email+ " Aparto "+producto);
+            Serializador.serializarObjeto(listActivity, "actividades.dat");
              mostrarMenu();
             }
     }
     public static void MenuRegistrarProducto(String email){
+         Stack<String> listActivity=(Stack<String>) Serializador.deserializarObjeto("actividades.dat");
         // Obtener los datos existentes del archivo (si los hay)
         DoubleLinkedList<Product> listaProductos = (DoubleLinkedList<Product>) Serializador.deserializarObjeto("productos.dat");
         System.out.println("-----------------Registro de Productos--------------------------");
@@ -276,16 +298,24 @@ public class GUI {
         if (listaProductos == null) {
             listaProductos = new DoubleLinkedList<Product>();
         }
-        listaProductos.pushBack(productox);
+        listaProductos.pushFront(productox);
 
          // Guardar la lista actualizada en el archivo
          Serializador.serializarObjeto(listaProductos, "productos.dat");
          System.out.println("Registro exitoso, gracias por tu donacion");
+         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+email+ " Registro "+producto);
+         Serializador.serializarObjeto(listActivity, "actividades.dat");
          mostrarMenu();
     }
     
     public static void salirMenu(){
+        Stack<String> listActivity=(Stack<String>) Serializador.deserializarObjeto("actividades.dat");
         System.out.println("Gracias por utilizar el programa");
+        System.out.println("-------------Lista de Actividades-----------------");
+        while(!listActivity.empty()){
+            System.out.println(listActivity.pop());
+            //System.out.println("\n");
+        }
         System.exit(0); // ACA HUBO CAMBIO
     }
    
