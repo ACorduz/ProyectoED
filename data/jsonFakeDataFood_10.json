@@ -1,0 +1,104 @@
+{
+    "productFood": [
+        {
+            "index": 1,
+            "typeProduct": "Food",
+            "nameProduct": "Salsa de manzana",
+            "quantity": 54,
+            "emailDonor": "llopez@example.com",
+            "expirationDateYear": 2025,
+            "expirationDateMonth": 2,
+            "expirationDateDay": 28
+        },
+        {
+            "index": 2,
+            "typeProduct": "Food",
+            "nameProduct": "Cebollas",
+            "quantity": 29,
+            "emailDonor": "tatiana55@example.org",
+            "expirationDateYear": 2023,
+            "expirationDateMonth": 9,
+            "expirationDateDay": 20
+        },
+        {
+            "index": 3,
+            "typeProduct": "Food",
+            "nameProduct": "Fideos",
+            "quantity": 13,
+            "emailDonor": "janethrueda@example.com",
+            "expirationDateYear": 2024,
+            "expirationDateMonth": 8,
+            "expirationDateDay": 8
+        },
+        {
+            "index": 4,
+            "typeProduct": "Food",
+            "nameProduct": "Azucar",
+            "quantity": 20,
+            "emailDonor": "suarezemilse@example.com",
+            "expirationDateYear": 2023,
+            "expirationDateMonth": 1,
+            "expirationDateDay": 5
+        },
+        {
+            "index": 5,
+            "typeProduct": "Food",
+            "nameProduct": "Te",
+            "quantity": 59,
+            "emailDonor": "morenofernando@example.org",
+            "expirationDateYear": 2025,
+            "expirationDateMonth": 11,
+            "expirationDateDay": 22
+        },
+        {
+            "index": 6,
+            "typeProduct": "Food",
+            "nameProduct": "Arroz",
+            "quantity": 91,
+            "emailDonor": "maria20@example.net",
+            "expirationDateYear": 2025,
+            "expirationDateMonth": 4,
+            "expirationDateDay": 12
+        },
+        {
+            "index": 7,
+            "typeProduct": "Food",
+            "nameProduct": "Pimienta",
+            "quantity": 71,
+            "emailDonor": "wmoreno@example.net",
+            "expirationDateYear": 2024,
+            "expirationDateMonth": 10,
+            "expirationDateDay": 27
+        },
+        {
+            "index": 8,
+            "typeProduct": "Food",
+            "nameProduct": "Sopa enlatada",
+            "quantity": 75,
+            "emailDonor": "soniaocampo@example.org",
+            "expirationDateYear": 2023,
+            "expirationDateMonth": 3,
+            "expirationDateDay": 15
+        },
+        {
+            "index": 9,
+            "typeProduct": "Food",
+            "nameProduct": "Sal",
+            "quantity": 45,
+            "emailDonor": "derly55@example.net",
+            "expirationDateYear": 2025,
+            "expirationDateMonth": 5,
+            "expirationDateDay": 19
+        },
+        {
+            "index": 10,
+            "typeProduct": "Food",
+            "nameProduct": "Agua embotellada",
+            "quantity": 24,
+            "emailDonor": "richard13@example.org",
+            "expirationDateYear": 2024,
+            "expirationDateMonth": 7,
+            "expirationDateDay": 19
+        }
+    ]
+}

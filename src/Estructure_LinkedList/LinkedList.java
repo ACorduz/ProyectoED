@@ -150,6 +150,46 @@ public class LinkedList <T> implements EstructureLinkedList<T>, Serializable{
          
     }
     
+    public void delete(T key) {
+        if (empty()) {
+            throw new RuntimeException("Lista vacía, no se puede eliminar.");
+        } else {
+            Node current = head.getNext();
+            Node prev = null;
+            boolean elementFound = false;
+
+            while (current != null) {
+                T value = (T) current.getData();
+                if (value.equals(key)) {
+                    if (current == head.getNext()) {
+                         // Si el nodo a eliminar es el primero
+                        head.setNext(current.getNext());
+                        if (current.getNext() == null) {
+                            tail.setNext(null);
+                        }
+                    } else if (current == tail.getNext()) {
+                        // Si el nodo a eliminar es el último
+                        tail.setNext(prev);
+                        if (prev != null) {
+                            prev.setNext(null);
+                        }
+                    } else {
+                        // Si el nodo a eliminar está en medio de la lista
+                        prev.setNext(current.getNext());
+                    }
+                    counter--;
+                    elementFound = true; // Indica que el elemento fue encontrado y eliminado.
+                    break; // Sale del bucle, ya que se eliminó el elemento deseado.
+                }
+                prev = current;
+                current = current.getNext();
+            }
+
+            if (!elementFound) {
+                System.out.println("Elemento " + key + " no encontrado en la lista.");
+            }
+        }
+    }
         
     public Node getNodeForKeyWhioutCheck(T key){
         // Este metodo devuelve el nodo de una llave y si no lo encuentra entonces devuelve un nulo
