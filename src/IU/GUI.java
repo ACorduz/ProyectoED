@@ -6,7 +6,9 @@ import Business.Main;
 import Data.Beneficiary;
 import Data.CompanyDonor;
 import Data.Donnor;
+import Data.Product;
 import Data.Serializador;
+import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Estructure_LinkedList.LinkedList;
 import java.util.Scanner;
 import java.io.BufferedReader;
@@ -182,7 +184,6 @@ public class GUI {
             String clave = readOptionString("Ingresa la clave");
 
             boolean autenticado = false;
-
             // Verificar en la lista de empresas
             if (listaEmpresas != null && !listaEmpresas.empty()) {
                 for (int i = 0; i < listaEmpresas.size(); i++) {
@@ -192,9 +193,10 @@ public class GUI {
                         System.out.println("Inicio de sesion exitoso para empresas.");
                         continuar = false;
                         break; // Si se encuentra una coincidencia, no es necesario seguir buscando.
+                        
                     }
                 }
-                System.out.println("Correo o contrasena, incorrecto.Volver a intentarlo");
+                System.out.println("Correo o contrasena, incorrecto.Volver a intentarlo2");
             }
 
             // Si no se autenticó como empresa, verificar en la lista de beneficiarios
@@ -204,12 +206,13 @@ public class GUI {
                     if (beneficiario.getEmail().equals(email) && beneficiario.getPassword().equals(clave)) {
                         autenticado = true;
                         System.out.println("Inicio de sesion exitoso para beneficiarios.");
+                        menuProductos();
                         //Lo lleva al menu de ver los productos de la pila
                         continuar = false;
                         break; // Si se encuentra una coincidencia, no es necesario seguir buscando.
                     }
                 }
-                System.out.println("Correo o contrasena, incorrecto.Volver a intentarlo");
+                System.out.println("Correo o contrasena, incorrecto.Volver a intentarlo3");
             }
             
 
@@ -224,13 +227,29 @@ public class GUI {
                         break; // Si se encuentra una coincidencia, no es necesario seguir buscando.
                     }
                 }
-                System.out.println("Correo o contrasena, incorrecto.Volver a intentarlo");
+                System.out.println("Correo o contrasena, incorrecto.Volver a intentarlo4");
           
             }
 
         }
     }
-    
+    public static void menuProductos(){
+        System.out.println("------------Estos son los productos que hay disponibles---------------");
+         // Deserializar la lista de productos desde el archivo "productos.dat"
+        DoubleLinkedList<Product> listaProductos = Serializador.deserializarObjeto("productos.dat");
+
+        // Verificar si la lista de productos se cargó correctamente
+        if (listaProductos != null) {
+            // Mostrar la lista de productos
+            System.out.println(listaProductos.toString());
+            String producto=readOptionString("Ingresa el nombre del producto que deseas");
+            listaProductos.removeProductByQuantity(producto);
+            System.out.println("Lista actualizada:");
+            System.out.println(listaProductos.toString());
+             Serializador.serializarObjeto(listaProductos, "productos.dat");
+            }
+        
+    }
     public static void salirMenu(){
         System.out.println("Gracias por utilizar el programa");
         System.exit(0); // ACA HUBO CAMBIO

@@ -74,8 +74,14 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{" + "typeProduct=" + typeProduct + ", nameProduct=" + nameProduct + ", estate=" + estate + ", quantity=" + quantity + ", emailDonor=" + emailDonor + '}';
-    }
+    return "Product{" +
+            "\n  Type: " + typeProduct +
+            "\n  Name: " + nameProduct +
+            "\n  Estate: " + estate +
+            "\n  Quantity: " + quantity +
+            "\n  Email Donor: " + emailDonor +
+            "\n}";
+}
     
     
 }

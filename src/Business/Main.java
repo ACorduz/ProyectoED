@@ -28,14 +28,24 @@ public class Main <T>{
     public static void main(String[] args) {
         //Pruebas para ver que el codigo funcione bien 
         // prueba lista de objetos
-        Product producto = new Product("FOOD", "Harina", 5,"@gmail");
-        Product producto2 = new Product("FOOD", "Frijol", 5,"@gmail");
-        Queue<Product> cola = new Queue();
-        cola.enqueue(producto);
-        cola.enqueue(producto2);
-        Product product2 =cola.dequeue();
-        System.out.println(product2.toString());
-        System.out.println(cola.find(producto2));
+        Product producto = new Product("FOOD", "Harina", 5,"sar@gmail");
+        Product producto2 = new Product("FOOD", "Frijol", 5,"carlos@gmail");
+        Product producto3 = new Product("Ropa", "camiseta", 1,"antonio@gmail");
+        Product producto4 = new Product("FOOD", "ARROZ", 3,"antoniA@gmail");
+        //listOfProducts.pushFront(producto);
+        //listOfProducts.pushFront(producto2);
+        //listOfProducts.pushFront(producto3);
+        //listOfProducts.pushFront(producto4);
+        //System.out.println("Lista de Productos:");
+        //System.out.println(listOfProducts.toString());
+        //listOfProducts.removeAt(2);
+        //System.out.println(listOfProducts.toString());
+        // Guardar la lista de productos en un archivo serializable
+        //Serializador.serializarObjeto(listOfProducts, "productos.dat");
+        //cola.enqueue(producto2);
+        //Product product2 =cola.dequeue();
+        //System.out.println(product2.toString());
+        //System.out.println(cola.find(producto2));
         
         // Agregar empresas a la lista
         //CompanyDonor empresa1 = new CompanyDonor("Surtifruver","545645-6","calle 43","Kennedy","super","surti@gmail.com","12345");

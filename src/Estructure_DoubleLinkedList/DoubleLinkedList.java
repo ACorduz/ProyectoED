@@ -1,6 +1,7 @@
 
 package Estructure_DoubleLinkedList;
 
+import Data.Product;
 import java.io.Serializable;
 
 
@@ -222,12 +223,132 @@ public class DoubleLinkedList <T> implements EstructureDoubleLinkedList<T> ,Seri
     public void setTail(Node tail) {
         this.tail = tail;
     }
+    public void removeAt(int position) {
+        if (position < 0 || position >= counter) {
+            throw new IndexOutOfBoundsException("Posición fuera de rango");
+        }
+
+        Node current = head.getNext();
+        int currentPosition = 0;
+
+        // Si la posición es 0, eliminar el primer nodo
+        if (position == 0) {
+            popFront();
+            return;
+        }
+
+        // Recorrer la lista hasta la posición deseada
+        while (current != null && currentPosition < position - 1) {
+            current = current.getNext();
+            currentPosition++;
+        }
+
+        // Verificar si se encontró el nodo anterior al que se desea eliminar
+        if (current != null) {
+            Node nodeToRemove = current.getNext();
+            current.setNext(nodeToRemove.getNext());
+
+            // Si se elimina el último nodo, actualizar la cola
+            if (nodeToRemove.getNext() == null) {
+                tail.setNext(current);
+            }
+
+            // Eliminar las referencias del nodo a eliminar
+            nodeToRemove.setNext(null);
+            nodeToRemove.setPrev(null);
+
+            counter--;
+        }
+    }
+    public void removeByProductName(String productName) {
+        Node current = head.getNext();
+
+        while (current != null) {
+            Object data = current.getData();
+            if (data instanceof Product) {
+                Product product = (Product) data;
+                if (product.getNameProduct().equalsIgnoreCase(productName)) {
+                    // Encontramos el producto por nombre, eliminémoslo
+                    if (current.getPrev() != null) {
+                        current.getPrev().setNext(current.getNext());
+                    } else {
+                        // Si es el primer elemento, actualizamos la cabeza
+                        head.setNext(current.getNext());
+                    }
+                    if (current.getNext() != null) {
+                        current.getNext().setPrev(current.getPrev());
+                    } else {
+                        // Si es el último elemento, actualizamos la cola
+                        tail.setNext(current.getPrev());
+                    }
+                    // Eliminamos las referencias del nodo
+                    current.setNext(null);
+                    current.setPrev(null);
+                    counter--;
+                    return; // Terminamos después de eliminar el nodo
+                }
+            }
+            current = current.getNext();
+        }
+    }
+    public void removeProductByQuantity(String productName) {
+        Node current = head.getNext();
+
+        while (current != null) {
+            Object data = current.getData();
+            if (data instanceof Product) {
+                Product product = (Product) data;
+                if (product.getNameProduct().equalsIgnoreCase(productName) && product.getQuantity() == 1) {
+                    removeByProductName(productName);
+                    return; // Salir del método después de eliminar el nodo
+                }
+                else if(product.getNameProduct().equalsIgnoreCase(productName) && product.getQuantity() > 1){
+                    decreaseProductQuantity(productName);
+                }
+            }
+            current = current.getNext();
+        }
+    }
+    public void decreaseProductQuantity(String productName) {
+        Node current = head.getNext();
+
+        while (current != null) {
+            Object data = current.getData();
+            if (data instanceof Product) {
+                Product product = (Product) data;
+                if (product.getNameProduct().equalsIgnoreCase(productName)) {
+                    if (product.getQuantity() > 1) {
+                        product.setQuantity(product.getQuantity() - 1);
+                    }
+                    return;
+                }
+            }
+            current = current.getNext();
+        }
+    }
 
     @Override
     public String toString() {
-        return "DoubleLinkedList{" + "head=" + head + ", tail=" + tail + ", counter=" + counter + '}';
+    if (empty()) {
+        return "DoubleLinkedList is empty";
     }
-    
-    
-    
+
+    StringBuilder stringBuilder = new StringBuilder();
+    Node current = head.getNext();
+    int index = 0;
+    while (current != null) {
+        Object data = current.getData();
+        if (data instanceof Product) {
+            stringBuilder.append(data.toString());
+            stringBuilder.append("\n"); // Agregar una nueva línea después de cada producto
+        } else {
+            stringBuilder.append(data.toString()); // Puedes ajustar esto si no es Product
+        }
+        current = current.getNext();
+        index++;
+    }
+
+    return "DoubleLinkedList{\n" + stringBuilder.toString() + '}';
+}
+
 }
