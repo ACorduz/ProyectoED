@@ -196,7 +196,7 @@ public class GUI {
                         
                     }
                 }
-                System.out.println("Correo o contrasena, incorrecto.Volver a intentarlo2");
+                System.out.println("Correo o contrasena, incorrecto.Volver a intentarlo");
             }
 
             // Si no se autenticó como empresa, verificar en la lista de beneficiarios
@@ -212,7 +212,7 @@ public class GUI {
                         break; // Si se encuentra una coincidencia, no es necesario seguir buscando.
                     }
                 }
-                System.out.println("Correo o contrasena, incorrecto.Volver a intentarlo3");
+                System.out.println("Correo o contrasena, incorrecto.Volver a intentarlo");
             }
             
 
@@ -227,7 +227,7 @@ public class GUI {
                         break; // Si se encuentra una coincidencia, no es necesario seguir buscando.
                     }
                 }
-                System.out.println("Correo o contrasena, incorrecto.Volver a intentarlo4");
+                System.out.println("Correo o contrasena, incorrecto.Volver a intentarlo");
           
             }
 
@@ -244,9 +244,11 @@ public class GUI {
             System.out.println(listaProductos.toString());
             String producto=readOptionString("Ingresa el nombre del producto que deseas");
             listaProductos.removeProductByQuantity(producto);
-            System.out.println("Lista actualizada:");
-            System.out.println(listaProductos.toString());
+            //System.out.println("Lista actualizada:");
+            //System.out.println(listaProductos.toString());
              Serializador.serializarObjeto(listaProductos, "productos.dat");
+             System.out.println("Esta es la informacion detallada del producto: ");
+             salirMenu();
             }
         
     }
