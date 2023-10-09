@@ -11,13 +11,12 @@ import Data.Beneficiary;
 import Data.Donnor;
 import Data.Food;
 import Data.User;
-import Estructure_LinkedList.Queue;
 import Estructure_DoubleLinkedList.Stack;
 import functionalities.find;
 
 import java.io.FileReader;
 
-public class InputDataDB {
+public class InputDataCamiloPrueba {
     private String yourComputer_pathToCarpet_fileJson = null; // RUTA de carpeta de archivo Json
     // si lo siguiente  es la ruta completa del archivo "(ruta/a/tu/carpetaJson)/nameArchivo.json", entonces ingresar esto "ruta/a/tu/carpetaJson/"; OJO CON / al final
     
@@ -32,14 +31,14 @@ public class InputDataDB {
     public String PathJhoanComputer = "C:\\Users\\pipec\\Escritorio\\ProyectoED\\Data/";
     
 
-    public InputDataDB(String pathYourComputerCarpetArchivoJson, int NumberRowsRead, int TypeOfFileRead) {
+    public InputDataCamiloPrueba(String pathYourComputerCarpetArchivoJson, int NumberRowsRead, int TypeOfFileRead) {
         this.yourComputer_pathToCarpet_fileJson = pathYourComputerCarpetArchivoJson;
         this.NumberRowsRead = NumberRowsRead;
         this.TypeOfFileRead = TypeOfFileRead;
         
     }
 
-    public InputDataDB( int NumberRowsRead, int TypeOfFileRead) {
+    public InputDataCamiloPrueba(int NumberRowsRead, int TypeOfFileRead) {
         this.NumberRowsRead = NumberRowsRead;
         this.TypeOfFileRead = TypeOfFileRead;
     }
