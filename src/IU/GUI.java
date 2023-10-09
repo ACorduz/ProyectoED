@@ -74,13 +74,17 @@ public class GUI {
     
     public static void mostrarMenu(){
         System.out.println("--------------Menu General-------------------");
-        System.out.println("Ingresa (1) para Crear Usuario o (2) para Iniciar Sesion");
+        System.out.println("Ingresa (1) para Crear Usuario, (2) para Iniciar Sesion o (3) para salir");
         int opcion= readIntegerOption("Ingresa una opcion: ");
         if (opcion==1){
             crearUsuario();
         }else if(opcion==2){
             IniciarSesion();
-        }else{
+         
+        }else if(opcion==3){
+            salirMenu();
+        }
+        else{
             System.out.println("Opcion no valida, vuelve a intentarlo");
             mostrarMenu();
         }
@@ -119,6 +123,8 @@ public class GUI {
 
         // Guardar la lista actualizada en el archivo
         Serializador.serializarObjeto(listaBeneficiarios, "beneficiarios.dat");
+        System.out.println("Registro exitoso");
+        mostrarMenu();    
         }
         
         else{
@@ -133,6 +139,8 @@ public class GUI {
 
         // Guardar la lista actualizada en el archivo
         Serializador.serializarObjeto(listaDonadores, "donadores.dat");
+            System.out.println("Registro exitoso");
+            mostrarMenu();
         }      
     }
     public static void MenuEmpresa(){
@@ -156,6 +164,8 @@ public class GUI {
 
     // Guardar la lista actualizada en el archivo
     Serializador.serializarObjeto(listaEmpresas, "empresas.dat");
+        System.out.println("Registro exitoso");
+        mostrarMenu();
     }
     
     public static void IniciarSesion(){
@@ -191,6 +201,7 @@ public class GUI {
                     if (empresa.getEmail().equals(email) && empresa.getPassword().equals(clave)) {
                         autenticado = true;
                         System.out.println("Inicio de sesion exitoso para empresas.");
+                        MenuRegistrarProducto(email);
                         continuar = false;
                         break; // Si se encuentra una coincidencia, no es necesario seguir buscando.
                         
@@ -223,6 +234,7 @@ public class GUI {
                     if (donador.getEmail().equals(email) && donador.getPassword().equals(clave)) {
                         autenticado = true;
                         System.out.println("Inicio de sesion exitoso para donadores.");
+                        MenuRegistrarProducto(email);
                         continuar = false;
                         break; // Si se encuentra una coincidencia, no es necesario seguir buscando.
                     }
@@ -244,14 +256,34 @@ public class GUI {
             System.out.println(listaProductos.toString());
             String producto=readOptionString("Ingresa el nombre del producto que deseas");
             listaProductos.removeProductByQuantity(producto);
-            //System.out.println("Lista actualizada:");
-            //System.out.println(listaProductos.toString());
+            System.out.println("Lista actualizada:");
+            System.out.println(listaProductos.toString());
              Serializador.serializarObjeto(listaProductos, "productos.dat");
-             System.out.println("Esta es la informacion detallada del producto: ");
-             salirMenu();
+             System.out.println("Ya quedo apartado, te puedes contactar con el donador ");
+             mostrarMenu();
             }
-        
     }
+    public static void MenuRegistrarProducto(String email){
+        // Obtener los datos existentes del archivo (si los hay)
+        DoubleLinkedList<Product> listaProductos = (DoubleLinkedList<Product>) Serializador.deserializarObjeto("productos.dat");
+        System.out.println("-----------------Registro de Productos--------------------------");
+        String tipo=readOptionString("Ingresa el tipo de producto que deseas donar");
+        String producto=readOptionString("Ingresa el nombre del producto que deseas donar");
+        int cantidad = readIntegerOption("Ingresa la cantidad del producto, para mas de un beneficiario ");
+        Product productox = new Product(tipo, producto,cantidad ,email);
+         //Guardar productos serializable
+         // Agregar la nueva instancia a la lista de datos existentes
+        if (listaProductos == null) {
+            listaProductos = new DoubleLinkedList<Product>();
+        }
+        listaProductos.pushBack(productox);
+
+         // Guardar la lista actualizada en el archivo
+         Serializador.serializarObjeto(listaProductos, "productos.dat");
+         System.out.println("Registro exitoso, gracias por tu donacion");
+         mostrarMenu();
+    }
+    
     public static void salirMenu(){
         System.out.println("Gracias por utilizar el programa");
         System.exit(0); // ACA HUBO CAMBIO

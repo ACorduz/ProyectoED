@@ -65,7 +65,7 @@ public class serialization <T>{
                         oos.writeObject(listForChooseProduct);
                         break;
                     case 1:
-                        DoubleLinkedList<Food> listOfProducts = Main.getListOfProducts();
+                        DoubleLinkedList<Product> listOfProducts = Main.getListOfProducts();
                         //System.out.println("aqui llego");
                         oos.writeObject(listOfProducts);
                         break;
@@ -169,7 +169,7 @@ public class serialization <T>{
                 Main.setListForChooseProduct(listForChooseProduct);
                 break;
             case 1:
-                DoubleLinkedList<Food> listOfProducts = (DoubleLinkedList<Food>) object; 
+                DoubleLinkedList<Product> listOfProducts = (DoubleLinkedList<Product>) object; 
                 Main.setListOfProducts(listOfProducts);
                 break;
             case 2:

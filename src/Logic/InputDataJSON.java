@@ -571,7 +571,7 @@ public class InputDataJSON {
                 int expirationDateMonth = comida.getInt("expirationDateMonth"); 
                 int expirationDateDay = comida.getInt("expirationDateDay");
 
-                registroComida.InsertRFScan_DoubleLinkedList(nameProduct, quantity, emailDonor, expirationDateYear, expirationDateMonth, expirationDateDay);
+                //registroComida.InsertRFScan_DoubleLinkedList(nameProduct, quantity, emailDonor, expirationDateYear, expirationDateMonth, expirationDateDay);
     
             }
             // Cierra el lector de archivo

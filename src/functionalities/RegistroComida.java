@@ -30,7 +30,7 @@ public class RegistroComida extends Main {
     public void CreateRF_DoubleLinkedList(){
         ser.WriteSerializationInicialFile(indexFileDoubleLL);
     }
-    
+    /*
     // Insertar
     public void InsertRFScan_DoubleLinkedList(String nameProduct, int quantity,String emailDonor, int expirationDateYear, int expirationDateMonth, int expirationDateDay){
         // traer lista
@@ -88,7 +88,7 @@ public class RegistroComida extends Main {
         }
         return(false);
     }
-    
+    */
     public boolean findData_Email_RF_DoubleLinkedList(String email){
         // traer lista
   

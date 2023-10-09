@@ -2,6 +2,8 @@
 package Estructure_DoubleLinkedList;
 
 import Data.Product;
+import static IU.GUI.menuProductos;
+import static IU.GUI.readOptionString;
 import java.io.Serializable;
 
 
@@ -359,21 +361,33 @@ public class DoubleLinkedList <T> implements EstructureDoubleLinkedList<T> ,Seri
         }
     }
     public void removeProductByQuantity(String productName) {
-        Node current = head.getNext();
+        while (true) {
+            boolean productFound = false; // Variable para verificar si se encontró el producto
+            Node current = head.getNext();
 
-        while (current != null) {
-            Object data = current.getData();
-            if (data instanceof Product) {
-                Product product = (Product) data;
-                if (product.getNameProduct().equalsIgnoreCase(productName) && product.getQuantity() == 1) {
-                    removeByProductName(productName);
-                    return; // Salir del método después de eliminar el nodo
+            while (current != null) {
+                Object data = current.getData();
+                if (data instanceof Product) {
+                    Product product = (Product) data;
+                    if (product.getNameProduct().equalsIgnoreCase(productName)) {
+                        productFound = true; // Se encontró el producto
+                        if (product.getQuantity() == 1) {
+                            removeByProductName(productName);
+                            return; // Salir del método después de eliminar el nodo
+                        } else if (product.getQuantity() > 1) {
+                            decreaseProductQuantity(productName);
+                            return; // Salir del método después de disminuir la cantidad
+                        }
+                    }
                 }
-                else if(product.getNameProduct().equalsIgnoreCase(productName) && product.getQuantity() > 1){
-                    decreaseProductQuantity(productName);
-                }
+                current = current.getNext();
             }
-            current = current.getNext();
+
+            // Si el producto no se encontró en la lista, mostrar un mensaje y pedir al usuario que ingrese el nombre nuevamente
+            if (!productFound) {
+                System.out.println("El producto no existe en la lista. Por favor, ingrese el nombre del producto nuevamente:");
+                productName=readOptionString("Ingresa el nombre del producto que deseas");
+            }
         }
     }
     public void decreaseProductQuantity(String productName) {
@@ -392,6 +406,24 @@ public class DoubleLinkedList <T> implements EstructureDoubleLinkedList<T> ,Seri
             }
             current = current.getNext();
         }
+    }
+    public int getIndexByName(String productName) {
+        Node current = head.getNext();
+        int index = 0;
+
+        while (current != null) {
+            Object data = current.getData();
+            if (data instanceof Product) {
+                Product product = (Product) data;
+                if (product.getNameProduct().equalsIgnoreCase(productName)) {
+                    return index;
+                }
+            }
+            current = current.getNext();
+            index++;
+        }
+
+        return -1; // Retorna -1 si no se encuentra el nombre en la lista
     }
 
     @Override
