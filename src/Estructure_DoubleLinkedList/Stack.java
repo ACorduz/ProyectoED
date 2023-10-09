@@ -21,7 +21,7 @@ public class Stack<T> extends DoubleLinkedList implements EstructureStack<T>, Se
    
     
     public void push(T item){
-        pushBack(item);  
+        pushFront(item);  
     }
 
     public T pop(){

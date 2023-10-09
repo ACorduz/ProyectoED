@@ -4,11 +4,13 @@ import Data.Product;
 import Data.Beneficiary;
 import Data.Donnor;
 import Data.Food;
+import Data.User;
 import Estructure_LinkedList.Queue;
 import Estructure_LinkedList.LinkedList;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Estructure_DinamicArray.DinamicArray;
 import Data.serialization;
+import Estructure_DoubleLinkedList.Stack;
 import Logic.ConectionAPI;
 import Logic.InputDataJSON;
 import functionalities.RegistroComida;
@@ -25,6 +27,8 @@ public class Main <T>{
     
     private static LinkedList<Beneficiary> listOfBeneficiaries= new LinkedList();
     private static LinkedList<Donnor> listOfDonors = new LinkedList(); 
+    private static Queue<User> listOfUsers = new Queue();
+    private static Stack<User> pilaUsuarios = new Stack();
 
     // lo de historial de acciones esta en la clase donador
     // luego cada donador tiene enlazado un producto
@@ -112,40 +116,40 @@ public class Main <T>{
         
         /*
         // PRUEBA LISTA DE OBJETOS
-        Product producto = new Product("FOOD", "Harina", 5,"@gmail");
-        Product producto2 = new Product("FOOD", "Frijol", 5,"@gmail");
-        Queue<Product> cola = new Queue();
-        cola.enqueue(producto);
-        cola.enqueue(producto2);
-        Product product2 =cola.dequeue();
-        System.out.println(product2.toString());
-        System.out.println(cola.find(producto2));
+        //Product producto = new Product("FOOD", "Harina", 5,"@gmail");
+        //Product producto2 = new Product("FOOD", "Frijol", 5,"@gmail");
+        //Queue<Product> cola = new Queue();
+        //cola.enqueue(producto);
+        //cola.enqueue(producto2);
+        //Product product2 =cola.dequeue();
+        //System.out.println(product2.toString());
+        //System.out.println(cola.find(producto2));
         
         
         
         // PRUEBAS DE SERIALIZACION
         // se crea un objeto para utilizar los metodos
-        serialization ser = new serialization();
+        //serialization ser = new serialization();
         
         // creacion inicial de un archivos, en este caso el 1
-        ser.deleteFile(ser.getNameArray(1));
-        System.out.println("Serializacion = "+ ser.WriteSerializationInicialFile(1));
+        //ser.deleteFile(ser.getNameArray(1));
+        //System.out.println("Serializacion = "+ ser.WriteSerializationInicialFile(1));
         
         // como agregar elementos a la lista
         // primero se pude sacar de la lista de los archivos que queremos,pero Hay que guardarlo en el programa, es decir las listas Main .
         // para que funcionen los demas metodos. Por ello muy raramente utilizar getObjectFromSerializationFile
-        ser.SetListInProgramFromFile(1);
-        Main.listOfProducts.pushBack(product2);
-        ser.saveStatusListProgram(1);
+        //ser.SetListInProgramFromFile(1);
+        //Main.listOfProducts.pushBack(product2);
+        //ser.saveStatusListProgram(1);
         
         //Ahora poner lista en main = null; para ver si funciona el guardado
-        Main.listOfProducts = null;
-        System.out.println("listaMain es igual  a = "+Main.listOfProducts);
+        //Main.listOfProducts = null;
+        //System.out.println("listaMain es igual  a = "+Main.listOfProducts);
         // luego ahora si traer poner la lista y mostrarla, para ver si funciono el guardado
-        ser.SetListInProgramFromFile(1);
-        System.out.println("listaMain es igual a = "+ Main.listOfProducts.topFront().toString());
+        //ser.SetListInProgramFromFile(1);
+        //System.out.println("listaMain es igual a = "+ Main.listOfProducts.topFront().toString());
         // luego SI FUNCIONA
-        ser.WriteSerializationInicial_AllFiles();// Va a decir que la 2 no se creo porque ya fue creada anteriormente para la prueba anterior
+        //ser.WriteSerializationInicial_AllFiles();// Va a decir que la 2 no se creo porque ya fue creada anteriormente para la prueba anterior
         //ser.deleteAllFiles();
         
         
@@ -192,4 +196,62 @@ public class Main <T>{
         Donnor d1 = (Donnor) listaSimple.topFront();
         System.out.println(d1.getEmail()+ "  "+d1.getLocality());
         
+<<<<<<< Updated upstream
      */   
+=======
+     */   
+        
+        // Prueba tiempo creación de 10000 usuarios en Lista Doblemente enlazada
+        // Primero crear un objeto 
+        InputDataDB jsonEntrada = new InputDataDB(1000000,0);
+        //InputDataDB jsonEntrada2 = new InputDataDB("C:\\Users\\JHOAN FRANCO\\OneDrive\\respaldo datos\\Documentos\\PROGRAMACION\\proyectoEstructuras\\ProyectoED\\data/",10000, 0 );
+
+        //con el objeto jsonEntrada
+        //primero configuro la ruta de la carpeta ya la tengo guardada en el programa si no hacer lo mismo, guardar su path y ya hacer esto 
+        jsonEntrada.setYourComputer_pathToCarpet_fileJson(jsonEntrada.PathJhoanComputer);
+        //System.out.println(jsonEntrada.getYourComputer_pathToCarpet_fileJson()); // mostrar el path 
+        
+        //Queue listOfUsers = jsonEntrada.ofJson_getListUsersQ();
+        
+        Stack pilaUsuarios = jsonEntrada.ofJson_getListUsersSt();
+        
+    }
+    
+    // setter y getter de Main
+
+    public static Queue getListForChooseProduct() {
+        return listForChooseProduct;
+    }
+
+    public static void setListForChooseProduct(Queue listForChooseProduct) {
+        Main.listForChooseProduct = listForChooseProduct;
+    }
+
+    public static DoubleLinkedList<Product> getListOfProducts() {
+        return listOfProducts;
+    }
+
+    public static void setListOfProducts(DoubleLinkedList<Product> listOfProducts) {
+        Main.listOfProducts = listOfProducts;
+    }
+
+    public static LinkedList<Beneficiary> getListOfBeneficiaries() {
+        return listOfBeneficiaries;
+    }
+
+    public static void setListOfBeneficiaries(LinkedList<Beneficiary> listOfBeneficiaries) {
+        Main.listOfBeneficiaries = listOfBeneficiaries;
+    }
+
+    public static LinkedList<Donnor> getListOfDonors() {
+        return listOfDonors;
+    }
+
+    public static void setListOfDonors(LinkedList<Donnor> listOfDonors) {
+        Main.listOfDonors = listOfDonors;
+    }
+
+    
+    
+}
+>>>>>>> Stashed changes
