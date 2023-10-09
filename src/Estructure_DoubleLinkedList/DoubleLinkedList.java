@@ -163,7 +163,43 @@ public class DoubleLinkedList <T> implements EstructureDoubleLinkedList<T> ,Seri
         }
             return(found);
     }
-           
+          
+    public void delete(T key) {
+        if (empty()) {
+            throw new RuntimeException("Lista vacía, no se puede eliminar.");
+        } else {
+            Node current = head.getNext();
+            Node prev = null;
+
+            while (current != null) {
+                T value = (T) current.getData();
+                if (value.equals(key)) {
+                    if (current == head.getNext()) {
+                        // Si el nodo a eliminar es el primero
+                        head.setNext(current.getNext());
+                        if (current.getNext() != null) {
+                            current.getNext().setPrev(null);
+                        }
+                    } else if (current == tail.getNext()) {
+                        // Si el nodo a eliminar es el último
+                        tail.setNext(prev);
+                        if (prev != null) {
+                            prev.setNext(null);
+                        }
+                    } else {
+                        // Si el nodo a eliminar está en medio de la lista
+                        prev.setNext(current.getNext());
+                        current.getNext().setPrev(prev);
+                    }
+                    counter--;
+                    return; // El nodo se ha eliminado, sal del método.
+                }
+                prev = current;
+                current = current.getNext();
+            }
+        }
+    }
+    
         
     public Node getNodeForKeyWhioutCheck(T key){
         if(empty()){
