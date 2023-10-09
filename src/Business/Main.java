@@ -125,7 +125,7 @@ public class Main <T>{
         //Product product2 =cola.dequeue();
         //System.out.println(product2.toString());
         //System.out.println(cola.find(producto2));
-
+        
         // Agregar empresas a la lista
         //CompanyDonor empresa1 = new CompanyDonor("Surtifruver","545645-6","calle 43","Kennedy","super","surti@gmail.com","12345");
         //listaEmpresas.pushBack(empresa1);
@@ -141,18 +141,18 @@ public class Main <T>{
         // PRUEBAS DE SERIALIZACION
         // se crea un objeto para utilizar los metodos
         //serialization ser = new serialization();
-
+        
         // creacion inicial de un archivos, en este caso el 1
         //ser.deleteFile(ser.getNameArray(1));
         //System.out.println("Serializacion = "+ ser.WriteSerializationInicialFile(1));
-
+        
         // como agregar elementos a la lista
         // primero se pude sacar de la lista de los archivos que queremos,pero Hay que guardarlo en el programa, es decir las listas Main .
         // para que funcionen los demas metodos. Por ello muy raramente utilizar getObjectFromSerializationFile
         //ser.SetListInProgramFromFile(1);
         //Main.listOfProducts.pushBack(product2);
         //ser.saveStatusListProgram(1);
-
+        
         //Ahora poner lista en main = null; para ver si funciona el guardado
         //Main.listOfProducts = null;
         //System.out.println("listaMain es igual  a = "+Main.listOfProducts);
@@ -206,5 +206,5 @@ public class Main <T>{
         System.out.println(listaSimple.toString());
         Donnor d1 = (Donnor) listaSimple.topFront();
         System.out.println(d1.getEmail()+ "  "+d1.getLocality());
-
-     */
+        
+     */   
