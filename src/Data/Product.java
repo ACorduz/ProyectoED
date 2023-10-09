@@ -72,6 +72,14 @@ public class Product implements Serializable {
         this.quantity = quantity;
     }
 
+    public String getEmailDonor() {
+        return emailDonor;
+    }
+
+    public void setEmailDonor(String emailDonor) {
+        this.emailDonor = emailDonor;
+    }
+
     @Override
     public String toString() {
     return "Product{" +
