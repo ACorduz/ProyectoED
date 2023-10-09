@@ -1,7 +1,9 @@
 
 package Estructure_DinamicArray;
 
-public class DinamicArray<T> {
+import java.io.Serializable;
+
+public class DinamicArray<T> implements Serializable{
     private T[] dinamicArray;
     private int counter;
     private int capacity;
@@ -53,6 +55,16 @@ public class DinamicArray<T> {
         
     }
     
+    public int getIndexFromValue(T key){
+        int index = -1;
+        for(int i=0; i <counter; i++){
+            if(dinamicArray[i] == key){
+                index = i;
+                return(index);
+            }
+        }
+        return(index);
+    }
     
     public void removeLast(){
         remove(counter-1);

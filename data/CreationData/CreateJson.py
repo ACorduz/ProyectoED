@@ -45,7 +45,7 @@ def InputDataJsonProduct_food(nameList:str,index:int,typeProduct:str,nameProduct
         "typeProduct": typeProduct, # este valor probablemente null
         "nameProduct": normalize(nameProduct),
         "quantity": quantity,
-        "emailDonor": (emailDonor), # este tambien 
+        "emailDonor": normalize(emailDonor), # este tambien 
         "expirationDateYear": expirationDateYear,
         "expirationDateMonth": expirationDateMonth,
         "expirationDateDay": expirationDateDay

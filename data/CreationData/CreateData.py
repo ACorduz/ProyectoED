@@ -63,7 +63,7 @@ def enterDataProduct_Food(numberData:int, nameFile:str, nameListInsideDic:str):
         typeProduct = "Food"  # este valor cuando sean varios productos definirlo mejor
         nameProduct = nombre_producto_comida()
         quantity = random.randint(0, 100)
-        emailDonor = None # no sabemos quien es
+        emailDonor = fake.email()# no sabemos quien es
         expirationDateYear = random.randint(2023, 2025)
         expirationDateMonth = random.randint(1, 12)
         expirationDateDay = random.randint(1, 28) # hasta 28 invalidar fechas no validas
