@@ -4,12 +4,15 @@ import Data.Beneficiary;
 import Data.CompanyDonor;
 import Data.Donnor;
 import Data.Serializador;
+import Data.Food;
+import Data.User;
 import Estructure_LinkedList.Queue;
 import Estructure_LinkedList.LinkedList;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Estructure_DinamicArray.DinamicArray;
 import Data.serialization;
 import static IU.GUI.mostrarMenu;
+import Estructure_DoubleLinkedList.Stack;
 import Logic.ConectionAPI;
 import Logic.InputDataJSON;
 import functionalities.RegistroComida;
@@ -114,14 +117,14 @@ public class Main <T>{
         
         /*
         // PRUEBA LISTA DE OBJETOS
-        Product producto = new Product("FOOD", "Harina", 5,"@gmail");
-        Product producto2 = new Product("FOOD", "Frijol", 5,"@gmail");
-        Queue<Product> cola = new Queue();
-        cola.enqueue(producto);
-        cola.enqueue(producto2);
-        Product product2 =cola.dequeue();
-        System.out.println(product2.toString());
-        System.out.println(cola.find(producto2));
+        //Product producto = new Product("FOOD", "Harina", 5,"@gmail");
+        //Product producto2 = new Product("FOOD", "Frijol", 5,"@gmail");
+        //Queue<Product> cola = new Queue();
+        //cola.enqueue(producto);
+        //cola.enqueue(producto2);
+        //Product product2 =cola.dequeue();
+        //System.out.println(product2.toString());
+        //System.out.println(cola.find(producto2));
         
         // Agregar empresas a la lista
         //CompanyDonor empresa1 = new CompanyDonor("Surtifruver","545645-6","calle 43","Kennedy","super","surti@gmail.com","12345");
@@ -137,27 +140,27 @@ public class Main <T>{
         
         // PRUEBAS DE SERIALIZACION
         // se crea un objeto para utilizar los metodos
-        serialization ser = new serialization();
+        //serialization ser = new serialization();
         
         // creacion inicial de un archivos, en este caso el 1
-        ser.deleteFile(ser.getNameArray(1));
-        System.out.println("Serializacion = "+ ser.WriteSerializationInicialFile(1));
+        //ser.deleteFile(ser.getNameArray(1));
+        //System.out.println("Serializacion = "+ ser.WriteSerializationInicialFile(1));
         
         // como agregar elementos a la lista
         // primero se pude sacar de la lista de los archivos que queremos,pero Hay que guardarlo en el programa, es decir las listas Main .
         // para que funcionen los demas metodos. Por ello muy raramente utilizar getObjectFromSerializationFile
-        ser.SetListInProgramFromFile(1);
-        Main.listOfProducts.pushBack(product2);
-        ser.saveStatusListProgram(1);
+        //ser.SetListInProgramFromFile(1);
+        //Main.listOfProducts.pushBack(product2);
+        //ser.saveStatusListProgram(1);
         
         //Ahora poner lista en main = null; para ver si funciona el guardado
-        Main.listOfProducts = null;
-        System.out.println("listaMain es igual  a = "+Main.listOfProducts);
+        //Main.listOfProducts = null;
+        //System.out.println("listaMain es igual  a = "+Main.listOfProducts);
         // luego ahora si traer poner la lista y mostrarla, para ver si funciono el guardado
-        ser.SetListInProgramFromFile(1);
-        System.out.println("listaMain es igual a = "+ Main.listOfProducts.topFront().toString());
+        //ser.SetListInProgramFromFile(1);
+        //System.out.println("listaMain es igual a = "+ Main.listOfProducts.topFront().toString());
         // luego SI FUNCIONA
-        ser.WriteSerializationInicial_AllFiles();// Va a decir que la 2 no se creo porque ya fue creada anteriormente para la prueba anterior
+        //ser.WriteSerializationInicial_AllFiles();// Va a decir que la 2 no se creo porque ya fue creada anteriormente para la prueba anterior
         //ser.deleteAllFiles();
         
         
