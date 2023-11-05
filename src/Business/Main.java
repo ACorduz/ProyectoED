@@ -51,23 +51,23 @@ public class Main <T>{
         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+producto2.getEmailDonor()+ " agrego un producto");
         listOfProducts.pushFront(producto3);
         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+producto3.getEmailDonor()+ " agrego un producto");
-        //Serializador.serializarObjeto(listOfProducts, "productos.dat");
+        Serializador.serializarObjeto(listOfProducts, "productos.dat");
          // Agregar empresas a la lista
         CompanyDonor empresa1 = new CompanyDonor("Surtifruver","545645-6","calle 43","Kennedy","super","surti@gmail.com","12345");
         listaEmpresas.pushBack(empresa1);
         listActivity.push(obtenerFechaHoraActualString()+": Se registo la empresa, "+empresa1.getName());
         // Guardar la lista de empresas en un archivo serializable
-        //Serializador.serializarObjeto(listaEmpresas, "empresas.dat");
+        Serializador.serializarObjeto(listaEmpresas, "empresas.dat");
         //Agregar Beneficiarios a la lista
         Beneficiary beneficiario=new Beneficiary("Felipe","Alvarez Ramirez","felalvarez@gmail.com","52483767","12345");
         listForChooseProduct.enqueue(beneficiario);
         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+beneficiario.getEmail()+ " se registro como beneficiario");
         // Guardar la lista de beneficiarios en un archivo serializable
-        //Serializador.serializarObjeto(listForChooseProduct, "beneficiarios.dat");
+        Serializador.serializarObjeto(listForChooseProduct, "beneficiarios.dat");
         //Agregar Donador a la lista
         Donnor donador=new Donnor("Alberto","Murillo Ramirez","murrami@gmail.com","3424242","12345","calle 45#56","Kennedy");
         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+donador.getEmail()+ " se registro como donador ocasional");
-        //Serializador.serializarObjeto(listOfDonors, "donador.dat");
+        Serializador.serializarObjeto(listOfDonors, "donadores.dat");
         Serializador.serializarObjeto(listActivity, "actividades.dat");
         mostrarMenu();
         
