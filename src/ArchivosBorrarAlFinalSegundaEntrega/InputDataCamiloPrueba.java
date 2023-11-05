@@ -1,26 +1,21 @@
-package Logic;
-// librerias para el Json 
+package ArchivosBorrarAlFinalSegundaEntrega;
 import java.io.File;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-// importamos estructuras para sacar listas de comida y demas
+// importamos estructuras para sacar listas de comida
 import Estructure_LinkedList.LinkedList;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Data.Beneficiary;
 import Data.Donnor;
 import Data.Food;
-//Traer Las funcionalidades
-import functionalities.RegistroComida;
-
-// Traer el Main
-import Business.Main;
-import Estructure_DinamicArray.DinamicArray;
+import Data.User;
+import Estructure_DoubleLinkedList.Stack;
 
 import java.io.FileReader;
 
-public class InputDataJSON {
+public class InputDataCamiloPrueba {
     private String yourComputer_pathToCarpet_fileJson = null; // RUTA de carpeta de archivo Json
     // si lo siguiente  es la ruta completa del archivo "(ruta/a/tu/carpetaJson)/nameArchivo.json", entonces ingresar esto "ruta/a/tu/carpetaJson/"; OJO CON / al final
     
@@ -32,17 +27,17 @@ public class InputDataJSON {
     private int NumberRowsRead; // numero de filas a leer
     private int TypeOfFileRead; // este va desde 0 a  1; siendo 0 leer datos del json de comida, 1 leer datos del json de Productos_comida
     // Coloquen sus rutas para no tener que estar creandolas
-    public String PathJhoanComputer = "C:\\Users\\JHOAN FRANCO\\OneDrive\\respaldo datos\\Documentos\\PROGRAMACION\\proyectoEstructuras\\ProyectoED\\data/";
+    public String PathJhoanComputer = "C:\\Users\\pipec\\Escritorio\\ProyectoED\\Data/";
     
 
-    public InputDataJSON(String pathYourComputerCarpetArchivoJson, int NumberRowsRead, int TypeOfFileRead) {
+    public InputDataCamiloPrueba(String pathYourComputerCarpetArchivoJson, int NumberRowsRead, int TypeOfFileRead) {
         this.yourComputer_pathToCarpet_fileJson = pathYourComputerCarpetArchivoJson;
         this.NumberRowsRead = NumberRowsRead;
         this.TypeOfFileRead = TypeOfFileRead;
         
     }
 
-    public InputDataJSON( int NumberRowsRead, int TypeOfFileRead) {
+    public InputDataCamiloPrueba(int NumberRowsRead, int TypeOfFileRead) {
         this.NumberRowsRead = NumberRowsRead;
         this.TypeOfFileRead = TypeOfFileRead;
     }
@@ -143,14 +138,14 @@ public class InputDataJSON {
                 String locality = usuario.getString("locality");
 
                 // Imprime los datos de los usuarios
-                System.out.print("Usuario #" + index);
-                System.out.print("Nombre: " + firstName);
-                System.out.print("Apellido: " + lastName);
-                System.out.print("Email: " + email);
-                System.out.print("Documento: " + document);
-                System.out.print("Contraseña: " + password);
-                System.out.print("Dirección: " + address);
-                System.out.print("Localidad: " + locality);
+                System.out.print("Usuario #" + index+" ");
+                System.out.print("Nombre: " + firstName+" ");
+                System.out.print("Apellido: " + lastName+" ");
+                System.out.print("Email: " + email+" ");
+                System.out.print("Documento: " + document+" ");
+                System.out.print("Contraseña: " + password+" ");
+                System.out.print("Dirección: " + address+" ");
+                System.out.print("Localidad: " + locality+" ");
                 System.out.println("");
             }
             
@@ -160,7 +155,8 @@ public class InputDataJSON {
             e.printStackTrace();
         }
     }
-        public void ShowUserByName(String name){
+    
+    public void ShowUserByName(String name){
         JSONObject jsonObject = null;
         try {
             boolean exist = FileExist();
@@ -212,7 +208,7 @@ public class InputDataJSON {
             e.printStackTrace();
         }
     }
-        
+    
     // metodo para mostrar los datos del archivo json con print
     public void ShowJson_Food(){
         JSONObject jsonObject = null;
@@ -254,14 +250,14 @@ public class InputDataJSON {
                 int expirationDateDay = comida.getInt("expirationDateDay");
 
                 // Imprime los datos del comida
-                System.out.print("Usuario #" + index);
-                System.out.print("typeProduct: " + typeProduct);
-                System.out.print("nameProduct: " + nameProduct);
-                System.out.print("quantity: " + quantity);
-                System.out.print("emailDonor: " + emailDonor);
-                System.out.print("expirationDateYear: " + expirationDateYear);
-                System.out.print("expirationDateMonth: " + expirationDateMonth);
-                System.out.print("expirationDateDay: " + expirationDateDay);
+                System.out.print("Usuario #" + index+" ");
+                System.out.print("typeProduct: " + typeProduct+" ");
+                System.out.print("nameProduct: " + nameProduct+ " ");
+                System.out.print("quantity: " + quantity +" ");
+                System.out.print("emailDonor: " + emailDonor+" ");
+                System.out.print("expirationDateYear: " + expirationDateYear+" ");
+                System.out.print("expirationDateMonth: " + expirationDateMonth+" ");
+                System.out.print("expirationDateDay: " + expirationDateDay+" ");
                 System.out.println("");
                 
             }
@@ -273,7 +269,6 @@ public class InputDataJSON {
         }
         
     }
-    // metodo para mostrar la comida por nombre
     public void ShowFoodByName(String name){
         JSONObject jsonObject = null;
         try {
@@ -291,19 +286,11 @@ public class InputDataJSON {
 
             JSONArray productFood = jsonObject.getJSONArray("productFood");
             
-            int sumador = NumberRowsRead/10;
-            int comparador =NumberRowsRead/10;
-            
+
             for (int i = 0; i < productFood.length(); i++) {
                 JSONObject comida = productFood.getJSONObject(i);
-                int index = comida.getInt("index");
-                String emailDonor = comida.getString("emailDonor");
+
                 String nameProduct = comida.getString("nameProduct");
-                if(index == comparador){
-                    System.out.println(index +"  "+emailDonor );
-                    comparador+= sumador;
-                }
-                /*
                 if(nameProduct.equals(name)){ 
                     //unicamente imprime los productos que tengan el mismo nombre 
                     int index = comida.getInt("index");
@@ -323,7 +310,7 @@ public class InputDataJSON {
                     System.out.print("expirationDateMonth: " + expirationDateMonth+"  ");
                     System.out.print("expirationDateDay: " + expirationDateDay+"  ");
                     System.out.println("");
-                } */  
+                }   
             }
             ReaderJSON.close();
         } catch (Exception e) {
@@ -332,63 +319,6 @@ public class InputDataJSON {
         
     }
     
-    // metodo para obtener correos de usuarios
-    public String[] ofJson_getArrayUser(){
-        JSONObject jsonObject = null;
-        String[] arrayUser = new String[NumberRowsRead];
-        
-        try {
-            // ver si el archivo existe y crear nombre de la ruta
-            boolean exist = FileExist();
-            if(!exist){
-                throw new RuntimeException("ERROR: File Doesn't exist");
-            }
-            if(TypeOfFileRead != 0){
-                throw new RuntimeException("ERROR: TypeOfFileRead incorrect for use method ofJson_getArrayUser");
-            }
-            
-            // Especifica la ruta del archivo JSON que deseas leer
-            String pathFileJSON = finalPath_fileJson;
-
-            // Crea un FileReader para leer el archivo JSON
-            FileReader ReaderJSON = new FileReader(pathFileJSON);
-
-            // Crea un JSONTokener para analizar el contenido del archivo JSON
-            JSONTokener tokener = new JSONTokener(ReaderJSON);
-
-            // Crea un objeto JSONObject o JSONArray según la estructura del JSON
-            jsonObject = new JSONObject(tokener);
-
-            // Obtiene el array "users"
-            JSONArray usuarios = jsonObject.getJSONArray("users");
-            
-            // Iterar sobre los objetos de los usuarios
-            int counterLoop = 0;
-            
-            for (int i = usuarios.length()-1; i >=0; i--) { // para no obtener correos iguales
-                JSONObject usuario = usuarios.getJSONObject(i);
-                
-                // Accede a los campos del usuario
-                String email = usuario.getString("email");
-  
-                // agregar el email al array
-                arrayUser[counterLoop] = email;
-                // sumar al contador
-                counterLoop += 1;
-
-            }
-            // Cierra el lector de archivo
-            ReaderJSON.close();
-            // se retorna la lista
-            return(arrayUser);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // si la lista es nula este metodo no esta funcionando bien o algo paso
-        throw new RuntimeException("ERROR: Tratando de escribir la lista  en el metodo ofJson_getListBeneficiary");
-  
-        
-    }
     
     // Este metodo da una linkedlist de beneficiarios para utilzarlos como prueba
     public LinkedList ofJson_getListBeneficiary(){
@@ -507,7 +437,7 @@ public class InputDataJSON {
                 String password = usuario.getString("password");
                 String adress = usuario.getString("adress"); 
                 String locality = usuario.getString("locality");
-               
+
                 
                 // Crear el donador con algunos valores en nulo
                 donnor = new Donnor(firstName,lastName,email,document, password, adress, locality, null, null);
@@ -526,11 +456,10 @@ public class InputDataJSON {
         throw new RuntimeException("ERROR: Tratando de escribir la lista  en el metodo ofJson_getListDonnor");      
     }
     
-    //ESTE METODO ES PARA PROBAR LA INSERCION MASIVA DE REGISTROS DE COMIDA
-    // RG = registroComida_ DLL = DoubleLinkedList
-    
-    public String ofJson_proof_MasiveData_RC_DLL(String email1, String email2){
+    // metodo para obtener Una lista doblemente enlzada de productos de comida
+     public DoubleLinkedList ofJson_getListProductsFood(){
         JSONObject jsonObject = null;
+        DoubleLinkedList<Food> listOfFood = new DoubleLinkedList<>();
         
         try {
             // ver si el archivo existe y crear nombre de la ruta
@@ -544,72 +473,60 @@ public class InputDataJSON {
             }
             // Especifica la ruta del archivo JSON que deseas leer
             String pathFileJSON = finalPath_fileJson;
+
             // Crea un FileReader para leer el archivo JSON
             FileReader ReaderJSON = new FileReader(pathFileJSON);
+
             // Crea un JSONTokener para analizar el contenido del archivo JSON
             JSONTokener tokener = new JSONTokener(ReaderJSON);
+
             // Crea un objeto JSONObject o JSONArray según la estructura del JSON
             jsonObject = new JSONObject(tokener);
+
             // Obtiene el array "productFood"
             JSONArray productFood = jsonObject.getJSONArray("productFood");
             
-            // Utilizar la funcionalidad, crear un objeto para utilizar los metodos
-            RegistroComida registroComida = new RegistroComida(); 
+            // inicializar la lista de comida
+            listOfFood = new DoubleLinkedList<>();
+            //crear un comida provisional 
+            Food food;
             
-
-            //PONER EL TIEMPO Insert Masivo
-            long startTime = System.nanoTime();
             // Iterar sobre los objetos de comida
             for (int i = 0; i < productFood.length(); i++) {
                 JSONObject comida = productFood.getJSONObject(i);
 
                 // Accede a los campos del comida
+                int index = comida.getInt("index");
+                String typeProduct = comida.getString("typeProduct");  
                 String nameProduct = comida.getString("nameProduct");
                 int quantity = comida.getInt("quantity");
-                String emailDonor = comida.getString("emailDonor");
+                String emailDonor = null;
                 int expirationDateYear = comida.getInt("expirationDateYear");
                 int expirationDateMonth = comida.getInt("expirationDateMonth"); 
                 int expirationDateDay = comida.getInt("expirationDateDay");
 
-                //registroComida.InsertRFScan_DoubleLinkedList(nameProduct, quantity, emailDonor, expirationDateYear, expirationDateMonth, expirationDateDay);
-    
+                
+                // Crear la comida
+                food = new Food(typeProduct, nameProduct, quantity, emailDonor, expirationDateYear, expirationDateMonth, expirationDateDay);
+                // Ingresar la comida a la lista provisional 
+                listOfFood.pushFront(food); // es O(1)
+                
             }
             // Cierra el lector de archivo
             ReaderJSON.close();
-            
-            // SALIDA DEL TIEMPO Insert Masivo
-            long endTime = System.nanoTime();
-            Double tiempoTranscurrido = (endTime - startTime)/1000000.0;
-            System.out.println("El tiempo Transcurrido del metodo Insertar masivo en DLL es= " + tiempoTranscurrido);
-            
-            //prueba find 
-            InsideFind_ofJson_proof_MasiveData_RC_DLL(email1, email2);
-            
-            
-            // lista DoubleLinkedList final
-            DoubleLinkedList DLL = Main.getListOfProducts();
-            
-            long startTime2 = System.nanoTime();
-            // PRUEBA ELIMINACION DE DATOS
-            while(!DLL.empty()){
-                DLL.popFront();
-            }
-            
-            long endTime2 = System.nanoTime();
-            Double tiempoTranscurrido2 = (endTime2 - startTime2)/1000000.0;
-            System.out.println("El tiempo Transcurrido del metodo Borrar(popFornt) masivo En DLL es= " + tiempoTranscurrido2);
-            
-            return("PruebaConcluidaExitosamente");
+            // se retorna la lista
+            return(listOfFood);
         } catch (Exception e) {
             e.printStackTrace();
         }
         // si la lista es nula este metodo no esta funcionando bien o algo paso
         throw new RuntimeException("ERROR: Tratando de escribir la lista  en el metodo ofJson_getListProductsFood");      
     }
-    
-    
-    public String ofJson_proof_MasiveData_RC_DA(String email1, String email2){
+     /*
+        // metodo para obtener Una cola de usuarios nuevos
+     public Queue ofJson_getListUsersQ(){
         JSONObject jsonObject = null;
+        Queue <User> listOfUsers;
         
         try {
             // ver si el archivo existe y crear nombre de la ruta
@@ -618,117 +535,164 @@ public class InputDataJSON {
                 throw new RuntimeException("ERROR: File Doesn't exist");
             }
             
-            if(TypeOfFileRead != 1){
-                throw new RuntimeException("ERROR: TypeOfFileRead incorrect for use method ofJson_getListProductsFood");
+            if(TypeOfFileRead != 0){
+                throw new RuntimeException("ERROR: TypeOfFileRead incorrect for use method ofJson_getListUsers");
             }
-            
             // Especifica la ruta del archivo JSON que deseas leer
             String pathFileJSON = finalPath_fileJson;
+
             // Crea un FileReader para leer el archivo JSON
             FileReader ReaderJSON = new FileReader(pathFileJSON);
+
             // Crea un JSONTokener para analizar el contenido del archivo JSON
             JSONTokener tokener = new JSONTokener(ReaderJSON);
+
             // Crea un objeto JSONObject o JSONArray según la estructura del JSON
             jsonObject = new JSONObject(tokener);
+
             // Obtiene el array "productFood"
-            JSONArray productFood = jsonObject.getJSONArray("productFood");
+            JSONArray users = jsonObject.getJSONArray("users");
             
-            // Utilizar la funcionalidad, crear un objeto para utilizar los metodos
-            RegistroComida registroComida = new RegistroComida(); 
-           
-            //PONER EL TIEMPO Insertar Masivo
-            long startTime = System.nanoTime();
-            // Iterar sobre los objetos de comida
-            for (int i = 0; i < productFood.length(); i++) {
-                JSONObject comida = productFood.getJSONObject(i);
+            // inicializar la lista de comida
+            listOfUsers = new Queue<>();
+            //crear un comida provisional 
+            User user;
+            //long tiempoInicio = System.nanoTime();
+            // Iterar sobre los objetos de usuarios
+            for (int i = 0; i < users.length(); i++) {
+                JSONObject usuario = users.getJSONObject(i);
 
-                // Accede a los campos del comida
-                String nameProduct = comida.getString("nameProduct");
-                int quantity = comida.getInt("quantity");
-                // colocar el email del donador
-                String emailDonor = comida.getString("emailDonor"); 
-                int expirationDateYear = comida.getInt("expirationDateYear");
-                int expirationDateMonth = comida.getInt("expirationDateMonth"); 
-                int expirationDateDay = comida.getInt("expirationDateDay");
-
-                registroComida.InsertRFScan_DinamicArray(nameProduct, quantity, emailDonor, expirationDateYear, expirationDateMonth, expirationDateDay);
+                // Accede a los campos del usuario
+                String name = usuario.getString("firs_name");  
+                String lastName = usuario.getString("last_name");
+                String email = usuario.getString("email");
+                String document = usuario.getString("document");
+                String password = usuario.getString("password");
+                String TypeUser = null;
+                
+                //Crear el usuario
+                user = new User(name, lastName, email, document, password, TypeUser);
+                //Ingresar el usuario a la lista provisional
+                listOfUsers.enqueue(user);
+                
             }
+            //long tiempoFin = System.nanoTime();
+            //long tiempoTranscurrido = tiempoFin - tiempoInicio;
+            //double segundos = (double) tiempoTranscurrido / 1000000.0;
+            //System.out.println(segundos);
+            
+            //Prueba de eliminación de datos
+            //long tiempoInicio = System.nanoTime();
+            //while(!listOfUsers.empty()){
+                //listOfUsers.dequeue();
+                //System.out.println("Desencolando");
+            //}
+            //long tiempoFin = System.nanoTime();
+            //long tiempoTranscurrido = tiempoFin - tiempoInicio;
+            //double segundos = (double) tiempoTranscurrido / 1000000.0;
+            //System.out.println(segundos);
+            
+            //Prueba de busqueda de elemento
+            find busquedaUsuariosQ = new find();
+            //User Suser = new User("Edinson", "Bastidas", "kquintero@example.net", "TI 80841066", "wN,HO5IKd9", null);
+            //busquedaUsuariosQ.findUser_listOfUsers(listOfUsers,"alix93@example.org");
+            
             // Cierra el lector de archivo
             ReaderJSON.close();
-            // SALIDA DEL TIEMPO Insertar Masivo
-            long endTime = System.nanoTime();
-            Double tiempoTranscurrido = (endTime - startTime)/1000000.0;
-            System.out.println("El tiempo Transcurrido del metodo Insertar masivo En DA es= " + tiempoTranscurrido);
-            
-            
-            // PRUEBA BUSCAR DATOS
-            InsideFind_ofJson_proof_MasiveData_RC_DA(email1,email2);
-            
-            //Arreglo Dinamico Final
-            DinamicArray DA = Main.getListOfProducts_DA();
-            
-            
-            // PRUEBA ELIMINACION DE DATOS
-            long startTime2 = System.nanoTime();
-            
-            /*
-            //Eliminacion Masiva al Inicio
-            int counterDelete = 0;
-            while(!DA.isEmpty()){
-                DA.remove(counterDelete);
-                counterDelete += 1; 
-                //System.out.println(counterDelete);
+            // se retorna la lista
+            return(listOfUsers);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // si la lista es nula este metodo no esta funcionando bien o algo paso
+        throw new RuntimeException("ERROR: Tratando de escribir la lista  en el metodo ofJson_getListUsers");      
+    }*/
+  
+    // metodo para obtener Una pila de usuarios nuevos
+     public Stack ofJson_getListUsersSt(){
+        JSONObject jsonObject = null;
+        Stack <User> listOfUsers;
+        
+        try {
+            // ver si el archivo existe y crear nombre de la ruta
+            boolean exist = FileExist();
+            if(!exist){
+                throw new RuntimeException("ERROR: File Doesn't exist");
             }
-            long endTime2 = System.nanoTime();
-            Double tiempoTranscurrido2 = (endTime - startTime)/1000000.0;
-            System.out.println("El tiempo Transcurrido del metodo Borrar(Al inicio) masivo En DA es= " + tiempoTranscurrido);
+            
+            if(TypeOfFileRead != 0){
+                throw new RuntimeException("ERROR: TypeOfFileRead incorrect for use method ofJson_getListUsers");
+            }
+            // Especifica la ruta del archivo JSON que deseas leer
+            String pathFileJSON = finalPath_fileJson;
+
+            // Crea un FileReader para leer el archivo JSON
+            FileReader ReaderJSON = new FileReader(pathFileJSON);
+
+            // Crea un JSONTokener para analizar el contenido del archivo JSON
+            JSONTokener tokener = new JSONTokener(ReaderJSON);
+
+            // Crea un objeto JSONObject o JSONArray según la estructura del JSON
+            jsonObject = new JSONObject(tokener);
+
+            // Obtiene el array "productFood"
+            JSONArray users = jsonObject.getJSONArray("users");
+            
+            // inicializar la lista de comida
+            listOfUsers = new Stack<>();
+            //crear un comida provisional 
+            User user;
+            //long tiempoInicio = System.nanoTime();
+            // Iterar sobre los objetos de usuarios
+            for (int i = 0; i < users.length(); i++) {
+                JSONObject usuario = users.getJSONObject(i);
+
+                // Accede a los campos del usuario
+                String name = usuario.getString("firs_name");  
+                String lastName = usuario.getString("last_name");
+                String email = usuario.getString("email");
+                String document = usuario.getString("document");
+                String password = usuario.getString("password");
+                String TypeUser = null;
+                
+                //Crear el usuario
+                user = new User(name, lastName, email, document, password, TypeUser);
+                //Ingresar el usuario a la lista provisional
+                listOfUsers.push(user);
+                
+                
+            }
+            //long tiempoFin = System.nanoTime();
+            //long tiempoTranscurrido = tiempoFin - tiempoInicio;
+            //double segundos = (double) tiempoTranscurrido / 1000000.0;
+            //System.out.println(segundos);
+            /*
+            //Prueba de eliminación de datos
+            long tiempoInicio = System.nanoTime();
+            while(!listOfUsers.empty()){
+                listOfUsers.pop();
+            }
+            long tiempoFin = System.nanoTime();
+            long tiempoTranscurrido = tiempoFin - tiempoInicio;
+            double segundos = (double) tiempoTranscurrido / 1000000.0;
+            System.out.println(segundos);
             */
             
-            //SI QUIER AL FINAL ELIMINAR ESTE COMENTARIO Y COMENTAR LO OTRO
-            // Elimininacion masiva al Final
+            //Prueba de busqueda de elemento
+            find busquedaUsuariosQ = new find();
+            //User Suser = new User("Edinson", "Bastidas", "kquintero@example.net", "TI 80841066", "wN,HO5IKd9", null);
+            busquedaUsuariosQ.findUser_listOfUsersS(listOfUsers, "ciroherrera@example.org");
             
             
-            while(!DA.isEmpty()){
-                DA.removeLast();
-            }
-            
-            long endTime2 = System.nanoTime();
-            Double tiempoTranscurrido2 = (endTime2 - startTime2)/1000000.0;
-            System.out.println("El tiempo Transcurrido del metodo Borrar(Al Final) masivo En DA es= " + tiempoTranscurrido2);
-            
-            
-           
-            return("PruebaConcluidaExitosamente");
-            
+            // Cierra el lector de archivo
+            ReaderJSON.close();
+            // se retorna la lista
+            return(listOfUsers);
         } catch (Exception e) {
             e.printStackTrace();
         }
         // si la lista es nula este metodo no esta funcionando bien o algo paso
-        throw new RuntimeException("ERROR: Tratando de escribir la lista  en el metodo ofJson_getListProductsFood");      
-    }
-    
-    public void InsideFind_ofJson_proof_MasiveData_RC_DLL(String email1, String email2){
-        long startTime = System.nanoTime();
-        DoubleLinkedList DLL = Main.getListOfProducts();
-        RegistroComida rComida = new RegistroComida();
-        boolean a=rComida.findData_Email_RF_DoubleLinkedList(email1);
-        boolean b = rComida.findData_Email_RF_DoubleLinkedList(email2);
-        System.out.println(a+" , "+b);
-        long endTime = System.nanoTime();
-        Double tiempoTranscurrido = (endTime - startTime)/1000000.0;
-        System.out.println("El tiempo Transcurrido del metodo Find En DLL es= " + tiempoTranscurrido);
-    }
-    
-    public void InsideFind_ofJson_proof_MasiveData_RC_DA(String email1, String email2){
-        long startTime = System.nanoTime();
-        DinamicArray DA = Main.getListOfProducts_DA();
-        RegistroComida rComida = new RegistroComida();
-        boolean a = rComida.FindData_emailRF_DinamicArray(email1);
-        boolean b = rComida.FindData_emailRF_DinamicArray(email2);
-        System.out.println(a+" , "+b);
-        long endTime = System.nanoTime();
-        Double tiempoTranscurrido = (endTime - startTime)/1000000.0;
-        System.out.println("El tiempo Transcurrido del metodo Find En DA es= " + tiempoTranscurrido);
+        throw new RuntimeException("ERROR: Tratando de escribir la lista  en el metodo ofJson_getListUsers");      
     }
     
     public String getYourComputer_pathToCarpet_fileJson() {

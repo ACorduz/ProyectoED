@@ -13,10 +13,10 @@ import Estructure_DinamicArray.DinamicArray;
 import Data.serialization;
 import static IU.GUI.mostrarMenu;
 import Estructure_DoubleLinkedList.Stack;
-import Logic.ConectionAPI;
-import Logic.InputDataJSON;
-import functionalities.RegistroComida;
-import Logic.InputDataJSON;
+import EntradaDatos.ConectionAPI;
+import ArchivosBorrarAlFinalSegundaEntrega.InputDataJSON;
+import ArchivosBorrarAlFinalSegundaEntrega.RegistroComida;
+import ArchivosBorrarAlFinalSegundaEntrega.InputDataJSON;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -25,7 +25,7 @@ import java.time.format.DateTimeFormatter;
 public class Main <T>{
 
     private static Queue<Beneficiary> listForChooseProduct = new Queue(); // primero una cola para poner los beneficiarios por orden de llegada
-    private static Stack<String> listActivity=new Stack(); //Registro de Actividades
+    private static Stack<String> listActivity = new Stack(); //Registro de Actividades
     private static DoubleLinkedList<Product> listOfProducts = new DoubleLinkedList(); // segundo una lista donde se van a poner todos los productos
     private static DinamicArray<Food> listOfProducts_DA = new DinamicArray();
 

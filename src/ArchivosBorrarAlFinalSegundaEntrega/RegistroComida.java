@@ -1,9 +1,9 @@
 
-package functionalities;
+package ArchivosBorrarAlFinalSegundaEntrega;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Estructure_DoubleLinkedList.Node;
 import Estructure_DinamicArray.DinamicArray;
-import Logic.InputDataJSON;
+import ArchivosBorrarAlFinalSegundaEntrega.InputDataJSON;
 import Business.Main;
 import Data.Food;
 import Data.serialization;
@@ -89,6 +89,7 @@ public class RegistroComida extends Main {
         return(false);
     }
     */
+    
     public boolean findData_Email_RF_DoubleLinkedList(String email){
         // traer lista
   
