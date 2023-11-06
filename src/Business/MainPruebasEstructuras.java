@@ -21,9 +21,25 @@ public class MainPruebasEstructuras {
     
     public static void main(String[] args) {
         
+        String documento1 = "123456";
+        String documento2 = "0789012";
+
+        if (documento1.equals(documento2)) {
+            // Los documentos son iguales
+        }
+
+        int comparacion = documento1.compareTo(documento2);
+        if (comparacion == 0) {
+            System.out.println("=");
+        } else if (comparacion < 0) {
+            System.out.println("<");
+        } else {
+            System.out.println(">");
+        }
+        
         // COLA PRIORITARIA Comida
         Date fecha = new Date(2023, 1, 16);
-        System.out.println(fecha.hashCode());
+ 
         
         Comida f1 = new Comida(1,"Food", "Sopa enlatada", 65, "alejandragomez@example.com", 2024 ,2, 2); 
         Comida f2 = new Comida(2,"Food", "Avena", 65, "alejandragomez@example.com", 2025 ,2, 2); 
@@ -45,12 +61,13 @@ public class MainPruebasEstructuras {
            System.out.println(hc.getHeapArray()[i].toString());
        }
         
+        System.out.println("");
         for(int i =0; i < 4; i++ ){
             System.out.println(hc.extractMin().toString());
         }
         
         // AVL COMIDA
-                AVLTree_ComidaNombre avlTree = new AVLTree_ComidaNombre();
+        AVLTree_ComidaNombre avlTree = new AVLTree_ComidaNombre();
 
         // Insertar productos en el árbol
         
@@ -89,10 +106,10 @@ public class MainPruebasEstructuras {
         
         
         // PRUEBAS AVL USUARIO NOMBRE
-        Usuario u1 = new Usuario("Milena", "Reyes", "javier40@example.org", "RC 08434474", "TAVP=^pauxI", "DONADOR");
-        Usuario u2 = new Usuario("Esteban", "Reyes", "javier40@example.org", "RC 08434474", "TAVP=^pauxI", "DONADOR");
-        Usuario u3 = new Usuario("Jukuian", "Reyes", "javier40@example.org", "RC 08434474", "TAVP=^pauxI", "DONADOR");
-        Usuario u4 = new Usuario("Jukuian", "Res", "javier40@example.org", "RC 08434474", "TAVP=^pauxI", "DONADOR");
+        Usuario u1 = new Usuario("Milena", "Reyes", "javier40@example.org", "RC", "8434474", "TAVP=^pauxI", "DONADOR");
+        Usuario u2 = new Usuario("Esteban", "Reyes", "javier40@example.org", "RC", "8434474", "TAVP=^pauxI", "DONADOR");
+        Usuario u3 = new Usuario("Jukuian", "Reyes", "javier40@example.org", "RC", "8434474", "TAVP=^pauxI", "DONADOR");
+        Usuario u4 = new Usuario("Jukuian", "Res", "javier40@example.org", "RC", "8434474", "TAVP=^pauxI", "DONADOR");
         
         avlTree2.root = avlTree2.insert(avlTree2.root, u1);
         avlTree2.root = avlTree2.insert(avlTree2.root, u2);
@@ -110,6 +127,9 @@ public class MainPruebasEstructuras {
         } else {
             System.out.println("Producto no encontrado.");
         }
+        
+        
+        
     }
     
 }

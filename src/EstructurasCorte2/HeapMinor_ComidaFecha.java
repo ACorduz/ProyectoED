@@ -68,7 +68,6 @@ public class HeapMinor_ComidaFecha {
         int leftChild = leftChild(index);
         int rightChild = rightChild(index);
         
-        System.out.println(minIndex +", " + leftChild +", " + rightChild);
         Date dateLeftChild = null;
         Date dateminIndex  = null; 
         try{
@@ -82,29 +81,22 @@ public class HeapMinor_ComidaFecha {
         
         if (leftChild <= size && dateLeftChild.compareTo(dateminIndex) < 0) {
             minIndex = leftChild;
-            System.out.println("ingresos ahi dateLeftchild, leftChild"+ leftChild);
-            System.out.println(heapArray[leftChild].getExpirationDateYear()+ heapArray[leftChild].getExpirationDateMonth()+ heapArray[leftChild].getExpirationDateDay());
-            System.out.println( " , " + heapArray[minIndex].getExpirationDateYear()+ heapArray[minIndex].getExpirationDateMonth()+ heapArray[minIndex].getExpirationDateDay());
         }
         Date dateRightChild = null;
         try{
             dateRightChild = new Date(heapArray[rightChild].getExpirationDateYear(), heapArray[rightChild].getExpirationDateMonth(), heapArray[rightChild].getExpirationDateDay());            dateminIndex = new Date(heapArray[minIndex].getExpirationDateYear(), heapArray[minIndex].getExpirationDateMonth(), heapArray[minIndex].getExpirationDateDay());
         }catch(Exception io){
-            //swap(index, minIndex);
             return; 
         }
         
         if (rightChild <= size && dateRightChild.compareTo(dateminIndex) <0  ){
             
             minIndex = rightChild;
-            System.out.println("ingresos ahi daterightchild");
-            System.out.println(dateRightChild.toString() + " , " + dateminIndex.toString());
         }
-        System.out.println("index= " + index+" , minIndex = "+ minIndex);
         if (index != minIndex) {
             swap( index, minIndex);
             siftDown(minIndex);
-            //System.out.println("entrada =!");
+            
         }
     }
 

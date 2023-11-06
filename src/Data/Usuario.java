@@ -10,17 +10,19 @@ public class Usuario implements Serializable{
     private String name;
     private String lastName;
     protected String email;
-    private String document;
+    private String typeDocument;
+    private String document; 
     private String password;
     private String TypeUser;
     // los tipos de usuarios podrian ser los siguientes; 
     // "Donador", "Beneficiario"
     
     
-    public Usuario(String name,String lastName, String email, String document, String password, String TypeUser) {
+    public Usuario(String name,String lastName, String email,  String typeDocument, String document, String password, String TypeUser) {
         this.name = name; 
         this.email = email;
         this.lastName = lastName; 
+        this.typeDocument = typeDocument;
         this.document = document;
         this.password = password;
         this.TypeUser = TypeUser;
@@ -53,12 +55,12 @@ public class Usuario implements Serializable{
         this.email = email;
     }
 
-    public String getDocument() {
-        return document;
+    public String getTypeDocument() {
+        return typeDocument;
     }
 
-    public void setDocument(String document) {
-        this.document = document;
+    public void setTypeDocument(String typeDocument) {
+        this.typeDocument = typeDocument;
     }
 
     public String getPassword() {
@@ -77,9 +79,18 @@ public class Usuario implements Serializable{
         this.TypeUser = TypeUser;
     }
 
+    public String getDocument() {
+        return document;
+    }
+
+    public void setDocument(String document) {
+        this.document = document;
+    }
+    
+
     @Override
     public String toString() {
-        return "User{" + "name=" + name+ ", email=" + email + ", document=" + document + ", password=" + password + ", TypeUser=" + TypeUser + '}';
+        return "User{" + "name=" + name+ ", email=" + email + ", document=" + document +", " + "typeDocument"+ typeDocument + ", password=" + password + ", TypeUser=" + TypeUser + '}';
     }
     
     

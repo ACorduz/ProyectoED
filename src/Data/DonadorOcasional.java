@@ -8,8 +8,8 @@ import java.io.Serializable;
 
 public class DonadorOcasional extends Donador implements Serializable{
 
-    public DonadorOcasional(String name,String lastName, String email, String document, String password, String adress, String locality) {
-        super(name, lastName, email, document, password, adress, locality);
+    public DonadorOcasional(String name,String lastName, String email, String typeDocument,String document, String password, String adress, String locality) {
+        super(name, lastName, email, typeDocument,document, password, adress, locality);
     }
 
     
