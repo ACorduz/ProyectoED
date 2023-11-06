@@ -17,6 +17,11 @@ import EstructurasCorte2.NodoAVLUsuario;
 
 import EstructurasCorte2.AVLTree_UsuarioDocumento;
 
+// Pruebas BST 
+import EstructurasCorte2.BST_TreeComidaNombre;
+import EstructurasCorte2.BST_TreeUsuarioDocumento;
+
+
 public class MainPruebasEstructuras {
 
     
@@ -127,6 +132,34 @@ public class MainPruebasEstructuras {
         avlTree3.root = avlTree3.insert(avlTree3.root, u1);
         
         avlTree3.printInOrder();
+        
+        // PRUEBAS BST COMIDA NOMBRE
+        System.out.println("");
+        System.out.println("BST Comida Nombre");
+        
+        BST_TreeComidaNombre BST_TCN = new BST_TreeComidaNombre();
+        // OJO forma ded colocar el root 
+        BST_TCN.root = BST_TCN.crearNodoRoot(f1);
+        //System.out.println(tree.root.key);
+        BST_TCN.insertar(f2);
+        BST_TCN.insertar(f3);
+        BST_TCN.insertar(f4);
+                
+        BST_TCN.inorder(BST_TCN.root);
+        
+        
+        // PRUEBA BST USUARIOS DOCUMENTO
+        System.out.println("");
+        System.out.println("BST USUARIO DOCUMENTO");
+        
+        BST_TreeUsuarioDocumento bst_ud = new BST_TreeUsuarioDocumento();
+        bst_ud.root = bst_ud.crearNodoRoot(u1);
+        bst_ud.insertar(u2);
+        bst_ud.insertar(u3);
+        bst_ud.insertar(u4);
+        bst_ud.insertar(u4);
+        
+        bst_ud.inorder(bst_ud.root);
     }
     
 }
