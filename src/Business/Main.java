@@ -17,6 +17,7 @@ import Logic.ConectionAPI;
 import Logic.InputDataJSON;
 import functionalities.RegistroComida;
 import Logic.InputDataJSON;
+import Trees.AVLTree;
 import Trees.DisjointSet;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -40,18 +41,23 @@ public class Main <T>{
     // lo de historial de acciones esta en la clase donador
     // luego cada donador tiene enlazado un producto
 
-
-
     public static void main(String[] args) {
 
         // PRUEBA LISTA DE OBJETOS
-        /*
+        //AVLTree avlTree = new AVLTree();
         Product producto = new Product("FOOD", "Harina", 5,"murrami@gmail.com");
+        //avlTree.root = avlTree.insert(avlTree.root, producto);
         Product producto2 = new Product("FOOD", "Frijol", 5,"murrami@gmail.com");
+        //avlTree.root = avlTree.insert(avlTree.root, producto2);
         Product producto3 = new Product("Ropa", "Camiseta", 1, "carmar@gmail.com");
+        //avlTree.root = avlTree.insert(avlTree.root, producto3);
         Product producto4 = new Product("FOOD", "Cebolla", 5, "surti@gmail.com");
+        //avlTree.root = avlTree.insert(avlTree.root, producto4);
         Product producto5 = new Product("FOOD", "Arveja", 5, "surti@gmail.com");
-         Product producto6 = new Product("FOOD", "Atun", 5, "losreyes@gmail.com");
+        //avlTree.root = avlTree.insert(avlTree.root, producto5);
+        Product producto6 = new Product("FOOD", "Atun", 5, "losreyes@gmail.com");
+        //avlTree.root = avlTree.insert(avlTree.root, producto6);
+        //avlTree.printInOrder();
         //agregar productos
         listOfProducts.pushFront(producto);
         indicesProductos.pushBack(producto);
@@ -73,6 +79,7 @@ public class Main <T>{
         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+producto6.getEmailDonor()+ " agrego un producto");
         Serializador.serializarObjeto(listOfProducts, "productos.dat");
         Serializador.serializarObjeto(indicesProductos, "indicesProductos.dat");
+        //Serializador.serializarObjeto(avlTree, "productosAVL.dat");
          // Agregar empresas a la lista
         CompanyDonor empresa1 = new CompanyDonor("Surtifruver","545645-6","calle 43","Kennedy","super","surti@gmail.com","12345");
         listaEmpresas.pushBack(empresa1);
@@ -131,7 +138,7 @@ public class Main <T>{
         // Llama al método que obtiene y muestra los productos asociados al donador
         //showProductsByDonor(donadorEspecifico);
         // Supongamos que deseas saber a qué donante se asignó un producto en particular.
-        */
+        
         mostrarMenu();
         
         
