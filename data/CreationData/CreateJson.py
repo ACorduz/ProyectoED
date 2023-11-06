@@ -27,12 +27,13 @@ def normalize(s):
     return s
 
 # metodo para ingresar dato Usuario a Json 
-def InputDataJsonUser(nameList:str, index:int, first_name:str,last_name:str, email:str, document:str, password:str, adress:str, locality:str):
+def InputDataJsonUser(nameList:str, index:int, first_name:str,last_name:str, email:str, document:str, numberDocument:int, password:str, adress:str, locality:str):
     data[nameList].append({"index":index, 
                        "firs_name": normalize(first_name),
                        "last_name": normalize(last_name),
                        "email": normalize(email),
                        "document": document,
+                       "numberDocument": numberDocument,
                        "password": normalize(password),
                        "adress": normalize(adress),
                        "locality": normalize(locality)

@@ -5,12 +5,18 @@ import string
 
 fake = Faker("es_CO") # idioma en español y cosas colombianas
 
-# numeroDeDocumentoFalso
-def numero_documento_falso():
+# TipoDeDocumentoFalso
+def tipo_documento_falso():
     tipos_documento = ["CC", "TI", "CE", "PA", "RC"]
     tipo_documento = random.choice(tipos_documento)
-    numero = "".join(random.choices(string.digits, k=8))  # Genera un número de 8 dígitos
-    return (f"{tipo_documento} {numero}")
+ # Genera un número de 8 dígitos
+    return (f"{tipo_documento}")
+
+# numeroDeDocumentoFalso
+def numero_documento_falso():
+    numero = "".join(random.choices(string.digits, k=8)) 
+    return (numero)
+
 
 # Función para generar una contraseña falsa
 def contrasena_falsa():
@@ -43,15 +49,16 @@ def enterDataUser(numberData:int, nameFile:str, nameListInsideDic:str):
         #print(last_name)
         email = fake.email()
         #print(email)
-        document = numero_documento_falso()
+        document = tipo_documento_falso()
         #print(document)
+        numberDocument =  numero_documento_falso()
         locality = fake.municipality()
         #print(locality)
         adress = fake.street_address()
         #print(direccion)
         password = contrasena_falsa()
         #AHORA poner en el json
-        CreateJson.InputDataJsonUser(nameListInsideDic, i+1,first_name,last_name, email, document, password, adress, locality)
+        CreateJson.InputDataJsonUser(nameListInsideDic, i+1,first_name,last_name, email, document, numberDocument, password, adress, locality)
         indexFinal+=1
     # luego de terminado el bucle
     CreateJson.CreateFile(nameFile, indexFinal)
