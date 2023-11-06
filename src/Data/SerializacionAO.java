@@ -15,7 +15,7 @@ import Estructure_DinamicArray.DinamicArray;
 
 
 
-public class serialization <T>{
+public class SerializacionAO <T>{
     String[] arrayRouteFiles = {"listForChooseProductSerialization.obj", "listOfProductsSerialization.obj", "listOfBeneficiariesSerialization.obj", "listOfDonorsSerialization.obj", "listOfProducts_DASerialization.obj"};
 
     public boolean fileExist(String nameFile){
@@ -65,7 +65,7 @@ public class serialization <T>{
                         oos.writeObject(listForChooseProduct);
                         break;
                     case 1:
-                        DoubleLinkedList<Product> listOfProducts = Main.getListOfProducts();
+                        DoubleLinkedList<Producto> listOfProducts = Main.getListOfProducts();
                         //System.out.println("aqui llego");
                         oos.writeObject(listOfProducts);
                         break;
@@ -74,11 +74,11 @@ public class serialization <T>{
                         //oos.writeObject(listOfBeneficiaries);
                         break;
                     case 3:
-                        LinkedList<Donnor> listOfDonors = Main.getListOfDonors();
+                        LinkedList<Donador> listOfDonors = Main.getListOfDonors();
                         oos.writeObject(listOfDonors);
                         break;
                     case 4: // nueva pruebas
-                        DinamicArray <Food> ListOfProducts_DA = Main.getListOfProducts_DA();
+                        DinamicArray <Comida> ListOfProducts_DA = Main.getListOfProducts_DA();
                         oos.writeObject(ListOfProducts_DA);
                         break;
                     default:
@@ -169,19 +169,19 @@ public class serialization <T>{
                 Main.setListForChooseProduct(listForChooseProduct);
                 break;
             case 1:
-                DoubleLinkedList<Product> listOfProducts = (DoubleLinkedList<Product>) object; 
+                DoubleLinkedList<Producto> listOfProducts = (DoubleLinkedList<Producto>) object; 
                 Main.setListOfProducts(listOfProducts);
                 break;
             case 2:
-                LinkedList<Beneficiary> listOfBeneficiaries = (LinkedList<Beneficiary>) object;
+                LinkedList<Beneficiario> listOfBeneficiaries = (LinkedList<Beneficiario>) object;
                 //Main.setListOfBeneficiaries(listOfBeneficiaries);
                 break;
             case 3:
-                LinkedList<Donnor> listOfDonors = (LinkedList<Donnor>) object;
+                LinkedList<Donador> listOfDonors = (LinkedList<Donador>) object;
                 Main.setListOfDonors(listOfDonors);
                 break;
             case 4:
-                DinamicArray<Food> listOfProducts_DA = (DinamicArray<Food> ) object;
+                DinamicArray<Comida> listOfProducts_DA = (DinamicArray<Comida> ) object;
                 Main.setListOfProducts_DA(listOfProducts_DA);
                 break;
             default:

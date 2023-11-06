@@ -4,7 +4,7 @@ package Data;
 import java.io.Serializable;
 
 
-public class User implements Serializable{
+public class Usuario implements Serializable{
     // la clase usuario es una superclase de las empresas donadores, y beneficiarios
     //Primero los atributos
     private String name;
@@ -17,7 +17,7 @@ public class User implements Serializable{
     // "Donador", "Beneficiario"
     
     
-    public User(String name,String lastName, String email, String document, String password, String TypeUser) {
+    public Usuario(String name,String lastName, String email, String document, String password, String TypeUser) {
         this.name = name; 
         this.email = email;
         this.lastName = lastName; 

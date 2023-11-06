@@ -4,22 +4,25 @@ package Data;
 import java.io.Serializable;
 
 
-public class Food extends Product implements Serializable{
+public class Comida extends Producto implements Serializable{
     // la clase comida es la clase hija de producto
     
-    public Food(String typeProduct,String nameProduct, int quantity,String emailDonor, int expirationDateYear, int expirationDateMonth, int expirationDateDay){
+    //  ATRIBUTOS 
+    private int expirationDateYear;
+    private int expirationDateMonth;
+    private int expirationDateDay;
+    
+    // CONSTRUCTOR
+    public Comida(int index, String typeProduct,String nameProduct, int quantity,String emailDonor, int expirationDateYear, int expirationDateMonth, int expirationDateDay){
         // llamar al constructor de la superclase
-        super(typeProduct, nameProduct,quantity, emailDonor);
+        super(index, typeProduct, nameProduct,quantity, emailDonor);
         this.expirationDateYear = expirationDateYear ;
         this.expirationDateMonth =  expirationDateMonth;       
         this.expirationDateDay = expirationDateDay;
         
     }
     
-    //  atributos 
-    private int expirationDateYear;
-    private int expirationDateMonth;
-    private int expirationDateDay;
+
     
     
     public boolean IsFoodExpired(int currentDateYear, int currentDateMonth, int currentDateDay){
@@ -40,7 +43,7 @@ public class Food extends Product implements Serializable{
         
     }
     
-    // metodos setters y getters
+    // METODOS SET, GET
 
     public int getExpirationDateYear() {
         return expirationDateYear;

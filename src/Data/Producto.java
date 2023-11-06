@@ -3,11 +3,20 @@ package Data;
 
 import java.io.Serializable;
 
-public class Product implements Serializable {
+public class Producto implements Serializable {
     //  Es la superclase
-    
-    // metodos constructores
-    public Product( String typeProduct,String nameProduct, int quantity, String emailDonor){
+ 
+    // ATRIBUTOS
+    private int index; 
+    private String typeProduct;
+    private String nameProduct;
+    private boolean estate;// el estado se refiere a si ya lo eligieron o no
+    private int quantity;
+    private String emailDonor; // el imail para luego saber quien publico este producto
+
+    // COSNTRUCTORES
+    public Producto(int index, String typeProduct,String nameProduct, int quantity, String emailDonor){
+        this.index = index;
         this.typeProduct = typeProduct;
         this.nameProduct = nameProduct;
         // luego el estado va a ser verdadero
@@ -17,28 +26,21 @@ public class Product implements Serializable {
     }
     
 
-
-    public Product(String typeProduct, String nameProduct, boolean estate, int quantity, String emailDonor) {
+     // luego el estado se va a elegir
+    public Producto(int index, String typeProduct, String nameProduct, boolean estate, int quantity, String emailDonor) {
+        this.index = index;
         this.typeProduct = typeProduct;
         this.nameProduct = nameProduct;
         this.estate = estate;
         this.quantity = quantity;
         this.emailDonor = emailDonor;
     }
-       
-    
-    // atributos
-    private String typeProduct;
-    private String nameProduct;
-    private boolean estate;// el estado se refiere a si ya lo eligieron o no
-    private int quantity;
-    private String emailDonor; // el imail para luego saber quien publico este producto
-
-    public Product() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      
+    public Producto() {
+        
     }
 
-    // metodos setters y getters
+    // METODOS SET, GET 
     public String getTypeProduct() {
         return typeProduct;
     }
@@ -78,6 +80,14 @@ public class Product implements Serializable {
 
     public void setEmailDonor(String emailDonor) {
         this.emailDonor = emailDonor;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     @Override

@@ -3,7 +3,7 @@ package Data;
 import java.io.Serializable;
 
 
-public class Beneficiary extends User implements Serializable{
+public class Beneficiario extends Usuario implements Serializable{
     // esta es la clase beneficiario, clase hija de usuario 
     
     // sus atributos 
@@ -13,12 +13,12 @@ public class Beneficiary extends User implements Serializable{
     
     // constructor
 
-    public Beneficiary(int NumberProductSelect, int QuantityAllow, String name,String lastName, String email, String document, String password) {
+    public Beneficiario(int NumberProductSelect, int QuantityAllow, String name,String lastName, String email, String document, String password) {
         super(name, lastName ,email, document, password, "Beneficiario");
         NumberProductSelect=0;
         this.QuantityAllow = QuantityAllow;
     }
-    public Beneficiary(String name,String lastName, String email, String document, String password) {
+    public Beneficiario(String name,String lastName, String email, String document, String password) {
         super(name, lastName ,email, document, password, "Beneficiario");
         NumberProductSelect=0;
     }

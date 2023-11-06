@@ -8,9 +8,9 @@ import org.json.JSONTokener;
 // importamos estructuras para sacar listas de comida y demas
 import Estructure_LinkedList.LinkedList;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
-import Data.Beneficiary;
-import Data.Donnor;
-import Data.Food;
+import Data.Beneficiario;
+import Data.Donador;
+import Data.Comida;
 //Traer Las funcionalidades
 
 // Traer el Main
@@ -392,7 +392,7 @@ public class InputDataJSON {
     // Este metodo da una linkedlist de beneficiarios para utilzarlos como prueba
     public LinkedList ofJson_getListBeneficiary(){
         JSONObject jsonObject = null;
-        LinkedList<Beneficiary> listOfBeneficaries;
+        LinkedList<Beneficiario> listOfBeneficaries;
         
         try {
             // ver si el archivo existe y crear nombre de la ruta
@@ -422,7 +422,7 @@ public class InputDataJSON {
             // inicializar la lista de comida
             listOfBeneficaries= new LinkedList<>();
             //crear un comida provisional 
-            Beneficiary beneficiary;
+            Beneficiario beneficiary;
             
             // Iterar sobre los objetos de los usuarios
             for (int i = 0; i < usuarios.length(); i++) {
@@ -440,7 +440,7 @@ public class InputDataJSON {
 
                 
                 // Crear el beneficiario con algunos valores en 0
-                beneficiary = new Beneficiary(0,0,firstName,lastName,email,document,password);
+                beneficiary = new Beneficiario(0,0,firstName,lastName,email,document,password);
                 // Ingresar el beneficiario a la lista provisional 
                 listOfBeneficaries.pushFront(beneficiary); // es O(1)
                 
@@ -461,7 +461,7 @@ public class InputDataJSON {
     // Este metodo da Una linkedlist de donadores, para utilizar como datos de prueba
     public LinkedList ofJson_getListDonnor(){
         JSONObject jsonObject = null;
-        LinkedList<Donnor> listOfDonnor;
+        LinkedList<Donador> listOfDonnor;
         
         try {
             // ver si el archivo existe y crear nombre de la ruta
@@ -491,7 +491,7 @@ public class InputDataJSON {
             // inicializar la lista de comida
             listOfDonnor= new LinkedList<>();
             //crear un comida provisional 
-            Donnor donnor;
+            Donador donnor;
             
             // Iterar sobre los objetos de usuarios
             for (int i = 0; i < usuarios.length(); i++) {
@@ -509,7 +509,7 @@ public class InputDataJSON {
                
                 
                 // Crear el donador con algunos valores en nulo
-                donnor = new Donnor(firstName,lastName,email,document, password, adress, locality, null, null);
+                donnor = new Donador(firstName,lastName,email,document, password, adress, locality, null, null);
                 // Ingresar el donador a la lista provisional 
                 listOfDonnor.pushFront(donnor); // es O(1)
                 

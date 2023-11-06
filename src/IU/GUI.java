@@ -4,10 +4,10 @@ package IU;
 
 import Business.Main;
 import static Business.Main.obtenerFechaHoraActualString;
-import Data.Beneficiary;
-import Data.CompanyDonor;
-import Data.Donnor;
-import Data.Product;
+import Data.Beneficiario;
+import Data.DonadorCompania;
+import Data.Donador;
+import Data.Producto;
 import Data.Serializador;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Estructure_DoubleLinkedList.Stack;
@@ -117,8 +117,8 @@ public class GUI {
         Stack<String> listActivity=(Stack<String>) Serializador.deserializarObjeto("actividades.dat");
         if(tipo==1){
             // Obtener los datos existentes del archivo (si los hay)
-            LinkedList<Beneficiary> listaBeneficiarios = (LinkedList<Beneficiary>) Serializador.deserializarObjeto("beneficiarios.dat");
-            Beneficiary beneficiario=new Beneficiary(nombre,apellido,email,documento,clave);
+            LinkedList<Beneficiario> listaBeneficiarios = (LinkedList<Beneficiario>) Serializador.deserializarObjeto("beneficiarios.dat");
+            Beneficiario beneficiario=new Beneficiario(nombre,apellido,email,documento,clave);
             if (listaBeneficiarios == null) {
             listaBeneficiarios = new LinkedList<>();
             }
@@ -135,8 +135,8 @@ public class GUI {
         else{
             String direccion =readOptionString("Ingresa una direccion:");
             String localidad=readOptionString("Ingresa la localidad");
-            LinkedList<Donnor> listaDonadores = (LinkedList<Donnor>) Serializador.deserializarObjeto("donadores.dat");
-            Donnor donador=new Donnor(nombre,apellido,email,documento,clave,direccion,localidad);
+            LinkedList<Donador> listaDonadores = (LinkedList<Donador>) Serializador.deserializarObjeto("donadores.dat");
+            Donador donador=new Donador(nombre,apellido,email,documento,clave,direccion,localidad);
             if (listaDonadores == null) {
                 listaDonadores = new LinkedList<>();
             }
@@ -153,7 +153,7 @@ public class GUI {
     public static void MenuEmpresa(){
         // Obtener los datos existentes del archivo (si los hay)
         Stack<String> listActivity=(Stack<String>) Serializador.deserializarObjeto("actividades.dat");
-        LinkedList<CompanyDonor> listaEmpresas = (LinkedList<CompanyDonor>) Serializador.deserializarObjeto("empresas.dat");
+        LinkedList<DonadorCompania> listaEmpresas = (LinkedList<DonadorCompania>) Serializador.deserializarObjeto("empresas.dat");
         //LinkedList<CompanyDonor> listaEmpresas = (LinkedList<CompanyDonor>) Serializador.deserializarObjeto("empresa.dat");
         String nombre=readOptionString("Ingresa el nombre de la empresa:");
         String NIT=readOptionString("Ingresa el NIT:");
@@ -162,7 +162,7 @@ public class GUI {
         String tipo=readOptionString("Ingresa el tipo de empresa ");
         String email=readOptionString("Ingresa el correo electronico: ");   
         String clave=readOptionString("Ingresa una clave");
-        CompanyDonor empresa=new CompanyDonor(nombre,NIT,direccion,localidad,tipo,email, clave);
+        DonadorCompania empresa=new DonadorCompania(nombre,NIT,direccion,localidad,tipo,email, clave);
         //Guardar compañia serializable
          // Agregar la nueva instancia a la lista de datos existentes
         if (listaEmpresas == null) {
@@ -183,23 +183,23 @@ public class GUI {
         int rol = readIntegerOption("Ingresa 1 para ingresar como beneficiario, 2 como donador y 3 como empresa ");
         if (rol==1){
             //verificar los objetos de beneficiarios y guardarlos en un linkedList
-            LinkedList<Beneficiary> listaBeneficiarios = Serializador.deserializarObjeto("beneficiarios.dat");
+            LinkedList<Beneficiario> listaBeneficiarios = Serializador.deserializarObjeto("beneficiarios.dat");
             
             VerificacionLogin(listaBeneficiarios,null,null);
         }else if(rol==2){
             //verificar los objetos de donadores y guardarlos en un linkedList
-            LinkedList<Donnor> listaDonadores = Serializador.deserializarObjeto("donadores.dat");
+            LinkedList<Donador> listaDonadores = Serializador.deserializarObjeto("donadores.dat");
             VerificacionLogin(null,listaDonadores,null);
             
         }else if (rol==3){
             //verificar los objetos de empresas y guardarlos en un linkedList
-            LinkedList<CompanyDonor> listaEmpresas = Serializador.deserializarObjeto("empresas.dat");
+            LinkedList<DonadorCompania> listaEmpresas = Serializador.deserializarObjeto("empresas.dat");
             VerificacionLogin(null,null,listaEmpresas);
         }
         
         
     }
-    public static void VerificacionLogin(LinkedList<Beneficiary> listaBeneficiarios,LinkedList<Donnor> listaDonadores,LinkedList<CompanyDonor> listaEmpresas){
+    public static void VerificacionLogin(LinkedList<Beneficiario> listaBeneficiarios,LinkedList<Donador> listaDonadores,LinkedList<DonadorCompania> listaEmpresas){
         boolean continuar = true;
         while (continuar) {
             String email = readOptionString("Ingresa el correo electronico: ");
@@ -210,7 +210,7 @@ public class GUI {
             Stack<String> listActivity=(Stack<String>) Serializador.deserializarObjeto("actividades.dat");
             if (listaEmpresas != null && !listaEmpresas.empty()) {
                 for (int i = 0; i < listaEmpresas.size(); i++) {
-                    CompanyDonor empresa = listaEmpresas.get(i);
+                    DonadorCompania empresa = listaEmpresas.get(i);
                     if (empresa.getEmail().equals(email) && empresa.getPassword().equals(clave)) {
                         autenticado = true;
                         System.out.println("Inicio de sesion exitoso para empresas.");
@@ -228,7 +228,7 @@ public class GUI {
             // Si no se autenticó como empresa, verificar en la lista de beneficiarios
             else if (!autenticado && listaBeneficiarios != null && !listaBeneficiarios.empty()) {
                 for (int i = 0; i < listaBeneficiarios.size(); i++) {
-                    Beneficiary beneficiario = listaBeneficiarios.get(i);
+                    Beneficiario beneficiario = listaBeneficiarios.get(i);
                     if (beneficiario.getEmail().equals(email) && beneficiario.getPassword().equals(clave)) {
                         autenticado = true;
                         System.out.println("Inicio de sesion exitoso para beneficiarios.");
@@ -247,7 +247,7 @@ public class GUI {
             // Si no se autenticó como beneficiario, verificar en la lista de donadores
             else if (!autenticado && listaDonadores != null && !listaDonadores.empty()) {
                 for (int i = 0; i < listaDonadores.size(); i++) {
-                    Donnor donador = listaDonadores.get(i);
+                    Donador donador = listaDonadores.get(i);
                     if (donador.getEmail().equals(email) && donador.getPassword().equals(clave)) {
                         autenticado = true;
                         System.out.println("Inicio de sesion exitoso para donadores.");
@@ -267,7 +267,7 @@ public class GUI {
     public static void menuProductos(String email){
         System.out.println("------------Estos son los productos que hay disponibles---------------");
          // Deserializar la lista de productos desde el archivo "productos.dat"
-        DoubleLinkedList<Product> listaProductos = Serializador.deserializarObjeto("productos.dat");
+        DoubleLinkedList<Producto> listaProductos = Serializador.deserializarObjeto("productos.dat");
         Stack<String> listActivity=(Stack<String>) Serializador.deserializarObjeto("actividades.dat");
         // Verificar si la lista de productos se cargó correctamente
         if (listaProductos != null) {
@@ -287,16 +287,16 @@ public class GUI {
     public static void MenuRegistrarProducto(String email){
          Stack<String> listActivity=(Stack<String>) Serializador.deserializarObjeto("actividades.dat");
         // Obtener los datos existentes del archivo (si los hay)
-        DoubleLinkedList<Product> listaProductos = (DoubleLinkedList<Product>) Serializador.deserializarObjeto("productos.dat");
+        DoubleLinkedList<Producto> listaProductos = (DoubleLinkedList<Producto>) Serializador.deserializarObjeto("productos.dat");
         System.out.println("-----------------Registro de Productos--------------------------");
         String tipo=readOptionString("Ingresa el tipo de producto que deseas donar");
         String producto=readOptionString("Ingresa el nombre del producto que deseas donar");
         int cantidad = readIntegerOption("Ingresa la cantidad del producto, para mas de un beneficiario ");
-        Product productox = new Product(tipo, producto,cantidad ,email);
+        Producto productox = new Producto(tipo, producto,cantidad ,email);
          //Guardar productos serializable
          // Agregar la nueva instancia a la lista de datos existentes
         if (listaProductos == null) {
-            listaProductos = new DoubleLinkedList<Product>();
+            listaProductos = new DoubleLinkedList<Producto>();
         }
         listaProductos.pushFront(productox);
 

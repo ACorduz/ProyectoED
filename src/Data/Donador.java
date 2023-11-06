@@ -7,18 +7,18 @@ import java.io.Serializable;
 
 
 
-public class Donnor extends User implements Serializable {
+public class Donador extends Usuario implements Serializable {
     // la clase donador es hijo de la clase usurio y a la vez superclase
     private String adress;
     private String locality;
-    private Queue<Product> ListDonations;
-    private Stack<Product> HistoryOfDonations; 
+    private Queue<Producto> ListDonations;
+    private Stack<Producto> HistoryOfDonations; 
     private int numberDonates;
     // OJO typeOfUserNosDice Si es DonadorCompañia, donadorOcasional O Beneficiario
     
     // metodos constructores
 
-    public Donnor(String name,String lastName,  String email, String document, String password, String adress, String locality, Queue<Product> ListDonations, Stack<Product> HistoryOfDonations) {
+    public Donador(String name,String lastName,  String email, String document, String password, String adress, String locality, Queue<Producto> ListDonations, Stack<Producto> HistoryOfDonations) {
         super(name,lastName, email,document,password,"Donador");
         this.adress = adress;
         this.locality = locality;
@@ -28,7 +28,7 @@ public class Donnor extends User implements Serializable {
     }
     
     
-    public Donnor(String name,String lastName, String email, String document, String password, String adress, String locality){
+    public Donador(String name,String lastName, String email, String document, String password, String adress, String locality){
         super(name,lastName,email,document,password,"Donador"); 
         this.adress = adress;
         this.locality = locality;
@@ -37,9 +37,9 @@ public class Donnor extends User implements Serializable {
     
     
     //ED = Expiration Day
-    public void DonateFood(String nameProduct, String type,int quantity,String emailDonor,int EDateYear, int EDateMonth, int EDateDay ){
+    public void DonateFood(String nameProduct,int index ,String type,int quantity,String emailDonor,int EDateYear, int EDateMonth, int EDateDay ){
         // se crea el producto 
-        Food food = new Food(type,nameProduct,quantity,emailDonor,EDateYear,EDateMonth,EDateDay);
+        Comida food = new Comida(index,type,nameProduct,quantity,emailDonor,EDateYear,EDateMonth,EDateDay);
         HistoryOfDonations.push(food);
         // AQUI LLAMAR EL METODO AÑADIR
        
@@ -70,19 +70,19 @@ public class Donnor extends User implements Serializable {
         this.locality = locality;
     }
 
-    public Queue<Product> getListDonations() {
+    public Queue<Producto> getListDonations() {
         return ListDonations;
     }
 
-    public void setListDonations(Queue<Product> ListDonations) {
+    public void setListDonations(Queue<Producto> ListDonations) {
         this.ListDonations = ListDonations;
     }
 
-    public Stack<Product> getHistoryOfDonations() {
+    public Stack<Producto> getHistoryOfDonations() {
         return HistoryOfDonations;
     }
 
-    public void setHistoryOfDonations(Stack<Product> HistoryOfDonations) {
+    public void setHistoryOfDonations(Stack<Producto> HistoryOfDonations) {
         this.HistoryOfDonations = HistoryOfDonations;
     }
 
