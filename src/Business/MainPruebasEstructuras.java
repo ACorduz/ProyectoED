@@ -15,27 +15,13 @@ import Data.Usuario;
 import EstructurasCorte2.AVLTree_UsuarioNombre;
 import EstructurasCorte2.NodoAVLUsuario;
 
+import EstructurasCorte2.AVLTree_UsuarioDocumento;
 
 public class MainPruebasEstructuras {
 
     
     public static void main(String[] args) {
-        
-        String documento1 = "123456";
-        String documento2 = "0789012";
-
-        if (documento1.equals(documento2)) {
-            // Los documentos son iguales
-        }
-
-        int comparacion = documento1.compareTo(documento2);
-        if (comparacion == 0) {
-            System.out.println("=");
-        } else if (comparacion < 0) {
-            System.out.println("<");
-        } else {
-            System.out.println(">");
-        }
+       
         
         // COLA PRIORITARIA Comida
         Date fecha = new Date(2023, 1, 16);
@@ -102,24 +88,25 @@ public class MainPruebasEstructuras {
         
         // OTRAS PRUEABS
         avlTree = null; 
+        
         AVLTree_UsuarioNombre avlTree2 = new AVLTree_UsuarioNombre();
         
         
         // PRUEBAS AVL USUARIO NOMBRE
-        Usuario u1 = new Usuario("Milena", "Reyes", "javier40@example.org", "RC", "8434474", "TAVP=^pauxI", "DONADOR");
-        Usuario u2 = new Usuario("Esteban", "Reyes", "javier40@example.org", "RC", "8434474", "TAVP=^pauxI", "DONADOR");
-        Usuario u3 = new Usuario("Jukuian", "Reyes", "javier40@example.org", "RC", "8434474", "TAVP=^pauxI", "DONADOR");
-        Usuario u4 = new Usuario("Jukuian", "Res", "javier40@example.org", "RC", "8434474", "TAVP=^pauxI", "DONADOR");
+        Usuario u1 = new Usuario("Milena", "Reyes", "javier40@example.org", "RC", "800", "TAVP=^pauxI", "DONADOR");
+        Usuario u2 = new Usuario("Esteban", "Reyes", "javier40@example.org", "RC", "0900", "TAVP=^pauxI", "DONADOR");
+        Usuario u3 = new Usuario("Julian", "Reyes", "javier40@example.org", "RC", "600", "TAVP=^pauxI", "DONADOR");
+        Usuario u4 = new Usuario("Julian2", "Res", "javier40@example.org", "RC", "1000", "TAVP=^pauxI", "DONADOR");
         
         avlTree2.root = avlTree2.insert(avlTree2.root, u1);
         avlTree2.root = avlTree2.insert(avlTree2.root, u2);
         avlTree2.root = avlTree2.insert(avlTree2.root, u3);
         avlTree2.root = avlTree2.insert(avlTree2.root, u4);
-         avlTree2.root = avlTree2.insert(avlTree2.root, u1);
+        avlTree2.root = avlTree2.insert(avlTree2.root, u1);
         
         avlTree2.printInOrder();
         // Buscar un producto por nombre
-        String nombreProductoABuscar2 = "Jukuian";
+        String nombreProductoABuscar2 = "Jukuian2";
         NodoAVLUsuario resultadoBusqueda2 = avlTree2.find(nombreProductoABuscar2, "Res");
         if (resultadoBusqueda2 != null) {
             Usuario productoEncontrado = resultadoBusqueda2.usuario;
@@ -128,8 +115,18 @@ public class MainPruebasEstructuras {
             System.out.println("Producto no encontrado.");
         }
         
+        System.out.println("");
+        System.out.println("AVL USUARIO DOCUMENTO");
+        // AVL USUARIO DOCUMENTO 
+        AVLTree_UsuarioDocumento avlTree3 = new AVLTree_UsuarioDocumento();
         
+        avlTree3.root = avlTree3.insert(avlTree3.root, u1);
+        avlTree3.root = avlTree3.insert(avlTree3.root, u2);
+        avlTree3.root = avlTree3.insert(avlTree3.root, u3);
+        avlTree3.root = avlTree3.insert(avlTree3.root, u4);
+        avlTree3.root = avlTree3.insert(avlTree3.root, u1);
         
+        avlTree3.printInOrder();
     }
     
 }

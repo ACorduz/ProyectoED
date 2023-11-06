@@ -11,7 +11,7 @@ public class AVLTree_UsuarioDocumento {
         this.root = null;
     }
 
-
+    
     public void updateHeight(NodoAVLUsuario n) {
         n.altura = 1 + Math.max(height(n.izquierdo), height(n.derecho));
     }
@@ -72,7 +72,7 @@ public class AVLTree_UsuarioDocumento {
         if (node == null) {
             return new NodoAVLUsuario(usuario);
         } else {
-            int comparacion = usuario.getName().compareTo(node.usuario.getName());
+            int comparacion = Integer.parseInt(usuario.getDocument()) - Integer.parseInt(node.usuario.getDocument());
             if (comparacion < 0) {
                 node.izquierdo = insert(node.izquierdo, usuario);
             } else if (comparacion > 0) {
@@ -85,15 +85,15 @@ public class AVLTree_UsuarioDocumento {
     }
     
   
-    public NodoAVLUsuario delete(NodoAVLUsuario node, String nombreUsuario) {
+    public NodoAVLUsuario delete(NodoAVLUsuario node, String numeroDocumento) {
         if (node == null) {
             return node;
         } else {
-            int comparacion = nombreUsuario.compareTo(node.usuario.getName());
+            int comparacion = Integer.parseInt(numeroDocumento) - Integer.parseInt(node.usuario.getDocument());
             if (comparacion < 0) {
-                node.izquierdo = delete(node.izquierdo, nombreUsuario);
+                node.izquierdo = delete(node.izquierdo, numeroDocumento);
             } else if (comparacion > 0) {
-                node.derecho = delete(node.derecho, nombreUsuario);
+                node.derecho = delete(node.derecho, numeroDocumento);
             } else {
                 if (node.izquierdo == null || node.derecho == null) {
                     node = (node.izquierdo == null) ? node.derecho : node.izquierdo;
@@ -118,12 +118,11 @@ public class AVLTree_UsuarioDocumento {
         return current;
     }
 
-    public NodoAVLUsuario find(String nombreUsuario, String lastName) {
+    public NodoAVLUsuario find(String numeroDocumento) {
         NodoAVLUsuario current = root;
         while (current != null) {
-            int comparacion1 = nombreUsuario.compareTo(current.usuario.getName());
-            int comparacion2 = lastName.compareTo(current.usuario.getLastName());
-            if (comparacion1 == 0 && comparacion2 == 0) {
+            int comparacion1 = Integer.parseInt(numeroDocumento) - Integer.parseInt(current.usuario.getDocument());
+            if (comparacion1 == 0) {
                 break;
             }
             current = comparacion1 < 0 ? current.izquierdo : current.derecho;

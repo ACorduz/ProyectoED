@@ -13,12 +13,12 @@ public class Beneficiario extends Usuario implements Serializable{
     
     // constructor
 
-    public Beneficiario(int NumberProductSelect, int QuantityAllow, String name,String lastName, String email, String typeDocument ,int document, String password) {
+    public Beneficiario(int NumberProductSelect, int QuantityAllow, String name,String lastName, String email, String typeDocument ,String document, String password) {
         super(name, lastName ,email,typeDocument, document, password, "Beneficiario");
         NumberProductSelect=0;
         this.QuantityAllow = QuantityAllow;
     }
-    public Beneficiario(String name,String lastName, String email, String typeDocument ,int document, String password) {
+    public Beneficiario(String name,String lastName, String email, String typeDocument ,String document, String password) {
         super(name, lastName ,email,typeDocument,document, password, "Beneficiario");
         NumberProductSelect=0;
     }
