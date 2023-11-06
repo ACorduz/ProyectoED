@@ -4,7 +4,7 @@ import Data.Beneficiary;
 import Data.CompanyDonor;
 import Data.Donnor;
 import Data.Serializador;
-import Data.Food;
+import Data.Comida;
 import Data.User;
 import Estructure_LinkedList.Queue;
 import Estructure_LinkedList.LinkedList;
@@ -19,6 +19,7 @@ import functionalities.RegistroComida;
 import Logic.InputDataJSON;
 import Trees.AVLTree;
 import Trees.DisjointSet;
+import Trees.BinaryHeap;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -30,7 +31,7 @@ public class Main <T>{
     private static Stack<String> listActivity=new Stack(); //Registro de Actividades
     public static DoubleLinkedList<Product> listOfProducts = new DoubleLinkedList(); // segundo una lista donde se van a poner todos los productos
     public static LinkedList<Product> indicesProductos= new LinkedList();
-    private static DinamicArray<Food> listOfProducts_DA = new DinamicArray();
+    private static DinamicArray<Comida> listOfProducts_DA = new DinamicArray();
     public static DisjointSet donanteSet;
     public static DisjointSet empresaSet;
 
@@ -44,21 +45,34 @@ public class Main <T>{
     public static void main(String[] args) {
 
         // PRUEBA LISTA DE OBJETOS
-        //AVLTree avlTree = new AVLTree();
-        Product producto = new Product("FOOD", "Harina", 5,"murrami@gmail.com");
-        //avlTree.root = avlTree.insert(avlTree.root, producto);
-        Product producto2 = new Product("FOOD", "Frijol", 5,"murrami@gmail.com");
-        //avlTree.root = avlTree.insert(avlTree.root, producto2);
-        Product producto3 = new Product("Ropa", "Camiseta", 1, "carmar@gmail.com");
-        //avlTree.root = avlTree.insert(avlTree.root, producto3);
-        Product producto4 = new Product("FOOD", "Cebolla", 5, "surti@gmail.com");
-        //avlTree.root = avlTree.insert(avlTree.root, producto4);
-        Product producto5 = new Product("FOOD", "Arveja", 5, "surti@gmail.com");
-        //avlTree.root = avlTree.insert(avlTree.root, producto5);
-        Product producto6 = new Product("FOOD", "Atun", 5, "losreyes@gmail.com");
-        //avlTree.root = avlTree.insert(avlTree.root, producto6);
+        AVLTree avlTree = new AVLTree();
+        //Product producto = new Product("FOOD", "Harina", 5,"murrami@gmail.com");
+        Product producto = new Product("Food", "Sopa enlatada", 65, "murrami@gmail.com", 2024 ,2, 2); 
+        avlTree.root = avlTree.insert(avlTree.root, producto);
         //avlTree.printInOrder();
+        Product producto2 = new Product("Food", "Avena", 65, "murrami@gmail.com", 2025 ,2, 2);
+        //avlTree.root = avlTree.insert(avlTree.root, producto2);
+        Product producto3 = new Product("Food", "Garbanzo ", 65, "murrami@gmail.com", 2013 ,5, 9);
+        //avlTree.root = avlTree.insert(avlTree.root, producto3);
+        Product producto4 = new Product("Food", "Frijol ", 65, "carmar@gmail.com", 2018 ,5, 9);
+        //avlTree.root = avlTree.insert(avlTree.root, producto4);
+        Product producto5 = new Product("Food", "Pollo ", 65, "surti@gmail.com", 2023 ,5, 9);
+        //avlTree.root = avlTree.insert(avlTree.root, producto5);
+        Product producto6 = new Product("FOOD", "Atun", 5, "losreyes@gmail.com",2023,5,22);
+        //avlTree.root = avlTree.insert(avlTree.root, producto6);
+        //BinaryHeap hc=new BinaryHeap();
+        /*
+        hc.insert(producto);
+        hc.insert(producto2);
+        hc.insert(producto3);
+        hc.insert(producto4);
+        hc.insert(producto5);
+        hc.insert(producto6);
+        System.out.println("Elementos del montículo:");
+        hc.printHeap();
+        */
         //agregar productos
+        
         listOfProducts.pushFront(producto);
         indicesProductos.pushBack(producto);
         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+producto.getEmailDonor()+ " agrego un producto");
@@ -139,6 +153,23 @@ public class Main <T>{
         //showProductsByDonor(donadorEspecifico);
         // Supongamos que deseas saber a qué donante se asignó un producto en particular.
         
+        /*
+        Comida f1 = new Comida("Food", "Sopa enlatada", 65, "alejandragomez@example.com", 2024 ,2, 2); 
+        Comida f2 = new Comida("Food", "Avena", 65, "alejandragomez@example.com", 2025 ,2, 2); 
+        Comida f3 = new Comida("Food", "Garbanzo ", 65, "alejandragomez@example.com", 2013 ,5, 9);
+        Comida f4 = new Comida("Food", "Frijol ", 65, "alejandragomez@example.com", 2018 ,5, 9);
+        Comida f5 = new Comida("Food", "Pollo ", 65, "alejandragomez@example.com", 2023 ,5, 9);
+        BinaryHeap hc=new BinaryHeap();
+        
+        hc.insert(f1);
+        hc.insert(f2);
+        hc.insert(f3);
+        hc.insert(f4);
+        hc.insert(f5);
+        //hc.siftDown(0);
+        System.out.println("Elementos del montículo:");
+        hc.printHeap();
+        */
         mostrarMenu();
         
         
@@ -235,11 +266,11 @@ public class Main <T>{
         Main.listOfDonors = listOfDonors;
     }
 
-    public static DinamicArray<Food> getListOfProducts_DA() {
+    public static DinamicArray<Comida> getListOfProducts_DA() {
         return listOfProducts_DA;
     }
 
-    public static void setListOfProducts_DA(DinamicArray<Food> listOfProducts_DA) {
+    public static void setListOfProducts_DA(DinamicArray<Comida> listOfProducts_DA) {
         Main.listOfProducts_DA = listOfProducts_DA;
     }
     public static String obtenerFechaHoraActualString() {

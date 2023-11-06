@@ -78,7 +78,7 @@ public class serialization <T>{
                         oos.writeObject(listOfDonors);
                         break;
                     case 4: // nueva pruebas
-                        DinamicArray <Food> ListOfProducts_DA = Main.getListOfProducts_DA();
+                        DinamicArray <Comida> ListOfProducts_DA = Main.getListOfProducts_DA();
                         oos.writeObject(ListOfProducts_DA);
                         break;
                     default:
@@ -181,7 +181,7 @@ public class serialization <T>{
                 Main.setListOfDonors(listOfDonors);
                 break;
             case 4:
-                DinamicArray<Food> listOfProducts_DA = (DinamicArray<Food> ) object;
+                DinamicArray<Comida> listOfProducts_DA = (DinamicArray<Comida> ) object;
                 Main.setListOfProducts_DA(listOfProducts_DA);
                 break;
             default:

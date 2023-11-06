@@ -26,6 +26,7 @@ import java.io.ObjectOutputStream;
 
 import Estructure_LinkedList.Queue;
 import Trees.AVLTree;
+import Trees.BinaryHeap;
 import Trees.DisjointSet;
 import Trees.NodoAVL;
 
@@ -269,7 +270,7 @@ public class GUI {
     public static void menuProductos(String email){
         DoubleLinkedList<Product> listaProductos = Serializador.deserializarObjeto("productos.dat");
         Stack<String> listActivity=(Stack<String>) Serializador.deserializarObjeto("actividades.dat");
-        int filtro = readIntegerOption("Ingresa 1 si quieres buscar por nombre un producto o 2 para ver todos los productos:");
+        int filtro = readIntegerOption("Ingresa 1 si quieres buscar por nombre, 2 para ver todos los productos por fecha o 3 para ver los productos en orden mas reciente");
          if (filtro==1){
              AVLTree avlTree = new AVLTree();
             // Recorre la lista de productos y agrégalos al árbol AVL
@@ -280,6 +281,21 @@ public class GUI {
             // Asegúrate de que el árbol se mantenga equilibrado
             avlTree.root = avlTree.rebalance(avlTree.root);
              menuBusquedaAVL(avlTree,listaProductos,listActivity,email);
+        }else if(filtro==2){
+            BinaryHeap hc=new BinaryHeap();
+            
+            // Recorre la lista de productos y agrega Comida a la pila prioritaria
+        for (int i = 0; i < listaProductos.size(); i++) {
+            Product producto = listaProductos.get(i);
+
+            if (producto instanceof Product) {
+                Product comida = (Product) producto; // Realiza un casting a Comida
+                hc.insert(comida); // Agrega la comida a la pila prioritaria
+                
+            }
+        }
+        menuFechaVencimiento(hc,listaProductos,listActivity, email);
+        
         }
         else{
             System.out.println("------------Estos son los productos que hay disponibles---------------");
@@ -299,6 +315,17 @@ public class GUI {
                     mostrarMenu();
                    }
          }
+    }
+    public static void menuFechaVencimiento(BinaryHeap hc, DoubleLinkedList<Product> listaProductos,Stack<String> listActivity,String email){
+        hc.printHeap();
+        String producto=readOptionString("Ingresa el nombre del producto que deseas");
+        listaProductos.removeProductByQuantity(producto);
+        System.out.println("Lista actualizada:");
+        Serializador.serializarObjeto(listaProductos, "productos.dat");
+        System.out.println("Ya quedo apartado, te puedes contactar con el donador ");
+        listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+email+ " Aparto "+producto);
+        Serializador.serializarObjeto(listActivity, "actividades.dat");
+        mostrarMenu();
     }
     
     public static void menuBusquedaAVL(AVLTree avlTree,DoubleLinkedList<Product> listaProductos,Stack<String> listActivity,String email){
@@ -336,7 +363,10 @@ public class GUI {
         String tipo=readOptionString("Ingresa el tipo de producto que deseas donar");
         String producto=readOptionString("Ingresa el nombre del producto que deseas donar");
         int cantidad = readIntegerOption("Ingresa la cantidad del producto, para mas de un beneficiario ");
-        Product productox = new Product(tipo, producto,cantidad ,email);
+        int añoV = readIntegerOption("Ingresa el año de vencimiento: ");
+        int mesV = readIntegerOption("Ingresa el mes de vencimiento");
+        int diaV = readIntegerOption("Ingresa el dia de vencimiento");
+        Product productox = new Product(tipo, producto,cantidad ,email,añoV,mesV,diaV);
          //Guardar productos serializable
          // Agregar la nueva instancia a la lista de datos existentes
         if (listaProductos == null) {

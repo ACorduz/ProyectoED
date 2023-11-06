@@ -9,7 +9,7 @@ import Estructure_LinkedList.LinkedList;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Data.Beneficiary;
 import Data.Donnor;
-import Data.Food;
+import Data.Comida;
 import Data.User;
 import Estructure_DoubleLinkedList.Stack;
 import functionalities.find;
@@ -460,7 +460,7 @@ public class InputDataCamiloPrueba {
     // metodo para obtener Una lista doblemente enlzada de productos de comida
      public DoubleLinkedList ofJson_getListProductsFood(){
         JSONObject jsonObject = null;
-        DoubleLinkedList<Food> listOfFood = new DoubleLinkedList<>();
+        DoubleLinkedList<Comida> listOfFood = new DoubleLinkedList<>();
         
         try {
             // ver si el archivo existe y crear nombre de la ruta
@@ -490,7 +490,7 @@ public class InputDataCamiloPrueba {
             // inicializar la lista de comida
             listOfFood = new DoubleLinkedList<>();
             //crear un comida provisional 
-            Food food;
+            Comida food;
             
             // Iterar sobre los objetos de comida
             for (int i = 0; i < productFood.length(); i++) {
@@ -508,7 +508,7 @@ public class InputDataCamiloPrueba {
 
                 
                 // Crear la comida
-                food = new Food(typeProduct, nameProduct, quantity, emailDonor, expirationDateYear, expirationDateMonth, expirationDateDay);
+                food = new Comida(typeProduct, nameProduct, quantity, emailDonor, expirationDateYear, expirationDateMonth, expirationDateDay);
                 // Ingresar la comida a la lista provisional 
                 listOfFood.pushFront(food); // es O(1)
                 

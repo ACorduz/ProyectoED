@@ -4,10 +4,10 @@ package Data;
 import java.io.Serializable;
 
 
-public class Food extends Product implements Serializable{
+public class Comida extends Product implements Serializable{
     // la clase comida es la clase hija de producto
     
-    public Food(String typeProduct,String nameProduct, int quantity,String emailDonor, int expirationDateYear, int expirationDateMonth, int expirationDateDay){
+    public Comida(String typeProduct,String nameProduct, int quantity,String emailDonor, int expirationDateYear, int expirationDateMonth, int expirationDateDay){
         // llamar al constructor de la superclase
         super(typeProduct, nameProduct,quantity, emailDonor);
         this.expirationDateYear = expirationDateYear ;
@@ -66,7 +66,13 @@ public class Food extends Product implements Serializable{
         this.expirationDateDay = expirationDateDay;
     }
 
+    public String getExpirationDate() {
+    String year = String.valueOf(expirationDateYear);
+    String month = String.format("%02d", expirationDateMonth); // Asegura que el mes tenga dos dígitos (por ejemplo, 03 en lugar de 3).
+    String day = String.format("%02d", expirationDateDay); // Asegura que el día tenga dos dígitos (por ejemplo, 09 en lugar de 9).
     
+    return year + "-" + month + "-" + day;
+}
     @Override
     public String toString() {
         return "Food{" + "expirationDateYear=" + expirationDateYear + ", expirationDateMonth=" + expirationDateMonth + ", expirationDateDay=" + expirationDateDay + '}';
