@@ -16,8 +16,6 @@ public class Product implements Serializable {
         this.emailDonor = emailDonor;
     }
     
-
-
     public Product(String typeProduct, String nameProduct, boolean estate, int quantity, String emailDonor) {
         this.typeProduct = typeProduct;
         this.nameProduct = nameProduct;
@@ -26,7 +24,12 @@ public class Product implements Serializable {
         this.emailDonor = emailDonor;
     }
        
-    
+    public Product(String typeProduct, String nameProduct, int quantity, String emailDonor,int EDateYear, int EDateMonth, int EDateDay) {
+        this.typeProduct = typeProduct;
+        this.nameProduct = nameProduct;
+        this.quantity = quantity;
+        this.emailDonor = emailDonor;
+    }
     // atributos
     private String typeProduct;
     private String nameProduct;

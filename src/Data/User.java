@@ -9,7 +9,7 @@ public class User implements Serializable{
     //Primero los atributos
     private String name;
     private String lastName;
-    private String email;
+    public String email;
     private String document;
     private String password;
     private String TypeUser;

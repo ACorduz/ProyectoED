@@ -425,6 +425,39 @@ public class DoubleLinkedList <T> implements EstructureDoubleLinkedList<T> ,Seri
 
         return -1; // Retorna -1 si no se encuentra el nombre en la lista
     }
+    public int size() {
+    return counter;
+    }
+    public int indexOf(T key) {
+        Node current = head.getNext();
+        int index = 0;
+
+        while (current != null) {
+            T data = (T) current.getData();
+
+            if (data.equals(key)) {
+                return index; // Devolver el índice cuando se encuentra el elemento
+            }
+
+            current = current.getNext();
+            index++;
+        }
+
+        return -1; // Devolver -1 si el elemento no se encuentra en la lista
+    }
+    public T get(int i) {
+        if (i < 0 || i >= counter) {
+            throw new IndexOutOfBoundsException("Índice fuera de los límites de la lista");
+        }
+
+        Node current = head.getNext();
+        for (int index = 0; index < i; index++) {
+            current = current.getNext();
+        }
+
+        return (T) current.getData();
+    }
+    
 
     @Override
     public String toString() {
