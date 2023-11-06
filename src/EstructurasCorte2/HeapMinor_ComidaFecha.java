@@ -26,60 +26,88 @@ public class HeapMinor_ComidaFecha {
         return 2 * i + 2;
     }
 
-    private void swap(Comida[] arr, int a, int b) {
-        Comida temp = arr[a];
-        arr[a] = arr[b];
-        arr[b] = temp;
-    }
-
-    public void siftUp(int index) {
-        Date d1 = new Date(heapArray[parent(index)].getExpirationDateYear(),heapArray[parent(index)].getExpirationDateMonth(),heapArray[parent(index)].getExpirationDateDay());
-        Date d2  = new Date(heapArray[index].getExpirationDateYear(), heapArray[index].getExpirationDateMonth(), heapArray[index].getExpirationDateDay());
-        while (index > 0 && d1.compareTo(d2) > 0) {
-            swap(heapArray, parent(index), index);
-            index = parent(index);
-        }
-    }
-
-    public void siftDown(int index) {
-        int minIndex = index;
-        int leftChild = leftChild(index);
-        int rightChild = rightChild(index);
-
-        Date dateLeftChild = new Date(heapArray[leftChild].getExpirationDateYear(), heapArray[leftChild].getExpirationDateMonth(), heapArray[leftChild].getExpirationDateDay()); 
-        Date dateminIndex = new Date(heapArray[minIndex].getExpirationDateYear(), heapArray[minIndex].getExpirationDateMonth(), heapArray[minIndex].getExpirationDateDay());
-        if (leftChild <= size && dateLeftChild.compareTo(dateminIndex) <0) {
-            minIndex = leftChild;
-        }
-        Date dateRightChild = new Date(heapArray[rightChild].getExpirationDateYear(), heapArray[rightChild].getExpirationDateMonth(), heapArray[rightChild].getExpirationDateDay());
-        if (rightChild <= size && dateRightChild.compareTo(dateminIndex) <0) {
-            minIndex = rightChild;
-        }
-        if (index != minIndex) {
-            swap(heapArray, index, minIndex);
-            siftDown(minIndex);
-        }
-    }
-
     public void insert(Comida key) {
         if (size == heapArray.length - 1) {
             throw new RuntimeException("El array está lleno y no se puede insertar más.");
         }
-
         size += 1;
         heapArray[size] = key;
         siftUp(size);
     }
-
+    
     public Comida extractMin() {
+        if (size == -1) {
+            throw new IllegalStateException("El montículo está vacío");
+        }
+      
         Comida result = heapArray[0];
         heapArray[0] = heapArray[size];
         size -= 1;
         siftDown(0);
         return result;
     }
+        
+    private void swap( int a, int b) {
+        Comida temp = heapArray[a];
+        heapArray[a] = heapArray[b];
+        heapArray[b] = temp;
+    }
 
+    public void siftUp(int index) {
+        Date d1 = new Date(heapArray[parent(index)].getExpirationDateYear(),heapArray[parent(index)].getExpirationDateMonth(),heapArray[parent(index)].getExpirationDateDay());
+        Date d2  = new Date(heapArray[index].getExpirationDateYear(), heapArray[index].getExpirationDateMonth(), heapArray[index].getExpirationDateDay());
+        while (index > 0 && d1.compareTo(d2) > 0) {
+            swap(index, parent(index));
+            index = parent(index);
+        }
+    }
     
+
+    public void siftDown(int index) {
+        int minIndex = index;
+        int leftChild = leftChild(index);
+        int rightChild = rightChild(index);
+        
+        System.out.println(minIndex +", " + leftChild +", " + rightChild);
+        Date dateLeftChild = null;
+        Date dateminIndex  = null; 
+        try{
+            dateLeftChild = new Date(heapArray[leftChild].getExpirationDateYear(), heapArray[leftChild].getExpirationDateMonth(), heapArray[leftChild].getExpirationDateDay()); 
+            dateminIndex = new Date(heapArray[minIndex].getExpirationDateYear(), heapArray[minIndex].getExpirationDateMonth(), heapArray[minIndex].getExpirationDateDay());
+        }catch(Exception io){
+            //swap(index, minIndex);
+            return; 
+            
+        }
+        
+        if (leftChild <= size && dateLeftChild.compareTo(dateminIndex) < 0) {
+            minIndex = leftChild;
+            System.out.println("ingresos ahi dateLeftchild, leftChild"+ leftChild);
+            System.out.println(heapArray[leftChild].getExpirationDateYear()+ heapArray[leftChild].getExpirationDateMonth()+ heapArray[leftChild].getExpirationDateDay());
+            System.out.println( " , " + heapArray[minIndex].getExpirationDateYear()+ heapArray[minIndex].getExpirationDateMonth()+ heapArray[minIndex].getExpirationDateDay());
+        }
+        Date dateRightChild = null;
+        try{
+            dateRightChild = new Date(heapArray[rightChild].getExpirationDateYear(), heapArray[rightChild].getExpirationDateMonth(), heapArray[rightChild].getExpirationDateDay());            dateminIndex = new Date(heapArray[minIndex].getExpirationDateYear(), heapArray[minIndex].getExpirationDateMonth(), heapArray[minIndex].getExpirationDateDay());
+        }catch(Exception io){
+            //swap(index, minIndex);
+            return; 
+        }
+        
+        if (rightChild <= size && dateRightChild.compareTo(dateminIndex) <0  ){
+            
+            minIndex = rightChild;
+            System.out.println("ingresos ahi daterightchild");
+            System.out.println(dateRightChild.toString() + " , " + dateminIndex.toString());
+        }
+        System.out.println("index= " + index+" , minIndex = "+ minIndex);
+        if (index != minIndex) {
+            swap( index, minIndex);
+            siftDown(minIndex);
+            //System.out.println("entrada =!");
+        }
+    }
+
     
     public Comida getMin() {
         return heapArray[0];

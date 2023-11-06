@@ -10,13 +10,11 @@ import Estructure_LinkedList.Queue;
 import Estructure_LinkedList.LinkedList;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Estructure_DinamicArray.DinamicArray;
-import Data.SerializacionAO;
+
 import static IU.GUI.mostrarMenu;
 import Estructure_DoubleLinkedList.Stack;
-import EntradaDatos.ConectionAPI;
-import ArchivosBorrarAlFinalSegundaEntrega.InputDataJSON;
-import ArchivosBorrarAlFinalSegundaEntrega.RegistroComida;
-import ArchivosBorrarAlFinalSegundaEntrega.InputDataJSON;
+
+import EstructurasCorte2.DisjointSet;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -25,9 +23,12 @@ import java.time.format.DateTimeFormatter;
 public class Main <T>{
 
     private static Queue<Beneficiario> listForChooseProduct = new Queue(); // primero una cola para poner los beneficiarios por orden de llegada
-    private static Stack<String> listActivity = new Stack(); //Registro de Actividades
-    private static DoubleLinkedList<Producto> listOfProducts = new DoubleLinkedList(); // segundo una lista donde se van a poner todos los productos
+    private static Stack<String> listActivity=new Stack(); //Registro de Actividades
+    public static DoubleLinkedList<Producto> listOfProducts = new DoubleLinkedList(); // segundo una lista donde se van a poner todos los productos
+    public static LinkedList<Producto> indicesProductos= new LinkedList();
     private static DinamicArray<Comida> listOfProducts_DA = new DinamicArray();
+    public static DisjointSet donanteSet;
+    public static DisjointSet empresaSet;
 
     //private static LinkedList<Beneficiary> listOfBeneficiaries= new LinkedList();
     private static LinkedList<Donador> listOfDonors = new LinkedList();
@@ -41,21 +42,41 @@ public class Main <T>{
     public static void main(String[] args) {
 
         // PRUEBA LISTA DE OBJETOS
-        Producto producto = new Producto(14,"FOOD", "Harina", 5,"felipe@gmail");
-        Producto producto2 = new Producto(16,"FOOD", "Frijol", 5,"vivian@gmail");
-        Producto producto3 = new Producto(17,"Ropa", "Camiseta", 1, "antonio@gmail");
+        /*
+        Producto producto = new Producto("FOOD", "Harina", 5,"murrami@gmail.com");
+        Producto producto2 = new Producto("FOOD", "Frijol", 5,"murrami@gmail.com");
+        Producto producto3 = new Producto("Ropa", "Camiseta", 1, "carmar@gmail.com");
+        Producto producto4 = new Producto("FOOD", "Cebolla", 5, "surti@gmail.com");
+        Producto producto5 = new Producto("FOOD", "Arveja", 5, "surti@gmail.com");
+         Producto producto6 = new Producto("FOOD", "Atun", 5, "losreyes@gmail.com");
         //agregar productos
         listOfProducts.pushFront(producto);
+        indicesProductos.pushBack(producto);
         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+producto.getEmailDonor()+ " agrego un producto");
         listOfProducts.pushFront(producto2);
+        indicesProductos.pushBack(producto2);
         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+producto2.getEmailDonor()+ " agrego un producto");
         listOfProducts.pushFront(producto3);
+        indicesProductos.pushBack(producto3);
         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+producto3.getEmailDonor()+ " agrego un producto");
+        listOfProducts.pushFront(producto4);
+        indicesProductos.pushBack(producto4);
+        listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+producto4.getEmailDonor()+ " agrego un producto");
+        listOfProducts.pushFront(producto5);
+        indicesProductos.pushBack(producto5);
+        listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+producto5.getEmailDonor()+ " agrego un producto");
+        listOfProducts.pushFront(producto6);
+        indicesProductos.pushBack(producto6);
+        listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+producto6.getEmailDonor()+ " agrego un producto");
         Serializador.serializarObjeto(listOfProducts, "productos.dat");
+        Serializador.serializarObjeto(indicesProductos, "indicesProductos.dat");
          // Agregar empresas a la lista
         DonadorCompania empresa1 = new DonadorCompania("Surtifruver","545645-6","calle 43","Kennedy","super","surti@gmail.com","12345");
         listaEmpresas.pushBack(empresa1);
         listActivity.push(obtenerFechaHoraActualString()+": Se registo la empresa, "+empresa1.getName());
+        DonadorCompania empresa2 = new DonadorCompania("Los Reyes","745542-4","calle 36","Kennedy","super","losreyes@gmail.com","12345");
+        listaEmpresas.pushBack(empresa2);
+        listActivity.push(obtenerFechaHoraActualString()+": Se registo la empresa, "+empresa2.getName());
         // Guardar la lista de empresas en un archivo serializable
         Serializador.serializarObjeto(listaEmpresas, "empresas.dat");
         //Agregar Beneficiarios a la lista
@@ -66,15 +87,54 @@ public class Main <T>{
         Serializador.serializarObjeto(listForChooseProduct, "beneficiarios.dat");
         //Agregar Donador a la lista
         Donador donador=new Donador("Alberto","Murillo Ramirez","murrami@gmail.com","3424242","12345","calle 45#56","Kennedy");
+        Donador donador1=new Donador("Carlos","Martinez Ramirez","carmar@gmail.com","34243532","12345","calle 65#13","Chapinero");
         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+donador.getEmail()+ " se registro como donador ocasional");
+        listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+donador1.getEmail()+ " se registro como donador ocasional");
+        listOfDonors.pushBack(donador);
+        listOfDonors.pushBack(donador1);
         Serializador.serializarObjeto(listOfDonors, "donadores.dat");
         Serializador.serializarObjeto(listActivity, "actividades.dat");
+       
+        int numDonantes = 100; // El número de donantes max
+        int numEmpresa = 50; // El número de empresas max
+        //int numProductos = 100; // El número de productos
+        
+        donanteSet = new DisjointSet(numDonantes);
+        empresaSet = new DisjointSet(numEmpresa);
+        //DisjointSet productoSet = new DisjointSet(numProductos);
+        // Obtén los índices del donante y del producto en sus respectivas listas.
+        int indiceDonante = listOfDonors.indexOfDonnorByEmail("murrami@gmail.com");
+        int indiceDonante1 = listOfDonors.indexOfDonnorByEmail("carmar@gmail.com");
+        int indiceProducto = listOfProducts.indexOf(producto);
+        int indiceProducto1 = listOfProducts.indexOf(producto2);
+        int indiceProducto2 = listOfProducts.indexOf(producto3);
+        //indice empresa
+        int indiceEmpresa=listaEmpresas.indexOfCompanyByEmail("surti@gmail.com");
+        System.out.println("Indice empresa"+indiceEmpresa);
+        int indiceProducto3 = listOfProducts.indexOf(producto4);
+        int indiceProducto4 = listOfProducts.indexOf(producto5);
+        // Une el producto con el donante utilizando sus índices en los conjuntos disjuntos.
+        donanteSet.union(indiceDonante, indiceProducto);
+        donanteSet.union(indiceDonante, indiceProducto1);
+        donanteSet.union(indiceDonante1, indiceProducto2);
+        Serializador.serializarObjeto(donanteSet, "donantesset.dat");
+        //unir producto con la empresa
+        empresaSet.union(indiceEmpresa, indiceProducto3);
+        empresaSet.union(indiceEmpresa, indiceProducto4);
+        Serializador.serializarObjeto(empresaSet, "empresaset.dat");
+
+        //Donnor donadorEspecifico = donador1; // Obtén el donador de alguna manera (puede ser por email, por ejemplo)
+
+        // Llama al método que obtiene y muestra los productos asociados al donador
+        //showProductsByDonor(donadorEspecifico);
+        // Supongamos que deseas saber a qué donante se asignó un producto en particular.
+        */
         mostrarMenu();
         
         
         /*
         System.out.println(Runtime.getRuntime().maxMemory());
-        SerializacionAO ser = new SerializacionAO();
+        serialization ser = new serialization();
         ser.deleteAllFiles();
         ser.WriteSerializationInicial_AllFiles(); // Crear todas las listas inciales vacias por si no lo esta
         // se crea un objeto Injson
@@ -97,9 +157,39 @@ public class Main <T>{
         //ser.saveStatusListProgram(4);
 
         */
+    
         
     }
     // setter y getter de Main
+     /*
+    public static Donador obtenerDonadorPorEmail(String email) {
+        for (int i = 0; i < listOfDonors.size(); i++) {
+            Donador donador = listOfDonors.get(i); // Obtén el donador en la posición i
+
+            // Compara el correo electrónico del donador con el correo electrónico proporcionado
+            if (donador.getEmail().equals(email)) {
+                return donador; // Se encontró un donador con el correo electrónico proporcionado
+            }
+        }
+
+        // No se encontró un donador con el correo electrónico proporcionado
+        return null;
+    }
+   
+    public static DonadorCompania obtenerCompanyDonorPorEmail(String email) {
+        for (int i = 0; i < listaEmpresas.size(); i++) {
+            DonadorCompania empresa = listaEmpresas.get(i); // Obtén la empresa en la posición i
+
+            // Compara el correo electrónico de la empresa con el correo electrónico proporcionado
+            if (empresa.getEmail().equals(email)) {
+                return empresa; // Se encontró una empresa con el correo electrónico proporcionado
+            }
+        }
+
+        // No se encontró una empresa con el correo electrónico proporcionado
+        return null;
+    }
+    */
 
     public static Queue getListForChooseProduct() {
         return listForChooseProduct;

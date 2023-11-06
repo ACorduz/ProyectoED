@@ -3,6 +3,7 @@ package IU;
 
 
 import Business.Main;
+import static Business.Main.listOfProducts;
 import static Business.Main.obtenerFechaHoraActualString;
 import Data.Beneficiario;
 import Data.DonadorCompania;
@@ -22,10 +23,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import Estructure_LinkedList.Queue;
+import EstructurasCorte2.DisjointSet;
 
 public class GUI {
    
@@ -216,7 +216,7 @@ public class GUI {
                         System.out.println("Inicio de sesion exitoso para empresas.");
                         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+empresa.getEmail()+ " Inicio Sesion como Empresa");
                         Serializador.serializarObjeto(listActivity, "actividades.dat");
-                        MenuRegistrarProducto(email);
+                        MenuRegistrarProducto(email,2);
                         continuar = false;
                         break; // Si se encuentra una coincidencia, no es necesario seguir buscando.
                         
@@ -253,7 +253,7 @@ public class GUI {
                         System.out.println("Inicio de sesion exitoso para donadores.");
                         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+donador.getEmail()+ " Inicio Sesion como Donador");
                         Serializador.serializarObjeto(listActivity, "actividades.dat");
-                        MenuRegistrarProducto(email);
+                        MenuRegistrarProducto(email,1);
                         continuar = false;
                         break; // Si se encuentra una coincidencia, no es necesario seguir buscando.
                     }
@@ -284,10 +284,13 @@ public class GUI {
              mostrarMenu();
             }
     }
-    public static void MenuRegistrarProducto(String email){
+    public static void MenuRegistrarProducto(String email,int rol){
          Stack<String> listActivity=(Stack<String>) Serializador.deserializarObjeto("actividades.dat");
         // Obtener los datos existentes del archivo (si los hay)
         DoubleLinkedList<Producto> listaProductos = (DoubleLinkedList<Producto>) Serializador.deserializarObjeto("productos.dat");
+        LinkedList<Producto> indicesProductos = (LinkedList<Producto>) Serializador.deserializarObjeto("indicesProductos.dat");
+        LinkedList<Donador> donadores = (LinkedList<Donador>) Serializador.deserializarObjeto("donadores.dat");
+        DisjointSet donanteSet = (DisjointSet)Serializador.deserializarObjeto("donantesset.dat");
         System.out.println("-----------------Registro de Productos--------------------------");
         String tipo=readOptionString("Ingresa el tipo de producto que deseas donar");
         String producto=readOptionString("Ingresa el nombre del producto que deseas donar");
@@ -299,9 +302,42 @@ public class GUI {
             listaProductos = new DoubleLinkedList<Producto>();
         }
         listaProductos.pushFront(productox);
-
+        indicesProductos.pushBack(productox);
+        //Main.listOfProducts.pushFront(productox);
+        //agregar producto al conjunto disyunto
+        if (rol==1){
+            // Obtiene el índice del donador en la lista de donadores
+            //int indiceDonador = Main.listOfDonors.indexOf(donador);
+            int indiceDonador = donadores.indexOfDonnorByEmail(email);
+            // Obtiene el índice del producto en la lista de productos
+            int indiceProducto=indicesProductos.indexOf(productox);
+            // Une el producto con el donador utilizando sus índices en el conjunto disjunto
+            //System.out.println("IndiceDonador:"+indiceDonador+", indice Producto:"+indiceProducto);
+            //Main.donanteSet.union(indiceDonador, indiceProducto);
+            donanteSet.union(indiceDonador, indiceProducto);
+            Serializador.serializarObjeto(listaProductos, "productos.dat");
+            Serializador.serializarObjeto(indicesProductos, "indicesProductos.dat");
+            Serializador.serializarObjeto(donanteSet, "donantesset.dat");
+            showProductsByDonor(obtenerDonadorPorEmail(email,donadores));
+        }
+        else{
+             LinkedList<DonadorCompania> empresas = (LinkedList<DonadorCompania>) Serializador.deserializarObjeto("empresas.dat");
+             DisjointSet empresaSet = (DisjointSet)Serializador.deserializarObjeto("empresaset.dat");
+            int indiceEmpresa = empresas.indexOfCompanyByEmail(email);
+            
+            // Obtiene el índice del producto en la lista de productos
+            //int indiceProducto=Main.listOfProducts.indexOf(productox);
+            int indiceProducto=indicesProductos.indexOf(productox);
+            // Une el producto con el donador utilizando sus índices en el conjunto disjunto
+            empresaSet.union(indiceEmpresa, indiceProducto);
+            Serializador.serializarObjeto(listaProductos, "productos.dat");
+            Serializador.serializarObjeto(indicesProductos, "indicesProductos.dat");
+            Serializador.serializarObjeto(empresaSet, "empresaset.dat");
+            showProductsByCompanyDonor(obtenerCompanyDonorPorEmail(email,empresas));
+        }
          // Guardar la lista actualizada en el archivo
-         Serializador.serializarObjeto(listaProductos, "productos.dat");
+         //Serializador.serializarObjeto(listaProductos, "productos.dat");
+         //Serializador.serializarObjeto(indicesProductos, "indicesProductos.dat");
          System.out.println("Registro exitoso, gracias por tu donacion");
          listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+email+ " Registro "+producto);
          Serializador.serializarObjeto(listActivity, "actividades.dat");
@@ -318,6 +354,88 @@ public class GUI {
         }
         System.exit(0); // ACA HUBO CAMBIO
     }
+    
+    public static void showProductsByDonor(Donador donador) {
+        LinkedList<Producto> indicesProductos = (LinkedList<Producto>) Serializador.deserializarObjeto("indicesProductos.dat");
+        DoubleLinkedList<Producto> productsByDonor = new DoubleLinkedList<>();
+
+        // Itera sobre la lista de productos para encontrar los asociados al donador
+        for (int i = 0; i < indicesProductos.size(); i++) {
+            Producto product = indicesProductos.get(i);
+
+            // Compara el correo electrónico del producto con el correo electrónico del donador
+            if (product.getEmailDonor().equals(donador.getEmail())) {
+                productsByDonor.pushBack(product);
+            }
+        }
+
+        // Muestra los productos asociados al donador
+        if (!productsByDonor.empty()) {
+            System.out.println("Productos asociados al donador " + donador.getEmail() + ":");
+            for (int i = 0; i < productsByDonor.size(); i++) {
+                Producto product = productsByDonor.get(i);
+                System.out.println("Nombre: " + product.getNameProduct() + ", Categoría: " + product.getTypeProduct() + ", Cantidad: " + product.getQuantity());
+            }
+        } else {
+            System.out.println("No hay productos asociados al donador " + donador.getName());
+        }
+    }
+
+    public static void showProductsByCompanyDonor(DonadorCompania empresa) {
+        LinkedList<Producto> indicesProductos = (LinkedList<Producto>) Serializador.deserializarObjeto("indicesProductos.dat");
+        DoubleLinkedList<Producto> productsByCompanyDonor = new DoubleLinkedList<>();
+
+        // Itera sobre la lista de productos para encontrar los asociados a la empresa donadora
+        for (int i = 0; i < indicesProductos.size(); i++) {
+            Producto product = indicesProductos.get(i);
+
+            // Compara el correo electrónico del producto con el correo electrónico de la empresa donadora
+            if (product.getEmailDonor().equals(empresa.getEmail())) {
+                productsByCompanyDonor.pushBack(product);
+            }
+        }
+
+        // Muestra los productos asociados a la empresa donadora
+        if (!productsByCompanyDonor.empty()) {
+            System.out.println("Productos asociados a la empresa donadora " + empresa.getEmail() + ":");
+            for (int i = 0; i < productsByCompanyDonor.size(); i++) {
+                Producto product = productsByCompanyDonor.get(i);
+                System.out.println("Nombre: " + product.getNameProduct() + ", Categoría: " + product.getTypeProduct() + ", Cantidad: " + product.getQuantity());
+            }
+        } else {
+            System.out.println("No hay productos asociados a la empresa donadora " + empresa.getName());
+        }
+    }
+    
+    public static DonadorCompania obtenerCompanyDonorPorEmail(String email,LinkedList<DonadorCompania> listaEmpresas) {
+        for (int i = 0; i < listaEmpresas.size(); i++) {
+            DonadorCompania empresa = listaEmpresas.get(i); // Obtén la empresa en la posición i
+
+            // Compara el correo electrónico de la empresa con el correo electrónico proporcionado
+            if (empresa.getEmail().equals(email)) {
+                return empresa; // Se encontró una empresa con el correo electrónico proporcionado
+            }
+        }
+
+        // No se encontró una empresa con el correo electrónico proporcionado
+        return null;
+    }
+    
+    public static Donador obtenerDonadorPorEmail(String email, LinkedList<Donador> listOfDonors) {
+        for (int i = 0; i < listOfDonors.size(); i++) {
+            Donador donador = listOfDonors.get(i); // Obtén el donador en la posición i
+
+            // Compara el correo electrónico del donador con el correo electrónico proporcionado
+            if (donador.getEmail().equals(email)) {
+                return donador; // Se encontró un donador con el correo electrónico proporcionado
+            }
+        }
+
+        // No se encontró un donador con el correo electrónico proporcionado
+        return null;
+    }
+  
+    
    
 
     

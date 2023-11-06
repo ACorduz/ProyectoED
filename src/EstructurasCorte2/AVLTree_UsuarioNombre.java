@@ -1,34 +1,35 @@
 
 package EstructurasCorte2;
-import EstructurasCorte2.NodoAVLComida;
-import Data.Comida;
+import EstructurasCorte2.NodoAVLUsuario;
+import Data.Usuario;
 
 
-public class AVLTree_ComidaNombre {
-    public NodoAVLComida root;
+public class AVLTree_UsuarioNombre {
+    public NodoAVLUsuario root;
 
-    public AVLTree_ComidaNombre() {
+    public AVLTree_UsuarioNombre() {
         this.root = null;
     }
 
-    public void updateHeight(NodoAVLComida n) {
+
+    public void updateHeight(NodoAVLUsuario n) {
         n.altura = 1 + Math.max(height(n.izquierdo), height(n.derecho));
     }
 
-    public int height(NodoAVLComida n) {
+    public int height(NodoAVLUsuario n) {
         return n == null ? -1 : n.altura;
     }
 
-    public int getBalance(NodoAVLComida n) {
+    public int getBalance(NodoAVLUsuario n) {
         return (n == null) ? 0 : height(n.derecho) - height(n.izquierdo);
     }
 
-    public NodoAVLComida rotateRight(NodoAVLComida y) {
+    public NodoAVLUsuario rotateRight(NodoAVLUsuario y) {
         if (y == null || y.izquierdo == null) {
             return y; // No se puede realizar la rotación
         }
-        NodoAVLComida x = y.izquierdo;
-        NodoAVLComida z = x.derecho;
+        NodoAVLUsuario x = y.izquierdo;
+        NodoAVLUsuario z = x.derecho;
         x.derecho = y;
         y.izquierdo = z;
         updateHeight(y);
@@ -36,9 +37,9 @@ public class AVLTree_ComidaNombre {
         return x;
     }
 
-    public NodoAVLComida rotateLeft(NodoAVLComida y) {
-        NodoAVLComida x = y.derecho;
-        NodoAVLComida z = x.izquierdo;
+    public NodoAVLUsuario rotateLeft(NodoAVLUsuario y) {
+        NodoAVLUsuario x = y.derecho;
+        NodoAVLUsuario z = x.izquierdo;
         x.izquierdo = y;
         y.derecho = z;
         updateHeight(y);
@@ -46,7 +47,7 @@ public class AVLTree_ComidaNombre {
         return x;
     }
 
-    public NodoAVLComida rebalance(NodoAVLComida z) {
+    public NodoAVLUsuario rebalance(NodoAVLUsuario z) {
         updateHeight(z);
         int balance = getBalance(z);
         if (balance > 1) {
@@ -67,38 +68,39 @@ public class AVLTree_ComidaNombre {
         return z;
     }
 
-    public NodoAVLComida insert(NodoAVLComida node, Comida producto) {
+    public NodoAVLUsuario insert(NodoAVLUsuario node, Usuario usuario) {
         if (node == null) {
-            return new NodoAVLComida(producto);
+            return new NodoAVLUsuario(usuario);
         } else {
-            int comparacion = producto.getNameProduct().compareTo(node.producto.getNameProduct());
+            int comparacion = usuario.getName().compareTo(node.usuario.getName());
             if (comparacion < 0) {
-                node.izquierdo = insert(node.izquierdo, producto);
+                node.izquierdo = insert(node.izquierdo, usuario);
             } else if (comparacion > 0) {
-                node.derecho = insert(node.derecho, producto);
+                node.derecho = insert(node.derecho, usuario);
             } else {
-                node.derecho = insert(node.derecho, producto);
+                node.derecho = insert(node.derecho, usuario);
             }
             return rebalance(node);
         }
     }
-
-    public NodoAVLComida delete(NodoAVLComida node, String nombreProducto) {
+    
+  
+    public NodoAVLUsuario delete(NodoAVLUsuario node, String nombreUsuario) {
         if (node == null) {
             return node;
         } else {
-            int comparacion = nombreProducto.compareTo(node.producto.getNameProduct());
+            int comparacion = nombreUsuario.compareTo(node.usuario.getName());
             if (comparacion < 0) {
-                node.izquierdo = delete(node.izquierdo, nombreProducto);
+                node.izquierdo = delete(node.izquierdo, nombreUsuario);
             } else if (comparacion > 0) {
-                node.derecho = delete(node.derecho, nombreProducto);
+                node.derecho = delete(node.derecho, nombreUsuario);
             } else {
                 if (node.izquierdo == null || node.derecho == null) {
                     node = (node.izquierdo == null) ? node.derecho : node.izquierdo;
                 } else {
-                    NodoAVLComida mostLeftChild = mostLeftChild(node.derecho);
-                    node.producto = mostLeftChild.producto;
-                    node.derecho = delete(node.derecho, mostLeftChild.producto.getNameProduct());
+                    NodoAVLUsuario mostLeftChild = mostLeftChild(node.derecho);
+                    node.usuario = mostLeftChild.usuario;
+                    node.derecho = delete(node.derecho, mostLeftChild.usuario.getName());
                 }
             }
         }
@@ -108,30 +110,31 @@ public class AVLTree_ComidaNombre {
         return node;
     }
 
-    public NodoAVLComida mostLeftChild(NodoAVLComida node) {
-        NodoAVLComida current = node;
+    public NodoAVLUsuario mostLeftChild(NodoAVLUsuario node) {
+        NodoAVLUsuario current = node;
         while (current.izquierdo != null) {
             current = current.izquierdo;
         }
         return current;
     }
 
-    public NodoAVLComida find(String nombreProducto) {
-        NodoAVLComida current = root;
+    public NodoAVLUsuario find(String nombreUsuario, String lastName) {
+        NodoAVLUsuario current = root;
         while (current != null) {
-            int comparacion = nombreProducto.compareTo(current.producto.getNameProduct());
-            if (comparacion == 0) {
+            int comparacion1 = nombreUsuario.compareTo(current.usuario.getName());
+            int comparacion2 = lastName.compareTo(current.usuario.getLastName());
+            if (comparacion1 == 0 && comparacion2 == 0) {
                 break;
             }
-            current = comparacion < 0 ? current.izquierdo : current.derecho;
+            current = comparacion1 < 0 ? current.izquierdo : current.derecho;
         }
         return current;
     }
       // Agrega un método que realice un recorrido en orden (in-order traversal)
-    void inOrderTraversal(NodoAVLComida node) {
+    public void inOrderTraversal(NodoAVLUsuario node) {
         if (node != null) {
             inOrderTraversal(node.izquierdo);
-            System.out.println("Nombre del Producto: " + node.producto.getNameProduct());
+            System.out.println("Nombre del Producto: " + node.usuario.getName());
             // Aquí puedes agregar cualquier otra lógica de impresión que desees
             inOrderTraversal(node.derecho);
         }
@@ -141,4 +144,6 @@ public class AVLTree_ComidaNombre {
     public void printInOrder() {
         inOrderTraversal(root);
     }
+
+
 }
