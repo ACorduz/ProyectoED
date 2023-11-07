@@ -136,6 +136,51 @@ public class HeapMinor_ComidaFecha {
         return arraySort;
     }
 
+    public void remove(int year, int month, int day, String emailDonnor, String nameProduct) {
+        int index = -1;
+
+        // Buscar el índice del elemento que deseas eliminar.
+        for (int i = 0; i <= size; i++) {
+            if (compareToComida(heapArray[i], year,  month,  day,  emailDonnor,  nameProduct ) == 0) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index == -1) {
+            // El elemento no se encontró en el montículo.
+            return;
+        }
+
+        // Reemplaza el elemento que deseas eliminar con el último elemento en el montículo.
+        heapArray[index] = heapArray[size];
+        size--;
+
+        // Reajusta el montículo para mantener sus propiedades.
+        Date date1 = new Date(year, month, day);
+        Date date2 = new Date(heapArray[index].getExpirationDateYear(), heapArray[index].getExpirationDateMonth(), heapArray[index].getExpirationDateDay());
+        if (date1.compareTo(date2) < 0) {
+            siftUp(index);
+        } else {
+            siftDown(index);
+        }
+    }
+
+    private int compareToComida(Comida comida,int year, int month, int day, String emailDonnor, String nameProduct){
+        // primero comparar fechas
+        Date date1 = new Date(year, month, day);
+        Date date2 = new Date(comida.getExpirationDateYear(), comida.getExpirationDateMonth(), comida.getExpirationDateDay());
+        int comparacion = date1.compareTo(date2);
+        if(comparacion == 0){
+            if(emailDonnor.compareTo(comida.getEmailDonor()) == 0 && nameProduct.compareTo(comida.getNameProduct()) == 0){
+                return(0);
+            }else{
+                return(-1);
+            }
+        }else {
+            return(comparacion);
+        }
+    }
 
     public Comida[] heapSort() {
         Comida[] arraySort = new  Comida[capacity];

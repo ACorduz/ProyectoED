@@ -15,6 +15,7 @@ import EstructurasCorte2.HeapMinor_ComidaFecha;
 
 // Librerias ObjetosData
 import Data.Comida;
+import EstructurasCorte2.NodoAVLComida;
 import java.util.List;
 
 
@@ -278,8 +279,28 @@ public class PruebasCRUD_Productos {
          
         long endTime = System.nanoTime();
             Double tiempoTranscurrido = (endTime - startTime)/1000000.0;
-            System.out.println("El tiempo Transcurrido del metodo metodo de ordenamiento Ascendente masivo en HeapMinor_ComidaFecha es= " + tiempoTranscurrido);
+            System.out.println("El tiempo Transcurrido del metodo  de ordenamiento Ascendente masivo en HeapMinor_ComidaFecha es= " + tiempoTranscurrido);
         return(array); 
+    }
+    
+    // metodo para eliminar un valor de AVL Fecha
+    public void PruebaDeleteAVL_fecha(AVLTree_ComidaFecha AVL, int year, int month, int day, String emailDonnor, String nameProduct ) {
+        long startTime = System.nanoTime();
+            AVL.delete(AVL.root, year, month, day, emailDonnor, nameProduct);
+                 
+        long endTime = System.nanoTime();
+            Double tiempoTranscurrido = (endTime - startTime)/1000000.0;
+            System.out.println("El tiempo Transcurrido del metodo delete  en AVLTree_ComidaFecha es= " + tiempoTranscurrido);
+    }
+    
+    // metodo para eliminar un valor de HeapMinor Fecha
+    public void PruebaDeleteHeapMinor(HeapMinor_ComidaFecha hm, int year, int month, int day, String emailDonnor, String nameProduct ) {
+        long startTime = System.nanoTime();
+            hm.remove(year, month, day, emailDonnor, nameProduct);                   
+                 
+        long endTime = System.nanoTime();
+            Double tiempoTranscurrido = (endTime - startTime)/1000000.0;
+            System.out.println("El tiempo Transcurrido del metodo delete en HeapMinor_ComidaFecha es= " + tiempoTranscurrido);
     }
     
 }

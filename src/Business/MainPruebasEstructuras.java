@@ -79,6 +79,7 @@ public class MainPruebasEstructuras {
         } else {
             System.out.println("Producto no encontrado.");
         }
+        
 
         // Eliminar un producto por nombre
         String nombreProductoAEliminar = "Limon";
@@ -109,7 +110,14 @@ public class MainPruebasEstructuras {
         AVL_CF.root = AVL_CF.insert(AVL_CF.root, f1);
         
         AVL_CF.printInOrder();
+        NodoAVLComida bus  = AVL_CF.delete(AVL_CF.root, f1.getExpirationDateYear(), f1.getExpirationDateMonth(), f1.getExpirationDateDay(), f1.getEmailDonor(), f1.getNameProduct());
+        if (bus != null) {
+            System.out.println("Producto encontrado después de eliminación: " + bus.producto.getNameProduct() + bus.producto.toString());
+        } else {
+            System.out.println("Producto no encontrado después de eliminación.");
+        }
         
+        AVL_CF.printInOrder();
         
         System.out.println();
         System.out.println();

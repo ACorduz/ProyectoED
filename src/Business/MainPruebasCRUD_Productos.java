@@ -21,35 +21,45 @@ public class MainPruebasCRUD_Productos {
     
     public static void main(String[] args) {
         // Creacion obj de pruebas
-        int numberRowsRead = 10; 
+        int numberRowsRead = 100000; 
         int typeOfFileRead = 1;
         String path = "C:\\Users\\JHOAN FRANCO\\OneDrive\\respaldo datos\\Documentos\\PROGRAMACION\\proyectoEstructuras\\ProyectoED\\data/";
         PruebasCRUD_Productos ObjPruebas = new PruebasCRUD_Productos(numberRowsRead, typeOfFileRead, path);
         
+      
         // PRUEBAS AVL  
         // Insert 
         AVL = ObjPruebas.PruebaInsertAVL_fecha();// SE CORRE la prueba y se guarda el AVL para otras pruebas
         // Metodo Ordenamiento Ascendente
+        /*
         List<Comida> list = ObjPruebas.OrdenamientoAVL(AVL);
-       
         for(int i =0; i < list.size(); i++ ){
             System.out.println(list.get(i).toString());
         }
+        // metodo delete 
+        ObjPruebas.PruebaDeleteAVL_fecha(AVL, typeOfFileRead, numberRowsRead, typeOfFileRead, path, path);
+        
+        */
+        
+        /*
         // PRUEBAS Heap Minor
         // Insert
         HM = ObjPruebas.PruebaInsertHeapMinor();
+        
+        
         // Metodo Ordenamiento Ascendente
         Comida[] array = ObjPruebas.OrdenamientoHeapMinor(HM);
-       
         for(int i =0; i < array.length; i++ ){
             System.out.println(array[i].toString());
         }
-        
+        // metodo delete 
         
         
         // PRUEBAS BST
         // Insert 
         BST = ObjPruebas.PruebaInsertBST();
+        // metodo delete 
+        */
     }
     
 }
