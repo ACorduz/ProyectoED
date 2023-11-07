@@ -14,6 +14,7 @@ import Data.Comida;
 import Data.Usuario;
 import EstructurasCorte2.AVLTree_UsuarioNombre;
 import EstructurasCorte2.NodoAVLUsuario;
+import EstructurasCorte2.AVLTree_ComidaFecha;
 
 import EstructurasCorte2.AVLTree_UsuarioDocumento;
 
@@ -96,7 +97,22 @@ public class MainPruebasEstructuras {
         
         AVLTree_UsuarioNombre avlTree2 = new AVLTree_UsuarioNombre();
         
+        // AVL COMIDA FECHA
+        System.out.println();
+        System.out.println("AVL COMIDA FECHA");
         
+        AVLTree_ComidaFecha AVL_CF = new AVLTree_ComidaFecha();
+        
+        AVL_CF.root = AVL_CF.insert(AVL_CF.root, f1);
+        AVL_CF.root = AVL_CF.insert(AVL_CF.root, f2);
+        AVL_CF.root = AVL_CF.insert(AVL_CF.root, f3);
+        AVL_CF.root = AVL_CF.insert(AVL_CF.root, f1);
+        
+        AVL_CF.printInOrder();
+        
+        
+        System.out.println();
+        System.out.println();
         // PRUEBAS AVL USUARIO NOMBRE
         Usuario u1 = new Usuario("Milena", "Reyes", "javier40@example.org", "RC", "800", "TAVP=^pauxI", "DONADOR");
         Usuario u2 = new Usuario("Esteban", "Reyes", "javier40@example.org", "RC", "0900", "TAVP=^pauxI", "DONADOR");
@@ -161,6 +177,9 @@ public class MainPruebasEstructuras {
         bst_ud.insertar(u4);
         
         bst_ud.inorder(bst_ud.root);
+        
+        
+        
     }
     
 }

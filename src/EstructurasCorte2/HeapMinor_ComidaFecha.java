@@ -46,6 +46,8 @@ public class HeapMinor_ComidaFecha {
         siftDown(0);
         return result;
     }
+    
+
         
     private void swap( int a, int b) {
         Comida temp = heapArray[a];
@@ -54,11 +56,15 @@ public class HeapMinor_ComidaFecha {
     }
 
     public void siftUp(int index) {
-        Date d1 = new Date(heapArray[parent(index)].getExpirationDateYear(),heapArray[parent(index)].getExpirationDateMonth(),heapArray[parent(index)].getExpirationDateDay());
-        Date d2  = new Date(heapArray[index].getExpirationDateYear(), heapArray[index].getExpirationDateMonth(), heapArray[index].getExpirationDateDay());
-        while (index > 0 && d1.compareTo(d2) > 0) {
-            swap(index, parent(index));
-            index = parent(index);
+        Date d2 = new Date(heapArray[index].getExpirationDateYear(), heapArray[index].getExpirationDateMonth(), heapArray[index].getExpirationDateDay());
+        while (index > 0) {
+            Date d1 = new Date(heapArray[parent(index)].getExpirationDateYear(), heapArray[parent(index)].getExpirationDateMonth(), heapArray[parent(index)].getExpirationDateDay());
+            if (d1.compareTo(d2) > 0) {
+                swap(index, parent(index));
+                index = parent(index);
+            } else {
+                break;
+            }
         }
     }
     
@@ -131,6 +137,18 @@ public class HeapMinor_ComidaFecha {
     }
 
 
+    public Comida[] heapSort() {
+        Comida[] arraySort = new  Comida[capacity];
+
+        siftDown(0);
+        
+        for (int i = 0; i < arraySort.length; i++) {
+            arraySort[i] = extractMin();
+        }
+
+        setHeapArray(arraySort);
+        return arraySort;
+    }
 
     public Comida[] getHeapArray() {
         return heapArray;
