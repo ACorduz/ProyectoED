@@ -5,7 +5,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-// importamos estructuras para sacar listas de comida y demas
+// importamos estructuras para sacar listas de objetoComida y demas
 import Estructure_LinkedList.LinkedList;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Data.Beneficiario;
@@ -29,7 +29,7 @@ public class InputDataJSON {
     private String finalPath_fileJson = null;
     // otros cosas que se necesitan 
     private int NumberRowsRead; // numero de filas a leer
-    private int TypeOfFileRead; // este va desde 0 a  1; siendo 0 leer datos del json de comida, 1 leer datos del json de Productos_comida
+    private int TypeOfFileRead; // este va desde 0 a  1; siendo 0 leer datos del json de objetoComida, 1 leer datos del json de Productos_comida
     // Coloquen sus rutas para no tener que estar creandolas
     public String PathJhoanComputer = "C:\\Users\\JHOAN FRANCO\\OneDrive\\respaldo datos\\Documentos\\PROGRAMACION\\proyectoEstructuras\\ProyectoED\\data/";
     
@@ -238,11 +238,11 @@ public class InputDataJSON {
             JSONArray productFood = jsonObject.getJSONArray("productFood");
             
 
-            // Iterar sobre los objetos de comida
+            // Iterar sobre los objetos de objetoComida
             for (int i = 0; i < productFood.length(); i++) {
                 JSONObject comida = productFood.getJSONObject(i);
 
-                // Accede a los campos del comida
+                // Accede a los campos del objetoComida
                 int index = comida.getInt("index");
                 String typeProduct = comida.getString("typeProduct");  
                 String nameProduct = comida.getString("nameProduct");
@@ -252,7 +252,7 @@ public class InputDataJSON {
                 int expirationDateMonth = comida.getInt("expirationDateMonth"); 
                 int expirationDateDay = comida.getInt("expirationDateDay");
 
-                // Imprime los datos del comida
+                // Imprime los datos del objetoComida
                 System.out.print("Usuario #" + index);
                 System.out.print("typeProduct: " + typeProduct);
                 System.out.print("nameProduct: " + nameProduct);
@@ -272,7 +272,7 @@ public class InputDataJSON {
         }
         
     }
-    // metodo para mostrar la comida por nombre
+    // metodo para mostrar la objetoComida por nombre
     public void ShowFoodByName(String name){
         JSONObject jsonObject = null;
         try {
@@ -305,13 +305,13 @@ public class InputDataJSON {
                 /*
                 if(nameProduct.equals(name)){ 
                     //unicamente imprime los productos que tengan el mismo nombre 
-                    int index = comida.getInt("index");
-                    String typeProduct = comida.getString("typeProduct");  
-                    int quantity = comida.getInt("quantity");
+                    int index = objetoComida.getInt("index");
+                    String typeProduct = objetoComida.getString("typeProduct");  
+                    int quantity = objetoComida.getInt("quantity");
                     String emailDonor = null;
-                    int expirationDateYear = comida.getInt("expirationDateYear");
-                    int expirationDateMonth = comida.getInt("expirationDateMonth"); 
-                    int expirationDateDay = comida.getInt("expirationDateDay");
+                    int expirationDateYear = objetoComida.getInt("expirationDateYear");
+                    int expirationDateMonth = objetoComida.getInt("expirationDateMonth"); 
+                    int expirationDateDay = objetoComida.getInt("expirationDateDay");
 
                     System.out.print("Usuario #" + index+"  ");
                     System.out.print("typeProduct: " + typeProduct+"  ");
@@ -419,9 +419,9 @@ public class InputDataJSON {
             // Obtiene el array "users"
             JSONArray usuarios = jsonObject.getJSONArray("users");
             
-            // inicializar la lista de comida
+            // inicializar la lista de objetoComida
             listOfBeneficaries= new LinkedList<>();
-            //crear un comida provisional 
+            //crear un objetoComida provisional 
             Beneficiario beneficiary;
             
             // Iterar sobre los objetos de los usuarios
@@ -488,9 +488,9 @@ public class InputDataJSON {
             // Obtiene el array "users"
             JSONArray usuarios = jsonObject.getJSONArray("users");
             
-            // inicializar la lista de comida
+            // inicializar la lista de objetoComida
             listOfDonnor= new LinkedList<>();
-            //crear un comida provisional 
+            //crear un objetoComida provisional 
             Donador donnor;
             
             // Iterar sobre los objetos de usuarios
@@ -558,11 +558,11 @@ public class InputDataJSON {
 
             //PONER EL TIEMPO Insert Masivo
             long startTime = System.nanoTime();
-            // Iterar sobre los objetos de comida
+            // Iterar sobre los objetos de objetoComida
             for (int i = 0; i < productFood.length(); i++) {
                 JSONObject comida = productFood.getJSONObject(i);
 
-                // Accede a los campos del comida
+                // Accede a los campos del objetoComida
                 String nameProduct = comida.getString("nameProduct");
                 int quantity = comida.getInt("quantity");
                 String emailDonor = comida.getString("emailDonor");
@@ -637,18 +637,19 @@ public class InputDataJSON {
            
             //PONER EL TIEMPO Insertar Masivo
             long startTime = System.nanoTime();
-            // Iterar sobre los objetos de comida
+            
             for (int i = 0; i < productFood.length(); i++) {
-                JSONObject comida = productFood.getJSONObject(i);
+                JSONObject objetoComida = productFood.getJSONObject(i);
 
-                // Accede a los campos del comida
-                String nameProduct = comida.getString("nameProduct");
-                int quantity = comida.getInt("quantity");
-                // colocar el email del donador
-                String emailDonor = comida.getString("emailDonor"); 
-                int expirationDateYear = comida.getInt("expirationDateYear");
-                int expirationDateMonth = comida.getInt("expirationDateMonth"); 
-                int expirationDateDay = comida.getInt("expirationDateDay");
+                // Accede a los campos del objetoComida
+                int     index = objetoComida.getInt("index");
+                String  typeProduct = objetoComida.getString("typeProduct");
+                String  nameProduct = objetoComida.getString("nameProduct");
+                int     quantity = objetoComida.getInt("quantity");
+                String  emailDonor = objetoComida.getString("emailDonor");     // colocar el email del donador
+                int     expirationDateYear = objetoComida.getInt("expirationDateYear");
+                int     expirationDateMonth = objetoComida.getInt("expirationDateMonth"); 
+                int     expirationDateDay = objetoComida.getInt("expirationDateDay");
 
                 registroComida.InsertRFScan_DinamicArray(nameProduct, quantity, emailDonor, expirationDateYear, expirationDateMonth, expirationDateDay);
             }

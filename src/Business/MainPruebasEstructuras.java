@@ -140,6 +140,7 @@ public class MainPruebasEstructuras {
         BST_TreeComidaNombre BST_TCN = new BST_TreeComidaNombre();
         // OJO forma ded colocar el root 
         BST_TCN.root = BST_TCN.crearNodoRoot(f1);
+        
         //System.out.println(tree.root.key);
         BST_TCN.insertar(f2);
         BST_TCN.insertar(f3);
