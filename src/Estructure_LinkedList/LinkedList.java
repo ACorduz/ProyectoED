@@ -1,8 +1,8 @@
 
 package Estructure_LinkedList;
 
-import Data.CompanyDonor;
-import Data.Donnor;
+import Data.DonadorCompania;
+import Data.Donador;
 import java.io.Serializable;
 
 
@@ -288,8 +288,8 @@ public class LinkedList <T> implements EstructureLinkedList<T>, Serializable{
         Node current = head.getNext();
 
         while (current != null) {
-            if (current.getData() instanceof Donnor) {
-                Donnor donador = (Donnor) current.getData();
+            if (current.getData() instanceof Donador) {
+                Donador donador = (Donador) current.getData();
                 if (donador.getEmail().equals(email)) {
                     return index;
                 }
@@ -305,8 +305,8 @@ public class LinkedList <T> implements EstructureLinkedList<T>, Serializable{
         Node current = head.getNext();
 
         while (current != null) {
-            if (current.getData() instanceof CompanyDonor) {
-                CompanyDonor empresa = (CompanyDonor) current.getData();
+            if (current.getData() instanceof DonadorCompania) {
+                DonadorCompania empresa = (DonadorCompania) current.getData();
                 if (empresa.getEmail().equals(email)) {
                     return index;
                 }

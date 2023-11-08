@@ -4,7 +4,7 @@
  */
 package InterfazGrafica;
 
-import Data.Product;
+import Data.Producto;
 import Data.Serializador;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Estructure_LinkedList.LinkedList;
@@ -22,7 +22,7 @@ import javax.swing.table.TableColumn;
  * @author die_a
  */
 public class MenuProductosAVL extends javax.swing.JFrame {
-    private DoubleLinkedList<Product> listaProductos;
+    private DoubleLinkedList<Producto> listaProductos;
     private Map<String, String> productEmailMap = new HashMap<>();
     private int selectedRow = -1;
     private DefaultTableModel mt = new DefaultTableModel();
@@ -38,7 +38,7 @@ public class MenuProductosAVL extends javax.swing.JFrame {
         avlTree = new AVLTree();
         // Recorre la lista de productos y agrégalos al árbol AVL
             for (int i = 0; i < listaProductos.size(); i++) {
-                Product producto = listaProductos.get(i);
+                Producto producto = listaProductos.get(i);
                 avlTree.root = avlTree.insert(avlTree.root, producto);
                 String nombre = producto.getNameProduct();
                 String email=producto.getEmailDonor();
@@ -400,7 +400,7 @@ public class MenuProductosAVL extends javax.swing.JFrame {
     if (node != null) {
         addAVLTreeElementsToTable(node.izquierdo, model); // Recorre el subárbol izquierdo
 
-        Product product = node.producto;
+        Producto product = node.producto;
         // Agrega el producto a la tabla
         model.addRow(new Object[]{
             product.getNameProduct(),
@@ -420,7 +420,7 @@ private boolean addProductsBySearchTerm(NodoAVL node, DefaultTableModel model, S
     if (node != null) {
         productsFound |= addProductsBySearchTerm(node.izquierdo, model, searchTerm);
 
-        Product product = node.producto;
+        Producto product = node.producto;
         // Si el nombre del producto contiene el término de búsqueda (ignorando mayúsculas y minúsculas)
         if (product.getNameProduct().toLowerCase().contains(searchTerm.toLowerCase())) {
             model.addRow(new Object[]{
@@ -446,7 +446,7 @@ public void initializeTableWithOriginalData() {
     avlTree = new AVLTree();
     // Recorre la lista de productos y agrégalos al árbol AVL
     for (int i = 0; i < listaProductos.size(); i++) {
-        Product producto = listaProductos.get(i);
+        Producto producto = listaProductos.get(i);
         avlTree.root = avlTree.insert(avlTree.root, producto);
         String nombre = producto.getNameProduct();
         String email = producto.getEmailDonor();

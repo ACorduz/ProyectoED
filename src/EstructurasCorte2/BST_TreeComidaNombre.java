@@ -1,7 +1,7 @@
 
 package EstructurasCorte2;
 // import LinkedList_generico.LinkedList;
-import Data.Food;
+import Data.Comida;
 
 public class BST_TreeComidaNombre{
     
@@ -10,12 +10,12 @@ public class BST_TreeComidaNombre{
     public int counterNodes; 
     
     
-    public NodeBSTComida crearNodoRoot(Food key){
+    public NodeBSTComida crearNodoRoot(Comida key){
         return(new NodeBSTComida(key));
     }
     
     // metodo find
-    public NodeBSTComida find(Food keyFind, NodeBSTComida rootFind){
+    public NodeBSTComida find(Comida keyFind, NodeBSTComida rootFind){
         int comparacion = root.comida.getNameProduct().compareTo(keyFind.getNameProduct());
         if(comparacion == 0){        // si el nodo raiz es igual al que se busca se devuelve el mismo 
             return(rootFind);
@@ -92,7 +92,7 @@ public class BST_TreeComidaNombre{
     }*/
     
     // metodo insertar Coursera
-    public void insertarCoursera(Food key, NodeBSTComida N){
+    public void insertarCoursera(Comida key, NodeBSTComida N){
         NodeBSTComida father = find(key, N);
     
         // ahora mirar si se ingresa a la izquierda o la derecha
@@ -106,14 +106,14 @@ public class BST_TreeComidaNombre{
         }
     }
     
-    public void insertar(Food key){
+    public void insertar(Comida key){
         insertarCoursera(key, root);  
     }
     
 
     
     // Metodo borrar
-    public NodeBSTComida borrarNodoRecursivo(NodeBSTComida nodo, Food valor) {
+    public NodeBSTComida borrarNodoRecursivo(NodeBSTComida nodo, Comida valor) {
         if (nodo == null) {
             return nodo; // Nodo no encontrado
         }
@@ -141,7 +141,7 @@ public class BST_TreeComidaNombre{
         return nodo;
     }
     
-    public NodeBSTComida borrar(Food key){
+    public NodeBSTComida borrar(Comida key){
         return borrarNodoRecursivo(root, key);
     }
     

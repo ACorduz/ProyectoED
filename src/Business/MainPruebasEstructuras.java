@@ -3,15 +3,15 @@ package Business;
 
 // pruebas heapMinor
 import java.util.Date;
-import Data.Food;
+import Data.Comida;
 import EstructurasCorte2.HeapMinor_ComidaFecha;
 
 // pruebas avl 
 import EstructurasCorte2.AVLTree_ComidaNombre;
 import EstructurasCorte2.NodoAVLComida;
-import Data.Food;
+import Data.Comida;
 
-import Data.User;
+import Data.Usuario;
 import EstructurasCorte2.AVLTree_UsuarioNombre;
 import EstructurasCorte2.NodoAVLUsuario;
 import EstructurasCorte2.AVLTree_ComidaFecha;
@@ -29,14 +29,14 @@ public class MainPruebasEstructuras {
     public static void main(String[] args) {
        
         
-        // COLA PRIORITARIA Food
+        // COLA PRIORITARIA Comida
         Date fecha = new Date(2023, 1, 16);
  
         
-        Food f1 = new Food(1,"Food", "Sopa enlatada", 65, "alejandragomez@example.com", 2024 ,2, 2); 
-        Food f2 = new Food(2,"Food", "Avena", 65, "alejandragomez@example.com", 2025 ,2, 2); 
-        Food f3 = new Food(3,"Food", "Garbanzo ", 65, "alejandragomez@example.com", 2013 ,5, 9);
-        Food f4 = new Food(3,"Food", "Garbanzo ", 65, "alejandragomez@example.com", 2013 ,5, 9); 
+        Comida f1 = new Comida(1,"Food", "Sopa enlatada", 65, "alejandragomez@example.com", 2024 ,2, 2); 
+        Comida f2 = new Comida(2,"Food", "Avena", 65, "alejandragomez@example.com", 2025 ,2, 2); 
+        Comida f3 = new Comida(3,"Food", "Garbanzo ", 65, "alejandragomez@example.com", 2013 ,5, 9);
+        Comida f4 = new Comida(3,"Food", "Garbanzo ", 65, "alejandragomez@example.com", 2013 ,5, 9); 
         HeapMinor_ComidaFecha hc = new HeapMinor_ComidaFecha(4);
         
         
@@ -74,7 +74,7 @@ public class MainPruebasEstructuras {
         String nombreProductoABuscar = "Avena";
         NodoAVLComida resultadoBusqueda = avlTree.find(nombreProductoABuscar);
         if (resultadoBusqueda != null) {
-            Food productoEncontrado = resultadoBusqueda.producto;
+            Comida productoEncontrado = resultadoBusqueda.producto;
             System.out.println("Producto encontrado: " + productoEncontrado.getNameProduct());
         } else {
             System.out.println("Producto no encontrado.");
@@ -122,10 +122,10 @@ public class MainPruebasEstructuras {
         System.out.println();
         System.out.println();
         // PRUEBAS AVL USUARIO NOMBRE
-        User u1 = new User("Milena", "Reyes", "javier40@example.org", "RC", "800", "TAVP=^pauxI", "DONADOR");
-        User u2 = new User("Esteban", "Reyes", "javier40@example.org", "RC", "0900", "TAVP=^pauxI", "DONADOR");
-        User u3 = new User("Julian", "Reyes", "javier40@example.org", "RC", "600", "TAVP=^pauxI", "DONADOR");
-        User u4 = new User("Julian2", "Res", "javier40@example.org", "RC", "1000", "TAVP=^pauxI", "DONADOR");
+        Usuario u1 = new Usuario("Milena", "Reyes", "javier40@example.org", "RC", "800", "TAVP=^pauxI", "DONADOR");
+        Usuario u2 = new Usuario("Esteban", "Reyes", "javier40@example.org", "RC", "0900", "TAVP=^pauxI", "DONADOR");
+        Usuario u3 = new Usuario("Julian", "Reyes", "javier40@example.org", "RC", "600", "TAVP=^pauxI", "DONADOR");
+        Usuario u4 = new Usuario("Julian2", "Res", "javier40@example.org", "RC", "1000", "TAVP=^pauxI", "DONADOR");
         
         avlTree2.root = avlTree2.insert(avlTree2.root, u1);
         avlTree2.root = avlTree2.insert(avlTree2.root, u2);
@@ -138,7 +138,7 @@ public class MainPruebasEstructuras {
         String nombreProductoABuscar2 = "Jukuian2";
         NodoAVLUsuario resultadoBusqueda2 = avlTree2.find(nombreProductoABuscar2, "Res");
         if (resultadoBusqueda2 != null) {
-            User productoEncontrado = resultadoBusqueda2.usuario;
+            Usuario productoEncontrado = resultadoBusqueda2.usuario;
             System.out.println("Producto encontrado: " + productoEncontrado.getName() + " "+ productoEncontrado.getLastName() );
         } else {
             System.out.println("Producto no encontrado.");

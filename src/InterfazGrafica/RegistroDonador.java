@@ -4,7 +4,7 @@
  */
 package InterfazGrafica;
 
-import Data.Donnor;
+import Data.Donador;
 import Data.Serializador;
 import Estructure_LinkedList.LinkedList;
 import javax.swing.JOptionPane;
@@ -261,7 +261,7 @@ public class RegistroDonador extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        LinkedList<Donnor> listaDonadores = (LinkedList<Donnor>) Serializador.deserializarObjeto("donadores.dat");
+        LinkedList<Donador> listaDonadores = (LinkedList<Donador>) Serializador.deserializarObjeto("donadores.dat");
         String nombre=txt_nombre.getText();
         String apellido=txt_apellidos.getText();
         String documento=txt_documento.getText();
@@ -273,7 +273,7 @@ public class RegistroDonador extends javax.swing.JFrame {
         if (nombre.isEmpty()|| apellido.isEmpty()||documento.isEmpty()||email.isEmpty()||clave.isEmpty()||direccion.isEmpty()||localidad.isEmpty()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los datos");
         }else{
-            Donnor beneficiario=new Donnor(nombre,apellido,email,tipo,documento,clave,direccion,localidad);
+            Donador beneficiario=new Donador(nombre,apellido,email,tipo,documento,clave,direccion,localidad);
             if (listaDonadores == null) {
                 listaDonadores = new LinkedList<>();
             }

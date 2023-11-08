@@ -7,10 +7,10 @@ import org.json.JSONTokener;
 // importamos estructuras para sacar listas de comida
 import Estructure_LinkedList.LinkedList;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
-import Data.Beneficiary;
-import Data.Donnor;
-import Data.Food;
-import Data.User;
+import Data.Beneficiario;
+import Data.Donador;
+import Data.Comida;
+import Data.Usuario;
 import Estructure_DoubleLinkedList.Stack;
 import functionalities.find;
 
@@ -324,7 +324,7 @@ public class InputDataCamiloPrueba {
     // Este metodo da una linkedlist de beneficiarios para utilzarlos como prueba
     public LinkedList ofJson_getListBeneficiary(){
         JSONObject jsonObject = null;
-        LinkedList<Beneficiary> listOfBeneficaries;
+        LinkedList<Beneficiario> listOfBeneficaries;
         
         try {
             // ver si el archivo existe y crear nombre de la ruta
@@ -354,7 +354,7 @@ public class InputDataCamiloPrueba {
             // inicializar la lista de comida
             listOfBeneficaries= new LinkedList<>();
             //crear un comida provisional 
-            Beneficiary beneficiary;
+            Beneficiario beneficiary;
             
             // Iterar sobre los objetos de los usuarios
             for (int i = 0; i < usuarios.length(); i++) {
@@ -372,7 +372,7 @@ public class InputDataCamiloPrueba {
 
                 
                 // Crear el beneficiario con algunos valores en 0
-                beneficiary = new Beneficiary(0,0,firstName,lastName,email,document,password);
+                beneficiary = new Beneficiario(0,0,firstName,lastName,email,document,password);
                 // Ingresar el beneficiario a la lista provisional 
                 listOfBeneficaries.pushFront(beneficiary); // es O(1)
                 
@@ -393,7 +393,7 @@ public class InputDataCamiloPrueba {
     // Este metodo da Una linkedlist de donadores, para utilizar como datos de prueba
     public LinkedList ofJson_getListDonnor(){
         JSONObject jsonObject = null;
-        LinkedList<Donnor> listOfDonnor;
+        LinkedList<Donador> listOfDonnor;
         
         try {
             // ver si el archivo existe y crear nombre de la ruta
@@ -423,7 +423,7 @@ public class InputDataCamiloPrueba {
             // inicializar la lista de comida
             listOfDonnor= new LinkedList<>();
             //crear un comida provisional 
-            Donnor donnor;
+            Donador donnor;
             
             // Iterar sobre los objetos de usuarios
             for (int i = 0; i < usuarios.length(); i++) {
@@ -441,7 +441,7 @@ public class InputDataCamiloPrueba {
 
                 
                 // Crear el donador con algunos valores en nulo
-                donnor = new Donnor(firstName,lastName,email,document, password, adress, locality, null, null);
+                donnor = new Donador(firstName,lastName,email,document, password, adress, locality, null, null);
                 // Ingresar el donador a la lista provisional 
                 listOfDonnor.pushFront(donnor); // es O(1)
                 
@@ -460,7 +460,7 @@ public class InputDataCamiloPrueba {
     // metodo para obtener Una lista doblemente enlzada de productos de comida
      public DoubleLinkedList ofJson_getListProductsFood(){
         JSONObject jsonObject = null;
-        DoubleLinkedList<Food> listOfFood = new DoubleLinkedList<>();
+        DoubleLinkedList<Comida> listOfFood = new DoubleLinkedList<>();
         
         try {
             // ver si el archivo existe y crear nombre de la ruta
@@ -490,7 +490,7 @@ public class InputDataCamiloPrueba {
             // inicializar la lista de comida
             listOfFood = new DoubleLinkedList<>();
             //crear un comida provisional 
-            Food food;
+            Comida food;
             
             // Iterar sobre los objetos de comida
             for (int i = 0; i < productFood.length(); i++) {
@@ -508,7 +508,7 @@ public class InputDataCamiloPrueba {
 
                 
                 // Crear la comida
-                food = new Food(typeProduct, nameProduct, quantity, emailDonor, expirationDateYear, expirationDateMonth, expirationDateDay);
+                food = new Comida(typeProduct, nameProduct, quantity, emailDonor, expirationDateYear, expirationDateMonth, expirationDateDay);
                 // Ingresar la comida a la lista provisional 
                 listOfFood.pushFront(food); // es O(1)
                 
@@ -557,7 +557,7 @@ public class InputDataCamiloPrueba {
             // inicializar la lista de comida
             listOfUsers = new Queue<>();
             //crear un comida provisional 
-            User user;
+            Usuario user;
             //long tiempoInicio = System.nanoTime();
             // Iterar sobre los objetos de usuarios
             for (int i = 0; i < users.length(); i++) {
@@ -572,7 +572,7 @@ public class InputDataCamiloPrueba {
                 String TypeUser = null;
                 
                 //Crear el usuario
-                user = new User(name, lastName, email, document, password, TypeUser);
+                user = new Usuario(name, lastName, email, document, password, TypeUser);
                 //Ingresar el usuario a la lista provisional
                 listOfUsers.enqueue(user);
                 
@@ -595,7 +595,7 @@ public class InputDataCamiloPrueba {
             
             //Prueba de busqueda de elemento
             find busquedaUsuariosQ = new find();
-            //User Suser = new User("Edinson", "Bastidas", "kquintero@example.net", "TI 80841066", "wN,HO5IKd9", null);
+            //User Suser = new Usuario("Edinson", "Bastidas", "kquintero@example.net", "TI 80841066", "wN,HO5IKd9", null);
             //busquedaUsuariosQ.findUser_listOfUsers(listOfUsers,"alix93@example.org");
             
             // Cierra el lector de archivo
@@ -612,7 +612,7 @@ public class InputDataCamiloPrueba {
     // metodo para obtener Una pila de usuarios nuevos
      public Stack ofJson_getListUsersSt(){
         JSONObject jsonObject = null;
-        Stack <User> listOfUsers;
+        Stack <Usuario> listOfUsers;
         
         try {
             // ver si el archivo existe y crear nombre de la ruta
@@ -642,7 +642,7 @@ public class InputDataCamiloPrueba {
             // inicializar la lista de comida
             listOfUsers = new Stack<>();
             //crear un comida provisional 
-            User user;
+            Usuario user;
             //long tiempoInicio = System.nanoTime();
             // Iterar sobre los objetos de usuarios
             for (int i = 0; i < users.length(); i++) {
@@ -657,7 +657,7 @@ public class InputDataCamiloPrueba {
                 String TypeUser = null;
                 
                 //Crear el usuario
-                user = new User(name, lastName, email, document, password, TypeUser);
+                user = new Usuario(name, lastName, email, document, password, TypeUser);
                 //Ingresar el usuario a la lista provisional
                 listOfUsers.push(user);
                 
@@ -681,7 +681,7 @@ public class InputDataCamiloPrueba {
             
             //Prueba de busqueda de elemento
             find busquedaUsuariosQ = new find();
-            //User Suser = new User("Edinson", "Bastidas", "kquintero@example.net", "TI 80841066", "wN,HO5IKd9", null);
+            //User Suser = new Usuario("Edinson", "Bastidas", "kquintero@example.net", "TI 80841066", "wN,HO5IKd9", null);
             busquedaUsuariosQ.findUser_listOfUsersS(listOfUsers, "ciroherrera@example.org");
             
             

@@ -8,19 +8,19 @@ import java.io.Serializable;
 
 
 
-public class Donnor extends User implements Serializable {
+public class Donador extends Usuario implements Serializable {
     // la clase donador es hijo de la clase usurio y a la vez superclase
     private String adress;
     private String locality;
-    private Queue<Product> ListDonations;
-    private Stack<Product> HistoryOfDonations; 
+    private Queue<Producto> ListDonations;
+    private Stack<Producto> HistoryOfDonations; 
     private int numberDonates;
     private DisjointSet productSet;
     // OJO typeOfUserNosDice Si es DonadorCompañia, donadorOcasional O Beneficiario
     
     // metodos constructores
 
-    public Donnor(String name,String lastName,  String email,String typeDocument ,String document, String password, String adress, String locality, Queue<Product> ListDonations, Stack<Product> HistoryOfDonations) {
+    public Donador(String name,String lastName,  String email,String typeDocument ,String document, String password, String adress, String locality, Queue<Producto> ListDonations, Stack<Producto> HistoryOfDonations) {
         super(name,lastName, email, typeDocument, document,password,"Donador");
         this.adress = adress;
         this.locality = locality;
@@ -29,7 +29,7 @@ public class Donnor extends User implements Serializable {
         this.numberDonates = 0;
         this.productSet = new DisjointSet(50);
     }
-    public Donnor(String name,String lastName, String email, String typeDocument ,String document, String password, String adress, String locality){
+    public Donador(String name,String lastName, String email, String typeDocument ,String document, String password, String adress, String locality){
         super(name,lastName,email,typeDocument,document,password,"Donador"); 
         this.adress = adress;
         this.locality = locality;
@@ -50,7 +50,7 @@ public class Donnor extends User implements Serializable {
     
     public void donateFood(int index, String nameProduct, String type, int quantity, int EDateYear, int EDateMonth, int EDateDay) {
             // Crea el producto
-            Product product = new Product(index, type, nameProduct, quantity, this.getEmail());
+            Producto product = new Producto(index, type, nameProduct, quantity, this.getEmail());
 
             // Agrega el producto al conjunto disjunto del donante
             int productIndex =1;
@@ -84,19 +84,19 @@ public class Donnor extends User implements Serializable {
         this.locality = locality;
     }
 
-    public Queue<Product> getListDonations() {
+    public Queue<Producto> getListDonations() {
         return ListDonations;
     }
 
-    public void setListDonations(Queue<Product> ListDonations) {
+    public void setListDonations(Queue<Producto> ListDonations) {
         this.ListDonations = ListDonations;
     }
 
-    public Stack<Product> getHistoryOfDonations() {
+    public Stack<Producto> getHistoryOfDonations() {
         return HistoryOfDonations;
     }
 
-    public void setHistoryOfDonations(Stack<Product> HistoryOfDonations) {
+    public void setHistoryOfDonations(Stack<Producto> HistoryOfDonations) {
         this.HistoryOfDonations = HistoryOfDonations;
     }
 
@@ -119,7 +119,7 @@ public class Donnor extends User implements Serializable {
             return false;
         }
 
-        Donnor donnor = (Donnor) o;
+        Donador donnor = (Donador) o;
 
         return email.equals(donnor.email); // Compara por dirección de correo electrónico u otro campo único.
     }

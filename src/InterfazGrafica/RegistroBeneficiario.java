@@ -4,7 +4,7 @@
  */
 package InterfazGrafica;
 
-import Data.Beneficiary;
+import Data.Beneficiario;
 import Data.Serializador;
 import Estructure_LinkedList.LinkedList;
 import javax.swing.JOptionPane;
@@ -383,7 +383,7 @@ public class RegistroBeneficiario extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        LinkedList<Beneficiary> listaBeneficiarios = (LinkedList<Beneficiary>) Serializador.deserializarObjeto("beneficiarios.dat");
+        LinkedList<Beneficiario> listaBeneficiarios = (LinkedList<Beneficiario>) Serializador.deserializarObjeto("beneficiarios.dat");
         String nombre=txt_nombre.getText();
         String apellido=txt_apellidos.getText();
         String documento=txt_documento.getText();
@@ -393,7 +393,7 @@ public class RegistroBeneficiario extends javax.swing.JFrame {
         if (nombre.isEmpty()|| apellido.isEmpty()||documento.isEmpty()||email.isEmpty()||clave.isEmpty()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los datos");
         }else{
-            Beneficiary beneficiario=new Beneficiary(nombre,apellido,email,tipo,documento,clave);
+            Beneficiario beneficiario=new Beneficiario(nombre,apellido,email,tipo,documento,clave);
             if (listaBeneficiarios == null) {
             listaBeneficiarios = new LinkedList<>();
             }

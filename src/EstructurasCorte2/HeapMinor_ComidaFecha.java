@@ -1,15 +1,15 @@
 package EstructurasCorte2;
-import Data.Food;
+import Data.Comida;
 import java.util.Date;
 
 public class HeapMinor_ComidaFecha {
-    private Food[] heapArray;
+    private Comida[] heapArray;
     private int capacity;
     private int size;
 
     public HeapMinor_ComidaFecha(int n) {
         capacity = n;
-        heapArray = new Food[capacity];
+        heapArray = new Comida[capacity];
         size = -1;
     }
 
@@ -26,7 +26,7 @@ public class HeapMinor_ComidaFecha {
         return 2 * i + 2;
     }
 
-    public void insert(Food key) {
+    public void insert(Comida key) {
         if (size == heapArray.length - 1) {
             throw new RuntimeException("El array está lleno y no se puede insertar más.");
         }
@@ -35,12 +35,12 @@ public class HeapMinor_ComidaFecha {
         siftUp(size);
     }
     
-    public Food extractMin() {
+    public Comida extractMin() {
         if (size == -1) {
             throw new IllegalStateException("El montículo está vacío");
         }
       
-        Food result = heapArray[0];
+        Comida result = heapArray[0];
         heapArray[0] = heapArray[size];
         size -= 1;
         siftDown(0);
@@ -50,7 +50,7 @@ public class HeapMinor_ComidaFecha {
 
         
     private void swap( int a, int b) {
-        Food temp = heapArray[a];
+        Comida temp = heapArray[a];
         heapArray[a] = heapArray[b];
         heapArray[b] = temp;
     }
@@ -107,12 +107,12 @@ public class HeapMinor_ComidaFecha {
     }
 
     
-    public Food getMin() {
+    public Comida getMin() {
         return heapArray[0];
     }
 
-    public void changePriority(int index, Food newKey) {
-        Food oldKey = heapArray[index];
+    public void changePriority(int index, Comida newKey) {
+        Comida oldKey = heapArray[index];
         heapArray[index] = newKey;
 
         Date dateOldKey = new Date(oldKey.getExpirationDateYear(), oldKey.getExpirationDateMonth(), oldKey.getExpirationDateDay());
@@ -124,7 +124,7 @@ public class HeapMinor_ComidaFecha {
         }
     }
 
-    public Food[] heapSort(Food[] arraySort) {
+    public Comida[] heapSort(Comida[] arraySort) {
         for (int i = 0; i < arraySort.length; i++) {
             insert(arraySort[i]);
         }
@@ -167,7 +167,7 @@ public class HeapMinor_ComidaFecha {
         }
     }
 
-    private int compareToComida(Food comida,int year, int month, int day, String emailDonnor, String nameProduct){
+    private int compareToComida(Comida comida,int year, int month, int day, String emailDonnor, String nameProduct){
         // primero comparar fechas
         Date date1 = new Date(year, month, day);
         Date date2 = new Date(comida.getExpirationDateYear(), comida.getExpirationDateMonth(), comida.getExpirationDateDay());
@@ -183,8 +183,8 @@ public class HeapMinor_ComidaFecha {
         }
     }
 
-    public Food[] heapSort() {
-        Food[] arraySort = new  Food[capacity];
+    public Comida[] heapSort() {
+        Comida[] arraySort = new  Comida[capacity];
 
         for (int i = 0; i < arraySort.length; i++) {
             arraySort[i] = extractMin();
@@ -194,11 +194,11 @@ public class HeapMinor_ComidaFecha {
         return arraySort;
     }
 
-    public Food[] getHeapArray() {
+    public Comida[] getHeapArray() {
         return heapArray;
     }
 
-    public void setHeapArray(Food[] heapArray) {
+    public void setHeapArray(Comida[] heapArray) {
         this.heapArray = heapArray;
     }
 

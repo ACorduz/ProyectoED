@@ -4,7 +4,7 @@
  */
 package Trees;
 
-import Data.Product;
+import Data.Producto;
 import java.io.Serializable;
 
 /**
@@ -12,12 +12,12 @@ import java.io.Serializable;
  * @author die_a
  */
 public class NodoAVL implements Serializable {
-    public Product producto;
+    public Producto producto;
     public NodoAVL izquierdo;
     public NodoAVL derecho;
     public int altura;
     
-    public NodoAVL(Product producto) {
+    public NodoAVL(Producto producto) {
         this.producto = producto;
         this.altura = 0;
     }

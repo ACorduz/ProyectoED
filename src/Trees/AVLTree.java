@@ -4,7 +4,7 @@
  */
 package Trees;
 import java.io.Serializable;
-import Data.Product;
+import Data.Producto;
 
 /**
  *
@@ -73,7 +73,7 @@ public class AVLTree implements Serializable {
         return z;
     }
 
-    public NodoAVL insert(NodoAVL node, Product producto) {
+    public NodoAVL insert(NodoAVL node, Producto producto) {
         if (node == null) {
             return new NodoAVL(producto);
         } else {

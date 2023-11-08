@@ -3,7 +3,7 @@ package Data;
 
 import java.io.Serializable;
 
-public class Product implements Serializable {
+public class Producto implements Serializable {
     //  Es la superclase
  
     // ATRIBUTOS
@@ -19,7 +19,7 @@ public class Product implements Serializable {
     
 
     // COSNTRUCTORES
-    public Product(int index, String typeProduct,String nameProduct, int quantity, String emailDonor){
+    public Producto(int index, String typeProduct,String nameProduct, int quantity, String emailDonor){
         this.index = index;
         this.typeProduct = typeProduct;
         this.nameProduct = nameProduct;
@@ -32,7 +32,7 @@ public class Product implements Serializable {
 
      // luego el estado se va a elegir
 
-    public Product( String typeProduct, String nameProduct, int quantity, String emailDonor, int expirationDateYear, int expirationDateMonth, int expirationDateDay) {       
+    public Producto( String typeProduct, String nameProduct, int quantity, String emailDonor, int expirationDateYear, int expirationDateMonth, int expirationDateDay) {       
         this.typeProduct = typeProduct;
         this.nameProduct = nameProduct;
         this.quantity = quantity;
@@ -42,7 +42,7 @@ public class Product implements Serializable {
         this.expirationDateDay = expirationDateDay;     
     }
 
-    public Product() {
+    public Producto() {
     }
 
 

@@ -1,11 +1,11 @@
 package Business;
-import Data.Product;
-import Data.Beneficiary;
-import Data.CompanyDonor;
-import Data.Donnor;
+import Data.Producto;
+import Data.Beneficiario;
+import Data.DonadorCompania;
+import Data.Donador;
 import Data.Serializador;
-import Data.Food;
-import Data.User;
+import Data.Comida;
+import Data.Usuario;
 import Estructure_LinkedList.Queue;
 import Estructure_LinkedList.LinkedList;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
@@ -25,17 +25,17 @@ import java.time.format.DateTimeFormatter;
 
 public class Main <T>{
 
-    private static Queue<Beneficiary> listForChooseProduct = new Queue(); // primero una cola para poner los beneficiarios por orden de llegada
+    private static Queue<Beneficiario> listForChooseProduct = new Queue(); // primero una cola para poner los beneficiarios por orden de llegada
     private static Stack<String> listActivity=new Stack(); //Registro de Actividades
-    public static DoubleLinkedList<Product> listOfProducts = new DoubleLinkedList(); // segundo una lista donde se van a poner todos los productos
-    public static LinkedList<Product> indicesProductos= new LinkedList();
-    private static DinamicArray<Food> listOfProducts_DA = new DinamicArray();
+    public static DoubleLinkedList<Producto> listOfProducts = new DoubleLinkedList(); // segundo una lista donde se van a poner todos los productos
+    public static LinkedList<Producto> indicesProductos= new LinkedList();
+    private static DinamicArray<Comida> listOfProducts_DA = new DinamicArray();
     public static DisjointSet donanteSet;
     public static DisjointSet empresaSet;
 
     //private static LinkedList<Beneficiary> listOfBeneficiaries= new LinkedList();
-    private static LinkedList<Donnor> listOfDonors = new LinkedList();
-    private static LinkedList<CompanyDonor> listaEmpresas = new LinkedList();
+    private static LinkedList<Donador> listOfDonors = new LinkedList();
+    private static LinkedList<DonadorCompania> listaEmpresas = new LinkedList();
 
     // lo de historial de acciones esta en la clase donador
     // luego cada donador tiene enlazado un producto
@@ -44,19 +44,19 @@ public class Main <T>{
 
         // PRUEBA LISTA DE OBJETOS
         AVLTree avlTree = new AVLTree();
-        //Product producto = new Product("FOOD", "Harina", 5,"murrami@gmail.com");
-        Product producto = new Product("Food", "Sopa enlatada", 65, "murrami@gmail.com", 2024 ,2, 2); 
+        //Product producto = new Producto("FOOD", "Harina", 5,"murrami@gmail.com");
+        Producto producto = new Producto("Food", "Sopa enlatada", 65, "murrami@gmail.com", 2024 ,2, 2); 
         avlTree.root = avlTree.insert(avlTree.root, producto);
         //avlTree.printInOrder();
-        Product producto2 = new Product("Food", "Avena", 65, "murrami@gmail.com", 2025 ,2, 2);
+        Producto producto2 = new Producto("Food", "Avena", 65, "murrami@gmail.com", 2025 ,2, 2);
         //avlTree.root = avlTree.insert(avlTree.root, producto2);
-        Product producto3 = new Product("Food", "Garbanzo ", 65, "murrami@gmail.com", 2013 ,5, 9);
+        Producto producto3 = new Producto("Food", "Garbanzo ", 65, "murrami@gmail.com", 2013 ,5, 9);
         //avlTree.root = avlTree.insert(avlTree.root, producto3);
-        Product producto4 = new Product("Food", "Frijol ", 65, "carmar@gmail.com", 2018 ,5, 9);
+        Producto producto4 = new Producto("Food", "Frijol ", 65, "carmar@gmail.com", 2018 ,5, 9);
         //avlTree.root = avlTree.insert(avlTree.root, producto4);
-        Product producto5 = new Product("Food", "Pollo ", 65, "surti@gmail.com", 2023 ,5, 9);
+        Producto producto5 = new Producto("Food", "Pollo ", 65, "surti@gmail.com", 2023 ,5, 9);
         //avlTree.root = avlTree.insert(avlTree.root, producto5);
-        Product producto6 = new Product("FOOD", "Atun", 5, "losreyes@gmail.com",2023,5,22);
+        Producto producto6 = new Producto("FOOD", "Atun", 5, "losreyes@gmail.com",2023,5,22);
         //avlTree.root = avlTree.insert(avlTree.root, producto6);
         //BinaryHeap hc=new BinaryHeap();
         /*
@@ -93,23 +93,23 @@ public class Main <T>{
         Serializador.serializarObjeto(indicesProductos, "indicesProductos.dat");
         //Serializador.serializarObjeto(avlTree, "productosAVL.dat");
          // Agregar empresas a la lista
-        CompanyDonor empresa1 = new CompanyDonor("Surtifruver","545645-6","calle 43","Kennedy","super","surti@gmail.com","12345");
+        DonadorCompania empresa1 = new DonadorCompania("Surtifruver","545645-6","calle 43","Kennedy","super","surti@gmail.com","12345");
         listaEmpresas.pushBack(empresa1);
         listActivity.push(obtenerFechaHoraActualString()+": Se registo la empresa, "+empresa1.getName());
-        CompanyDonor empresa2 = new CompanyDonor("Los Reyes","745542-4","calle 36","Kennedy","super","losreyes@gmail.com","12345");
+        DonadorCompania empresa2 = new DonadorCompania("Los Reyes","745542-4","calle 36","Kennedy","super","losreyes@gmail.com","12345");
         listaEmpresas.pushBack(empresa2);
         listActivity.push(obtenerFechaHoraActualString()+": Se registo la empresa, "+empresa2.getName());
         // Guardar la lista de empresas en un archivo serializable
         Serializador.serializarObjeto(listaEmpresas, "empresas.dat");
         //Agregar Beneficiarios a la lista
-        Beneficiary beneficiario=new Beneficiary("Felipe","Alvarez Ramirez","felalvarez@gmail.com","CC","52483767","12345");
+        Beneficiario beneficiario=new Beneficiario("Felipe","Alvarez Ramirez","felalvarez@gmail.com","CC","52483767","12345");
         listForChooseProduct.enqueue(beneficiario);
         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+beneficiario.getEmail()+ " se registro como beneficiario");
         // Guardar la lista de beneficiarios en un archivo serializable
         Serializador.serializarObjeto(listForChooseProduct, "beneficiarios.dat");
         //Agregar Donador a la lista
-        Donnor donador=new Donnor("Alberto","Murillo Ramirez","murrami@gmail.com","CC","3424242","12345","calle 45#56","Kennedy");
-        Donnor donador1=new Donnor("Carlos","Martinez Ramirez","carmar@gmail.com","CC", "34243532","12345","calle 65#13","Chapinero");
+        Donador donador=new Donador("Alberto","Murillo Ramirez","murrami@gmail.com","CC","3424242","12345","calle 45#56","Kennedy");
+        Donador donador1=new Donador("Carlos","Martinez Ramirez","carmar@gmail.com","CC", "34243532","12345","calle 65#13","Chapinero");
         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+donador.getEmail()+ " se registro como donador ocasional");
         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+donador1.getEmail()+ " se registro como donador ocasional");
         listOfDonors.pushBack(donador);
@@ -152,11 +152,11 @@ public class Main <T>{
         // Supongamos que deseas saber a qué donante se asignó un producto en particular.
         
         /*
-        Food f1 = new Food("Food", "Sopa enlatada", 65, "alejandragomez@example.com", 2024 ,2, 2); 
-        Food f2 = new Food("Food", "Avena", 65, "alejandragomez@example.com", 2025 ,2, 2); 
-        Food f3 = new Food("Food", "Garbanzo ", 65, "alejandragomez@example.com", 2013 ,5, 9);
-        Food f4 = new Food("Food", "Frijol ", 65, "alejandragomez@example.com", 2018 ,5, 9);
-        Food f5 = new Food("Food", "Pollo ", 65, "alejandragomez@example.com", 2023 ,5, 9);
+        Comida f1 = new Comida("Comida", "Sopa enlatada", 65, "alejandragomez@example.com", 2024 ,2, 2); 
+        Comida f2 = new Comida("Comida", "Avena", 65, "alejandragomez@example.com", 2025 ,2, 2); 
+        Comida f3 = new Comida("Comida", "Garbanzo ", 65, "alejandragomez@example.com", 2013 ,5, 9);
+        Comida f4 = new Comida("Comida", "Frijol ", 65, "alejandragomez@example.com", 2018 ,5, 9);
+        Comida f5 = new Comida("Comida", "Pollo ", 65, "alejandragomez@example.com", 2023 ,5, 9);
         BinaryHeap hc=new BinaryHeap();
         
         hc.insert(f1);
@@ -201,9 +201,9 @@ public class Main <T>{
     }
     // setter y getter de Main
      /*
-    public static Donnor obtenerDonadorPorEmail(String email) {
+    public static Donador obtenerDonadorPorEmail(String email) {
         for (int i = 0; i < listOfDonors.size(); i++) {
-            Donnor donador = listOfDonors.get(i); // Obtén el donador en la posición i
+            Donador donador = listOfDonors.get(i); // Obtén el donador en la posición i
 
             // Compara el correo electrónico del donador con el correo electrónico proporcionado
             if (donador.getEmail().equals(email)) {
@@ -215,9 +215,9 @@ public class Main <T>{
         return null;
     }
    
-    public static CompanyDonor obtenerCompanyDonorPorEmail(String email) {
+    public static DonadorCompania obtenerCompanyDonorPorEmail(String email) {
         for (int i = 0; i < listaEmpresas.size(); i++) {
-            CompanyDonor empresa = listaEmpresas.get(i); // Obtén la empresa en la posición i
+            DonadorCompania empresa = listaEmpresas.get(i); // Obtén la empresa en la posición i
 
             // Compara el correo electrónico de la empresa con el correo electrónico proporcionado
             if (empresa.getEmail().equals(email)) {
@@ -229,7 +229,7 @@ public class Main <T>{
         return null;
     }
     */
-    public static int obtenerIndiceDonnorEnLista(Donnor donador) {
+    public static int obtenerIndiceDonnorEnLista(Donador donador) {
         return listOfDonors.indexOf(donador);
     }
     public static Queue getListForChooseProduct() {
@@ -240,11 +240,11 @@ public class Main <T>{
         Main.listForChooseProduct = listForChooseProduct;
     }
 
-    public static DoubleLinkedList<Product> getListOfProducts() {
+    public static DoubleLinkedList<Producto> getListOfProducts() {
         return listOfProducts;
     }
 
-    public static void setListOfProducts(DoubleLinkedList<Product> listOfProducts) {
+    public static void setListOfProducts(DoubleLinkedList<Producto> listOfProducts) {
         Main.listOfProducts = listOfProducts;
     }
 /*
@@ -256,19 +256,19 @@ public class Main <T>{
         Main.listOfBeneficiaries = listOfBeneficiaries;
     }
 */
-    public static LinkedList<Donnor> getListOfDonors() {
+    public static LinkedList<Donador> getListOfDonors() {
         return listOfDonors;
     }
 
-    public static void setListOfDonors(LinkedList<Donnor> listOfDonors) {
+    public static void setListOfDonors(LinkedList<Donador> listOfDonors) {
         Main.listOfDonors = listOfDonors;
     }
 
-    public static DinamicArray<Food> getListOfProducts_DA() {
+    public static DinamicArray<Comida> getListOfProducts_DA() {
         return listOfProducts_DA;
     }
 
-    public static void setListOfProducts_DA(DinamicArray<Food> listOfProducts_DA) {
+    public static void setListOfProducts_DA(DinamicArray<Comida> listOfProducts_DA) {
         Main.listOfProducts_DA = listOfProducts_DA;
     }
     public static String obtenerFechaHoraActualString() {
@@ -319,7 +319,7 @@ public class Main <T>{
         //Ahora probar otros metodos
         DoubleLinkedList listadoble = jsonEntrada.ofJson_getListProductsFood();
         System.out.println(listadoble.toString());
-        Food f1 = (Food) listadoble.topFront();
+        Comida f1 = (Comida) listadoble.topFront();
         System.out.println(f1.getNameProduct());
         /*
         System.out.println("\n\n PRUEBA 2");
@@ -328,7 +328,7 @@ public class Main <T>{
 
         LinkedList listaSimple = jsonEntrada.ofJson_getListDonnor();
         System.out.println(listaSimple.toString());
-        Donnor d1 = (Donnor) listaSimple.topFront();
+        Donador d1 = (Donador) listaSimple.topFront();
         System.out.println(d1.getEmail()+ "  "+d1.getLocality());
         
      */   

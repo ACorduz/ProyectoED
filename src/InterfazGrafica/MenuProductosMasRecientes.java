@@ -4,7 +4,7 @@
  */
 package InterfazGrafica;
 
-import Data.Product;
+import Data.Producto;
 import Data.Serializador;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import java.awt.event.ActionEvent;
@@ -29,7 +29,7 @@ public class MenuProductosMasRecientes extends javax.swing.JFrame {
     //private JTable jTable1;
     private DefaultTableModel mt = new DefaultTableModel();
     private int selectedRow = -1;
-    private DoubleLinkedList<Product> listaProductos;
+    private DoubleLinkedList<Producto> listaProductos;
     private Map<String, String> productEmailMap = new HashMap<>(); // Asocia nombres de productos con correos electrónicos
     //DefaultTableModel mt=new DefaultTableModel();
     /**
@@ -57,7 +57,7 @@ public class MenuProductosMasRecientes extends javax.swing.JFrame {
         listaProductos = Serializador.deserializarObjeto("productos.dat");
         if (listaProductos != null) {
             for (int i = 0; i < listaProductos.size(); i++) {
-                Product producto = listaProductos.get(i);
+                Producto producto = listaProductos.get(i);
                 String nombre = producto.getNameProduct();
                 String categoria = producto.getTypeProduct();
                 int cantidad = producto.getQuantity();

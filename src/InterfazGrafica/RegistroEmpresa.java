@@ -5,7 +5,7 @@
 package InterfazGrafica;
 
 import static Business.Main.obtenerFechaHoraActualString;
-import Data.CompanyDonor;
+import Data.DonadorCompania;
 import Data.Serializador;
 import Estructure_LinkedList.LinkedList;
 import javax.swing.JOptionPane;
@@ -254,7 +254,7 @@ public class RegistroEmpresa extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        LinkedList<CompanyDonor> listaEmpresas = (LinkedList<CompanyDonor>) Serializador.deserializarObjeto("empresas.dat");
+        LinkedList<DonadorCompania> listaEmpresas = (LinkedList<DonadorCompania>) Serializador.deserializarObjeto("empresas.dat");
         String nombre=txt_nombre.getText();
         String nit=txt_NIT.getText();
         String tipo=txt_tipo.getText();
@@ -265,7 +265,7 @@ public class RegistroEmpresa extends javax.swing.JFrame {
         if (nombre.isEmpty()|| nit.isEmpty()||tipo.isEmpty()||email.isEmpty()||clave.isEmpty()||direccion.isEmpty()||localidad.isEmpty()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los datos");
         }else{
-            CompanyDonor empresa=new CompanyDonor(nombre,nit,direccion,localidad,tipo,email,clave);
+            DonadorCompania empresa=new DonadorCompania(nombre,nit,direccion,localidad,tipo,email,clave);
             if (listaEmpresas == null) {
             listaEmpresas = new LinkedList<>();
         }

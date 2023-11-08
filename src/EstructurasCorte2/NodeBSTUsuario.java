@@ -1,13 +1,13 @@
 
 package EstructurasCorte2;
-import Data.User;
+import Data.Usuario;
 
 public class NodeBSTUsuario {
-    public User usuario;
+    public Usuario usuario;
     public NodeBSTUsuario izquierdo, derecho; 
     
     // constructor
-    NodeBSTUsuario(User usuario){
+    NodeBSTUsuario(Usuario usuario){
         this.usuario = usuario;
         izquierdo = derecho = null;
     }       

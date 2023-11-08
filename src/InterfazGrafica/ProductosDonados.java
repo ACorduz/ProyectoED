@@ -4,8 +4,8 @@
  */
 package InterfazGrafica;
 
-import Data.Donnor;
-import Data.Product;
+import Data.Donador;
+import Data.Producto;
 import Data.Serializador;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Estructure_LinkedList.LinkedList;
@@ -29,9 +29,9 @@ public class ProductosDonados extends javax.swing.JFrame {
      */
     public ProductosDonados() {
         initComponents();
-        DoubleLinkedList<Product> listaProductos = (DoubleLinkedList<Product>) Serializador.deserializarObjeto("productos.dat");
-        LinkedList<Product> indicesProductos = (LinkedList<Product>) Serializador.deserializarObjeto("indicesProductos.dat");
-        LinkedList<Donnor> donadores = (LinkedList<Donnor>) Serializador.deserializarObjeto("donadores.dat");
+        DoubleLinkedList<Producto> listaProductos = (DoubleLinkedList<Producto>) Serializador.deserializarObjeto("productos.dat");
+        LinkedList<Producto> indicesProductos = (LinkedList<Producto>) Serializador.deserializarObjeto("indicesProductos.dat");
+        LinkedList<Donador> donadores = (LinkedList<Donador>) Serializador.deserializarObjeto("donadores.dat");
         DisjointSet donanteSet = (DisjointSet)Serializador.deserializarObjeto("donantesset.dat");
         String email=this.emailUsuario;
         
@@ -49,7 +49,7 @@ public class ProductosDonados extends javax.swing.JFrame {
         addCheckBox(4, jTable1);
         
          // Llama a la función showProductsByDonor con el donador actual
-        Donnor donador = obtenerDonadorPorEmail(email, donadores);
+        Donador donador = obtenerDonadorPorEmail(email, donadores);
         showProductsByDonor(donador);
         
         // Obtener y mostrar los productos de la lista
@@ -246,15 +246,15 @@ public class ProductosDonados extends javax.swing.JFrame {
         return selectedCount;
     }
     
-    public void showProductsByDonor(Donnor donador) {
+    public void showProductsByDonor(Donador donador) {
     // Obtén los productos donados por el donador y agrégalos al modelo de la tabla mt
-    LinkedList<Product> indicesProductos = (LinkedList<Product>) Serializador.deserializarObjeto("indicesProductos.dat");
-    DoubleLinkedList<Product> productsByDonor = new DoubleLinkedList<>();
+    LinkedList<Producto> indicesProductos = (LinkedList<Producto>) Serializador.deserializarObjeto("indicesProductos.dat");
+    DoubleLinkedList<Producto> productsByDonor = new DoubleLinkedList<>();
 
     // Itera sobre la lista de productos para encontrar los asociados al donador
         System.out.println("email"+emailUsuario);
     for (int i = 0; i < indicesProductos.size(); i++) {
-        Product product = indicesProductos.get(i);
+        Producto product = indicesProductos.get(i);
 
         // Compara el correo electrónico del producto con el correo electrónico del donador
         if (product.getEmailDonor().equals(donador.getEmail())) {
@@ -265,7 +265,7 @@ public class ProductosDonados extends javax.swing.JFrame {
     // Agrega los productos donados por el donador al modelo de la tabla
     if (!productsByDonor.empty()) {
         for (int i = 0; i < productsByDonor.size(); i++) {
-            Product product = productsByDonor.get(i);
+            Producto product = productsByDonor.get(i);
             String nombre = product.getNameProduct();
             String categoria = product.getTypeProduct();
             int cantidad = product.getQuantity();
@@ -277,9 +277,9 @@ public class ProductosDonados extends javax.swing.JFrame {
     }
 }
 
-public static Donnor obtenerDonadorPorEmail(String email, LinkedList<Donnor> listOfDonors) {
+public static Donador obtenerDonadorPorEmail(String email, LinkedList<Donador> listOfDonors) {
         for (int i = 0; i < listOfDonors.size(); i++) {
-            Donnor donador = listOfDonors.get(i); // Obtén el donador en la posición i
+            Donador donador = listOfDonors.get(i); // Obtén el donador en la posición i
 
             // Compara el correo electrónico del donador con el correo electrónico proporcionado
             if (donador.getEmail().equals(email)) {

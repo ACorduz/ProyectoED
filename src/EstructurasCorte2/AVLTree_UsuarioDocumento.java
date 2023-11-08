@@ -1,7 +1,7 @@
 
 package EstructurasCorte2;
 import EstructurasCorte2.NodoAVLUsuario;
-import Data.User;
+import Data.Usuario;
 
 
 public class AVLTree_UsuarioDocumento {
@@ -68,7 +68,7 @@ public class AVLTree_UsuarioDocumento {
         return z;
     }
 
-    public NodoAVLUsuario insert(NodoAVLUsuario node, User usuario) {
+    public NodoAVLUsuario insert(NodoAVLUsuario node, Usuario usuario) {
         if (node == null) {
             return new NodoAVLUsuario(usuario);
         } else {

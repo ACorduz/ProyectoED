@@ -4,7 +4,7 @@
  */
 package InterfazGrafica;
 
-import Data.Product;
+import Data.Producto;
 import Data.Serializador;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Trees.AVLTree;
@@ -24,7 +24,7 @@ import javax.swing.table.TableColumn;
 public class MenuProductosFecha extends javax.swing.JFrame {
     private DefaultTableModel mt = new DefaultTableModel();
     private int selectedRow = -1;
-    private DoubleLinkedList<Product> listaProductos;
+    private DoubleLinkedList<Producto> listaProductos;
     private Map<String, String> productEmailMap = new HashMap<>(); // Asocia nombres de productos con correos electrónicos
     /**
      * Creates new form MenuProductosFecha
@@ -35,13 +35,13 @@ public class MenuProductosFecha extends javax.swing.JFrame {
         listaProductos = Serializador.deserializarObjeto("productos.dat");
         BinaryHeap hc=new BinaryHeap();
         for (int i = 0; i < listaProductos.size(); i++) {
-            Product producto = listaProductos.get(i);
+            Producto producto = listaProductos.get(i);
             String nombre = producto.getNameProduct();
             String email=producto.getEmailDonor();
             productEmailMap.put(nombre, email);
 
-            if (producto instanceof Product) {
-                Product comida = (Product) producto; // Realiza un casting a Comida
+            if (producto instanceof Producto) {
+                Producto comida = (Producto) producto; // Realiza un casting a Comida
                 hc.insert(comida); // Agrega la comida a la pila prioritaria
                 
             }
@@ -65,7 +65,7 @@ public class MenuProductosFecha extends javax.swing.JFrame {
         
         // Agrega los productos de la cola prioritaria a la tabla
         while (!hc.isEmpty()) {
-            Product producto = hc.deleteMin(); // Extrae el producto con la mayor prioridad
+            Producto producto = hc.deleteMin(); // Extrae el producto con la mayor prioridad
             // Agrega el producto a la tabla
             mt.addRow(new Object[]{producto.getNameProduct(), producto.getTypeProduct(), producto.getQuantity(), producto.getExpirationDate(), false});
         }

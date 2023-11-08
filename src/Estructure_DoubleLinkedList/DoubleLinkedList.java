@@ -1,7 +1,7 @@
 
 package Estructure_DoubleLinkedList;
 
-import Data.Product;
+import Data.Producto;
 import static IU.GUI.menuProductos;
 import static IU.GUI.readOptionString;
 import java.io.Serializable;
@@ -334,8 +334,8 @@ public class DoubleLinkedList <T> implements EstructureDoubleLinkedList<T> ,Seri
 
         while (current != null) {
             Object data = current.getData();
-            if (data instanceof Product) {
-                Product product = (Product) data;
+            if (data instanceof Producto) {
+                Producto product = (Producto) data;
                 if (product.getNameProduct().equalsIgnoreCase(productName)) {
                     // Encontramos el producto por nombre, eliminémoslo
                     if (current.getPrev() != null) {
@@ -367,8 +367,8 @@ public class DoubleLinkedList <T> implements EstructureDoubleLinkedList<T> ,Seri
 
             while (current != null) {
                 Object data = current.getData();
-                if (data instanceof Product) {
-                    Product product = (Product) data;
+                if (data instanceof Producto) {
+                    Producto product = (Producto) data;
                     if (product.getNameProduct().equalsIgnoreCase(productName)) {
                         productFound = true; // Se encontró el producto
                         if (product.getQuantity() == 1) {
@@ -395,8 +395,8 @@ public class DoubleLinkedList <T> implements EstructureDoubleLinkedList<T> ,Seri
 
         while (current != null) {
             Object data = current.getData();
-            if (data instanceof Product) {
-                Product product = (Product) data;
+            if (data instanceof Producto) {
+                Producto product = (Producto) data;
                 if (product.getNameProduct().equalsIgnoreCase(productName)) {
                     if (product.getQuantity() > 1) {
                         product.setQuantity(product.getQuantity() - 1);
@@ -413,8 +413,8 @@ public class DoubleLinkedList <T> implements EstructureDoubleLinkedList<T> ,Seri
 
         while (current != null) {
             Object data = current.getData();
-            if (data instanceof Product) {
-                Product product = (Product) data;
+            if (data instanceof Producto) {
+                Producto product = (Producto) data;
                 if (product.getNameProduct().equalsIgnoreCase(productName)) {
                     return index;
                 }
@@ -470,11 +470,11 @@ public class DoubleLinkedList <T> implements EstructureDoubleLinkedList<T> ,Seri
     int index = 0;
     while (current != null) {
         Object data = current.getData();
-        if (data instanceof Product) {
+        if (data instanceof Producto) {
             stringBuilder.append(data.toString());
             stringBuilder.append("\n"); // Agregar una nueva línea después de cada producto
         } else {
-            stringBuilder.append(data.toString()); // Puedes ajustar esto si no es Product
+            stringBuilder.append(data.toString()); // Puedes ajustar esto si no es Producto
         }
         current = current.getNext();
         index++;

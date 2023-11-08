@@ -4,7 +4,7 @@
  */
 package Trees;
 
-import Data.Product;
+import Data.Producto;
 import java.util.Date;
 
 /**
@@ -14,7 +14,7 @@ import java.util.Date;
 public class BinaryHeap {
     private static final int DEFAULT_CAPACITY = 10;
     private int currentSize; // Number of elements in the heap
-    private Product[] array; // The heap array
+    private Producto[] array; // The heap array
 
     public BinaryHeap() {
         this(DEFAULT_CAPACITY);
@@ -22,10 +22,10 @@ public class BinaryHeap {
 
     public BinaryHeap(int capacity) {
         currentSize = 0;
-        array = new Product[capacity + 1];
+        array = new Producto[capacity + 1];
     }
 
-    public void insert(Product x) {
+    public void insert(Producto x) {
         if (x.getExpirationDate() == null) {
             // Producto sin fecha de vencimiento, se agrega al final del montículo
             currentSize++;
@@ -49,11 +49,11 @@ public class BinaryHeap {
             array[hole] = x;
         }
     }
-    public Product deleteMin() {
+    public Producto deleteMin() {
         if (isEmpty()) {
             return null;
         }
-        Product minItem = findMin();
+        Producto minItem = findMin();
         array[1] = array[currentSize--];
         percolateDown(1);
         return minItem;
@@ -63,7 +63,7 @@ public class BinaryHeap {
         return currentSize == 0;
     }
 
-    public Product findMin() {
+    public Producto findMin() {
         if (isEmpty()) {
             return null;
         }
@@ -72,7 +72,7 @@ public class BinaryHeap {
 
     private void percolateDown(int hole) {
         int child;
-        Product tmp = array[hole];
+        Producto tmp = array[hole];
 
         for (; hole * 2 <= currentSize; hole = child) {
             child = hole * 2;
@@ -89,7 +89,7 @@ public class BinaryHeap {
     }
 
     private void percolateUp(int index) {
-        Product newValue = array[index];
+        Producto newValue = array[index];
         while (index > 1 && newValue.getExpirationDate().compareTo(array[index / 2].getExpirationDate()) < 0) {
             array[index] = array[index / 2];
             index /= 2;
@@ -98,7 +98,7 @@ public class BinaryHeap {
     }
 
     private void enlargeArray(int newSize) {
-        Product[] newArray = new Product[newSize];
+        Producto[] newArray = new Producto[newSize];
         System.arraycopy(array, 1, newArray, 1, currentSize);
         array = newArray;
     }
@@ -107,7 +107,7 @@ public class BinaryHeap {
         BinaryHeap tempHeap=new BinaryHeap(); // Crear un montículo temporal
 
         while (!isEmpty()) {
-            Product minItem = deleteMin(); // Eliminar el elemento mínimo
+            Producto minItem = deleteMin(); // Eliminar el elemento mínimo
             System.out.println(minItem); // Imprimir el elemento mínimo
             tempHeap.insert(minItem); // Insertar el elemento mínimo en el montículo temporal
         }

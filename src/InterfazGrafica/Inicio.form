@@ -111,7 +111,6 @@
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Registrar Donador "/>
-            <Property name="actionCommand" type="java.lang.String" value="Registrar Donador "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
@@ -247,7 +246,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Correo">
-                          <Border PropertyName="innerBorder" info="null"/>
                           <Font PropertyName="font" name="Segoe UI" size="12" style="1"/>
                         </TitledBorder>
                       </Border>
@@ -298,7 +296,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                         <TitledBorder title="Clave">
-                          <Border PropertyName="innerBorder" info="null"/>
                           <Font PropertyName="font" name="Segoe UI" size="12" style="1"/>
                         </TitledBorder>
                       </Border>

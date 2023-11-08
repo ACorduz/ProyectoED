@@ -1,7 +1,7 @@
 
 package EstructurasCorte2;
 import EstructurasCorte2.NodoAVLComida;
-import Data.Food;
+import Data.Comida;
 
 
 public class AVLTree_ComidaNombre {
@@ -67,7 +67,7 @@ public class AVLTree_ComidaNombre {
         return z;
     }
 
-    public NodoAVLComida insert(NodoAVLComida node, Food producto) {
+    public NodoAVLComida insert(NodoAVLComida node, Comida producto) {
         if (node == null) {
             return new NodoAVLComida(producto);
         } else {

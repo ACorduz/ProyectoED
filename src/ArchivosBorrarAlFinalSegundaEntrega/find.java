@@ -1,9 +1,9 @@
 
 package ArchivosBorrarAlFinalSegundaEntrega;
 
-import Data.Beneficiary;
-import Data.Donnor;
-import Data.User;
+import Data.Beneficiario;
+import Data.Donador;
+import Data.Usuario;
 import Estructure_DoubleLinkedList.Stack;
 import Estructure_LinkedList.LinkedList;
 import Estructure_LinkedList.Node;
@@ -13,13 +13,13 @@ import Estructure_LinkedList.Queue;
 public class find {
     //78 Buscar, filtrar por parcial o total. Usuarios, productos
     
-    public boolean findUser_listBeneficiaries_email(LinkedList<Beneficiary> listOfBeneficiaries, String email){
+    public boolean findUser_listBeneficiaries_email(LinkedList<Beneficiario> listOfBeneficiaries, String email){
         // se va a recorrer las listas como un find
         // primero se saca el siguiente nodo al head 
         Node currentNodeBeneficiary = listOfBeneficiaries.getHead().getNext();
         // luego  miramos si ese nodo  es !=  null
         while(currentNodeBeneficiary != null){
-            Beneficiary compareBeneficiary = (Beneficiary) currentNodeBeneficiary.getData();
+            Beneficiario compareBeneficiary = (Beneficiario) currentNodeBeneficiary.getData();
             if(compareBeneficiary.getEmail().equals(email)){
                 return(true);
             }
@@ -30,18 +30,18 @@ public class find {
         return(false);
     }
     
-    public void findUser_listOfDonors(LinkedList<Donnor> listOfDonors){
+    public void findUser_listOfDonors(LinkedList<Donador> listOfDonors){
           
     }
     
-    public boolean findUser_listOfUsers(Queue<User> listOfUsers, String email){
+    public boolean findUser_listOfUsers(Queue<Usuario> listOfUsers, String email){
         // se va a recorrer las listas como un find
         // primero se saca el siguiente nodo al head 
         Node currentNodeUser= listOfUsers.getHead().getNext();
         // luego  miramos si ese nodo  es !=  null
         long tiempoInicio = System.nanoTime();
         while(currentNodeUser != null){
-            User compareUser = (User) currentNodeUser.getData();
+            Usuario compareUser = (Usuario) currentNodeUser.getData();
             if(compareUser.getEmail().equals(email)){
                 long tiempoFin = System.nanoTime();
                 long tiempoTranscurrido = tiempoFin - tiempoInicio;
@@ -57,14 +57,14 @@ public class find {
         return(false);
     }
     
-    public boolean findUser_listOfUsersS(Stack<User> listOfUsers, String email){
+    public boolean findUser_listOfUsersS(Stack<Usuario> listOfUsers, String email){
         // se va a recorrer las listas como un find
         // primero se saca el siguiente nodo al head 
         Estructure_DoubleLinkedList.Node currentNodeUser= listOfUsers.getHead().getNext();
         // luego  miramos si ese nodo  es !=  null
         long tiempoInicio = System.nanoTime();
         while(currentNodeUser != null){
-            User compareUser = (User) currentNodeUser.getData();
+            Usuario compareUser = (Usuario) currentNodeUser.getData();
             if(compareUser.getEmail().equals(email)){
                 long tiempoFin = System.nanoTime();
                 long tiempoTranscurrido = tiempoFin - tiempoInicio;

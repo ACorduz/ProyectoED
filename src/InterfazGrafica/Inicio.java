@@ -5,9 +5,9 @@
 package InterfazGrafica;
 
 import static Business.Main.obtenerFechaHoraActualString;
-import Data.Beneficiary;
-import Data.CompanyDonor;
-import Data.Donnor;
+import Data.Beneficiario;
+import Data.DonadorCompania;
+import Data.Donador;
 import Data.Serializador;
 import Estructure_LinkedList.LinkedList;
 import javax.swing.JOptionPane;
@@ -267,7 +267,7 @@ public class Inicio extends javax.swing.JFrame {
     System.out.println("Valor de tipoUsuario: " + selectedItem);
 
     if (!usuario.equals("") && !clave.equals("") && "Beneficiario".equals(selectedItem)) {
-        LinkedList<Beneficiary> listaBeneficiarios = Serializador.deserializarObjeto("beneficiarios.dat");
+        LinkedList<Beneficiario> listaBeneficiarios = Serializador.deserializarObjeto("beneficiarios.dat");
         if (listaBeneficiarios != null) {
             //System.out.println("El archivo 'beneficiarios.dat' se cargó correctamente y contiene datos.");
 
@@ -275,7 +275,7 @@ public class Inicio extends javax.swing.JFrame {
 
             for (int i = 0; i < listaBeneficiarios.size(); i++) {
                 System.out.println("Entrando al bucle, i = " + i);
-                Beneficiary beneficiario = listaBeneficiarios.get(i);
+                Beneficiario beneficiario = listaBeneficiarios.get(i);
 
                 if (beneficiario.getEmail().equals(usuario) && beneficiario.getPassword().equals(clave)) {
                     System.out.println("Inicio de sesión exitoso para beneficiarios.");
@@ -300,7 +300,7 @@ public class Inicio extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Error al cargar los datos de beneficiarios");
     }
     } else if (!usuario.equals("") && !clave.equals("") && "Donador".equals(selectedItem)){
-         LinkedList<Donnor> listaDonadores = Serializador.deserializarObjeto("donadores.dat");
+         LinkedList<Donador> listaDonadores = Serializador.deserializarObjeto("donadores.dat");
          if (listaDonadores != null) {
             //System.out.println("El archivo 'beneficiarios.dat' se cargó correctamente y contiene datos.");
 
@@ -308,7 +308,7 @@ public class Inicio extends javax.swing.JFrame {
 
             for (int i = 0; i < listaDonadores.size(); i++) {
                 System.out.println("Entrando al bucle, i = " + i);
-                Donnor donador = listaDonadores.get(i);
+                Donador donador = listaDonadores.get(i);
 
                 if (donador.getEmail().equals(usuario) && donador.getPassword().equals(clave)) {
                     System.out.println("Inicio de sesión exitoso para Donadors.");
@@ -336,7 +336,7 @@ public class Inicio extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Error al cargar los datos de beneficiarios");
     }
     }else if(!usuario.equals("") && !clave.equals("") && "Empresa".equals(selectedItem)){
-        LinkedList<CompanyDonor> empresas = (LinkedList<CompanyDonor>) Serializador.deserializarObjeto("empresas.dat");
+        LinkedList<DonadorCompania> empresas = (LinkedList<DonadorCompania>) Serializador.deserializarObjeto("empresas.dat");
             if (empresas != null) {
                 //System.out.println("El archivo 'beneficiarios.dat' se cargó correctamente y contiene datos.");
 
@@ -344,7 +344,7 @@ public class Inicio extends javax.swing.JFrame {
 
                 for (int i = 0; i < empresas.size(); i++) {
                     System.out.println("Entrando al bucle, i = " + i);
-                    CompanyDonor empresa = empresas.get(i);
+                    DonadorCompania empresa = empresas.get(i);
 
                     if (empresa.getEmail().equals(usuario) && empresa.getPassword().equals(clave)) {
                         System.out.println("Inicio de sesión exitoso para Empresa.");

@@ -1,7 +1,7 @@
 
 package EstructurasCorte2;
 // import LinkedList_generico.LinkedList;
-import Data.User;
+import Data.Usuario;
 
 public class BST_TreeUsuarioDocumento{
     
@@ -10,12 +10,12 @@ public class BST_TreeUsuarioDocumento{
     public int counterNodes; 
     
     
-    public NodeBSTUsuario crearNodoRoot(User key){
+    public NodeBSTUsuario crearNodoRoot(Usuario key){
         return(new NodeBSTUsuario(key));
     }
     
     // metodo find
-    public NodeBSTUsuario find(User keyFind, NodeBSTUsuario rootFind){
+    public NodeBSTUsuario find(Usuario keyFind, NodeBSTUsuario rootFind){
         int comparacion = Integer.parseInt(rootFind.usuario.getDocument()) - Integer.parseInt(keyFind.getDocument());
         if(comparacion == 0){        // si el nodo raiz es igual al que se busca se devuelve el mismo 
             return(rootFind);
@@ -92,7 +92,7 @@ public class BST_TreeUsuarioDocumento{
     }*/
     
     // metodo insertar Coursera
-    public void insertarCoursera(User key, NodeBSTUsuario N){
+    public void insertarCoursera(Usuario key, NodeBSTUsuario N){
         NodeBSTUsuario father = find(key, N);
     
         // ahora mirar si se ingresa a la izquierda o la derecha
@@ -106,14 +106,14 @@ public class BST_TreeUsuarioDocumento{
         }
     }
     
-    public void insertar(User key){
+    public void insertar(Usuario key){
         insertarCoursera(key, root);  
     }
     
 
     
     // Metodo borrar
-    public NodeBSTUsuario borrarNodoRecursivo(NodeBSTUsuario nodo, User valor) {
+    public NodeBSTUsuario borrarNodoRecursivo(NodeBSTUsuario nodo, Usuario valor) {
         if (nodo == null) {
             return nodo; // Nodo no encontrado
         }
@@ -141,7 +141,7 @@ public class BST_TreeUsuarioDocumento{
         return nodo;
     }
     
-    public NodeBSTUsuario borrar(User key){
+    public NodeBSTUsuario borrar(Usuario key){
         return borrarNodoRecursivo(root, key);
     }
     

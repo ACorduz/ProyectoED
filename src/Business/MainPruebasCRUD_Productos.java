@@ -10,7 +10,7 @@ import EstructurasCorte2.HeapMinor_ComidaFecha;
 
 import EstructurasCorte2.NodoAVLComida;
 
-import Data.Food;
+import Data.Comida;
 import java.util.List;
 
 
@@ -45,7 +45,7 @@ public class MainPruebasCRUD_Productos {
 
         // Metodo Ordenamiento Ascendente
         
-        List<Food> list = ObjPruebas.OrdenamientoAVL(AVL);
+        List<Comida> list = ObjPruebas.OrdenamientoAVL(AVL);
         for(int i =0; i < list.size(); i++ ){
             System.out.println(list.get(i).toString());
         }
@@ -59,7 +59,7 @@ public class MainPruebasCRUD_Productos {
         ObjPruebas.PruebaDeleteHeapMinor(HM,  year3,  month3,  day3,  emailDonnor3,  nameProduct3);
       
         // Metodo Ordenamiento Ascendente
-        Food[] array = ObjPruebas.OrdenamientoHeapMinor(HM);
+        Comida[] array = ObjPruebas.OrdenamientoHeapMinor(HM);
         
         for(int i =0; i < array.length; i++ ){
             System.out.println(array[i].toString());
@@ -77,7 +77,7 @@ public class MainPruebasCRUD_Productos {
 /*Producto en 5000
         {
             "index": 5000,
-            "typeProduct": "Food",
+            "typeProduct": "Comida",
             "nameProduct": "Arroz",
             "quantity": 44,
             "emailDonor": "crodriguez@example.com",
@@ -90,7 +90,7 @@ public class MainPruebasCRUD_Productos {
 /* producto 50 000
         {
             "index": 50000,
-            "typeProduct": "Food",
+            "typeProduct": "Comida",
             "nameProduct": "Yogur",
             "quantity": 33,
             "emailDonor": "gonzalezharold@example.com",
@@ -104,7 +104,7 @@ public class MainPruebasCRUD_Productos {
 /*Producto en 500 000
         {
             "index": 506331,
-            "typeProduct": "Food",
+            "typeProduct": "Comida",
             "nameProduct": "Carne de res",
             "quantity": 9,
             "emailDonor": "lauracastrillon@example.com",

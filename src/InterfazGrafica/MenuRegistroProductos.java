@@ -4,9 +4,9 @@
  */
 package InterfazGrafica;
 
-import Data.CompanyDonor;
-import Data.Donnor;
-import Data.Product;
+import Data.DonadorCompania;
+import Data.Donador;
+import Data.Producto;
 import Data.Serializador;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Estructure_LinkedList.LinkedList;
@@ -246,9 +246,9 @@ public class MenuRegistroProductos extends javax.swing.JFrame {
 
     private void btn_registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registroActionPerformed
         // TODO add your handling code here:
-        DoubleLinkedList<Product> listaProductos = (DoubleLinkedList<Product>) Serializador.deserializarObjeto("productos.dat");
-        LinkedList<Product> indicesProductos = (LinkedList<Product>) Serializador.deserializarObjeto("indicesProductos.dat");
-        LinkedList<Donnor> donadores = (LinkedList<Donnor>) Serializador.deserializarObjeto("donadores.dat");
+        DoubleLinkedList<Producto> listaProductos = (DoubleLinkedList<Producto>) Serializador.deserializarObjeto("productos.dat");
+        LinkedList<Producto> indicesProductos = (LinkedList<Producto>) Serializador.deserializarObjeto("indicesProductos.dat");
+        LinkedList<Donador> donadores = (LinkedList<Donador>) Serializador.deserializarObjeto("donadores.dat");
         DisjointSet donanteSet = (DisjointSet)Serializador.deserializarObjeto("donantesset.dat");
         String Producto=txt_producto.getText();
         String cant=txt_cantidad.getText();
@@ -265,7 +265,7 @@ public class MenuRegistroProductos extends javax.swing.JFrame {
         if (Producto.isEmpty()|| cant.isEmpty()||categoria.isEmpty()||añov.isEmpty()||mesv.isEmpty()|| diav.isEmpty()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los datos");
         }else{
-            Product productox = new Product(categoria, Producto,cantidad ,email,año,mes,dia);
+            Producto productox = new Producto(categoria, Producto,cantidad ,email,año,mes,dia);
         
         listaProductos.pushFront(productox);
         indicesProductos.pushBack(productox);
@@ -287,7 +287,7 @@ public class MenuRegistroProductos extends javax.swing.JFrame {
             showProductsByDonor(obtenerDonadorPorEmail(email,donadores));
         }
         else{
-             LinkedList<CompanyDonor> empresas = (LinkedList<CompanyDonor>) Serializador.deserializarObjeto("empresas.dat");
+             LinkedList<DonadorCompania> empresas = (LinkedList<DonadorCompania>) Serializador.deserializarObjeto("empresas.dat");
              DisjointSet empresaSet = (DisjointSet)Serializador.deserializarObjeto("empresaset.dat");
             int indiceEmpresa = empresas.indexOfCompanyByEmail(email);
             
