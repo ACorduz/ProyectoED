@@ -21,7 +21,7 @@ public class Donador extends Usuario implements Serializable {
     // metodos constructores
 
     public Donador(String name,String lastName,  String email,String typeDocument ,String document, String password, String adress, String locality, Queue<Producto> ListDonations, Stack<Producto> HistoryOfDonations) {
-        super(name,lastName, email, typeDocument, document,password,"Donador");
+        super(name,lastName, email, typeDocument, document,password);
         this.adress = adress;
         this.locality = locality;
         this.ListDonations = ListDonations;
@@ -30,7 +30,7 @@ public class Donador extends Usuario implements Serializable {
         this.productSet = new DisjointSet(50);
     }
     public Donador(String name,String lastName, String email, String typeDocument ,String document, String password, String adress, String locality){
-        super(name,lastName,email,typeDocument,document,password,"Donador"); 
+        super(name,lastName,email,typeDocument,document,password); 
         this.adress = adress;
         this.locality = locality;
         this.numberDonates = 0;

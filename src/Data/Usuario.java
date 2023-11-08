@@ -16,6 +16,17 @@ public class Usuario implements Serializable{
     private String adress;
     private String locality;
     
+    public Usuario(String name,String lastName, String email,  String typeDocument, String document, String password) {
+        this.firs_name = name; 
+        this.last_name = lastName;
+        this.email = email;
+        this.document = typeDocument;
+        this.numberDocument = document;
+        this.document = document;
+        this.password = password;
+
+    }
+
     public Usuario(String name,String lastName, String email,  String typeDocument, String document, String password, String adress, String locality) {
         this.firs_name = name; 
         this.last_name = lastName;
@@ -27,6 +38,9 @@ public class Usuario implements Serializable{
         this.adress = adress;
         this.locality = locality;
     }
+
+
+    
 
     
     // metodos setter y getters

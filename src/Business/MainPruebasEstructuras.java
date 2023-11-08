@@ -122,10 +122,10 @@ public class MainPruebasEstructuras {
         System.out.println();
         System.out.println();
         // PRUEBAS AVL USUARIO NOMBRE
-        Usuario u1 = new Usuario("Milena", "Reyes", "javier40@example.org", "RC", "800", "TAVP=^pauxI", "DONADOR");
-        Usuario u2 = new Usuario("Esteban", "Reyes", "javier40@example.org", "RC", "0900", "TAVP=^pauxI", "DONADOR");
-        Usuario u3 = new Usuario("Julian", "Reyes", "javier40@example.org", "RC", "600", "TAVP=^pauxI", "DONADOR");
-        Usuario u4 = new Usuario("Julian2", "Res", "javier40@example.org", "RC", "1000", "TAVP=^pauxI", "DONADOR");
+        Usuario u1 = new Usuario("Milena", "Reyes", "javier40@example.org", "RC", "800", "TAVP=^pauxI", "DONADOR","");
+        Usuario u2 = new Usuario("Esteban", "Reyes", "javier40@example.org", "RC", "0900", "TAVP=^pauxI", "DONADOR", "");
+        Usuario u3 = new Usuario("Julian", "Reyes", "javier40@example.org", "RC", "600", "TAVP=^pauxI", "DONADOR", "");
+        Usuario u4 = new Usuario("Julian2", "Res", "javier40@example.org", "RC", "1000", "TAVP=^pauxI", "DONADOR", "");
         
         avlTree2.root = avlTree2.insert(avlTree2.root, u1);
         avlTree2.root = avlTree2.insert(avlTree2.root, u2);
