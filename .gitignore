@@ -1,7 +1,12 @@
 /build/
+<<<<<<< Updated upstream
 
 data/jsonFakeDataFood_100000.json
 
 data/jsonFakeDataFood_1000000.json
 
+=======
+data/jsonFakeDataFood_100000.json
+data/jsonFakeDataFood_1000000.json
+>>>>>>> Stashed changes
 data/jsonFakeDataFood_10000000.json
