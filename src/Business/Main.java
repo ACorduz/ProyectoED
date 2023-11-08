@@ -4,16 +4,14 @@ import Data.Beneficiary;
 import Data.CompanyDonor;
 import Data.Donnor;
 import Data.Serializador;
-import Data.Comida;
+import Data.Food;
 import Data.User;
 import Estructure_LinkedList.Queue;
 import Estructure_LinkedList.LinkedList;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Estructure_DinamicArray.DinamicArray;
-import Data.serialization;
 import static IU.GUI.mostrarMenu;
 import Estructure_DoubleLinkedList.Stack;
-import Logic.ConectionAPI;
 import Logic.InputDataJSON;
 import functionalities.RegistroComida;
 import Logic.InputDataJSON;
@@ -31,7 +29,7 @@ public class Main <T>{
     private static Stack<String> listActivity=new Stack(); //Registro de Actividades
     public static DoubleLinkedList<Product> listOfProducts = new DoubleLinkedList(); // segundo una lista donde se van a poner todos los productos
     public static LinkedList<Product> indicesProductos= new LinkedList();
-    private static DinamicArray<Comida> listOfProducts_DA = new DinamicArray();
+    private static DinamicArray<Food> listOfProducts_DA = new DinamicArray();
     public static DisjointSet donanteSet;
     public static DisjointSet empresaSet;
 
@@ -104,14 +102,14 @@ public class Main <T>{
         // Guardar la lista de empresas en un archivo serializable
         Serializador.serializarObjeto(listaEmpresas, "empresas.dat");
         //Agregar Beneficiarios a la lista
-        Beneficiary beneficiario=new Beneficiary("Felipe","Alvarez Ramirez","felalvarez@gmail.com","52483767","12345");
+        Beneficiary beneficiario=new Beneficiary("Felipe","Alvarez Ramirez","felalvarez@gmail.com","CC","52483767","12345");
         listForChooseProduct.enqueue(beneficiario);
         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+beneficiario.getEmail()+ " se registro como beneficiario");
         // Guardar la lista de beneficiarios en un archivo serializable
         Serializador.serializarObjeto(listForChooseProduct, "beneficiarios.dat");
         //Agregar Donador a la lista
-        Donnor donador=new Donnor("Alberto","Murillo Ramirez","murrami@gmail.com","3424242","12345","calle 45#56","Kennedy");
-        Donnor donador1=new Donnor("Carlos","Martinez Ramirez","carmar@gmail.com","34243532","12345","calle 65#13","Chapinero");
+        Donnor donador=new Donnor("Alberto","Murillo Ramirez","murrami@gmail.com","CC","3424242","12345","calle 45#56","Kennedy");
+        Donnor donador1=new Donnor("Carlos","Martinez Ramirez","carmar@gmail.com","CC", "34243532","12345","calle 65#13","Chapinero");
         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+donador.getEmail()+ " se registro como donador ocasional");
         listActivity.push(obtenerFechaHoraActualString()+": El usuario, "+donador1.getEmail()+ " se registro como donador ocasional");
         listOfDonors.pushBack(donador);
@@ -154,11 +152,11 @@ public class Main <T>{
         // Supongamos que deseas saber a qué donante se asignó un producto en particular.
         
         /*
-        Comida f1 = new Comida("Food", "Sopa enlatada", 65, "alejandragomez@example.com", 2024 ,2, 2); 
-        Comida f2 = new Comida("Food", "Avena", 65, "alejandragomez@example.com", 2025 ,2, 2); 
-        Comida f3 = new Comida("Food", "Garbanzo ", 65, "alejandragomez@example.com", 2013 ,5, 9);
-        Comida f4 = new Comida("Food", "Frijol ", 65, "alejandragomez@example.com", 2018 ,5, 9);
-        Comida f5 = new Comida("Food", "Pollo ", 65, "alejandragomez@example.com", 2023 ,5, 9);
+        Food f1 = new Food("Food", "Sopa enlatada", 65, "alejandragomez@example.com", 2024 ,2, 2); 
+        Food f2 = new Food("Food", "Avena", 65, "alejandragomez@example.com", 2025 ,2, 2); 
+        Food f3 = new Food("Food", "Garbanzo ", 65, "alejandragomez@example.com", 2013 ,5, 9);
+        Food f4 = new Food("Food", "Frijol ", 65, "alejandragomez@example.com", 2018 ,5, 9);
+        Food f5 = new Food("Food", "Pollo ", 65, "alejandragomez@example.com", 2023 ,5, 9);
         BinaryHeap hc=new BinaryHeap();
         
         hc.insert(f1);
@@ -266,11 +264,11 @@ public class Main <T>{
         Main.listOfDonors = listOfDonors;
     }
 
-    public static DinamicArray<Comida> getListOfProducts_DA() {
+    public static DinamicArray<Food> getListOfProducts_DA() {
         return listOfProducts_DA;
     }
 
-    public static void setListOfProducts_DA(DinamicArray<Comida> listOfProducts_DA) {
+    public static void setListOfProducts_DA(DinamicArray<Food> listOfProducts_DA) {
         Main.listOfProducts_DA = listOfProducts_DA;
     }
     public static String obtenerFechaHoraActualString() {

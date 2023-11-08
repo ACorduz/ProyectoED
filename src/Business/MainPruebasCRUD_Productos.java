@@ -10,7 +10,7 @@ import EstructurasCorte2.HeapMinor_ComidaFecha;
 
 import EstructurasCorte2.NodoAVLComida;
 
-import Data.Comida;
+import Data.Food;
 import java.util.List;
 
 
@@ -45,7 +45,7 @@ public class MainPruebasCRUD_Productos {
 
         // Metodo Ordenamiento Ascendente
         
-        List<Comida> list = ObjPruebas.OrdenamientoAVL(AVL);
+        List<Food> list = ObjPruebas.OrdenamientoAVL(AVL);
         for(int i =0; i < list.size(); i++ ){
             System.out.println(list.get(i).toString());
         }
@@ -59,7 +59,7 @@ public class MainPruebasCRUD_Productos {
         ObjPruebas.PruebaDeleteHeapMinor(HM,  year3,  month3,  day3,  emailDonnor3,  nameProduct3);
       
         // Metodo Ordenamiento Ascendente
-        Comida[] array = ObjPruebas.OrdenamientoHeapMinor(HM);
+        Food[] array = ObjPruebas.OrdenamientoHeapMinor(HM);
         
         for(int i =0; i < array.length; i++ ){
             System.out.println(array[i].toString());

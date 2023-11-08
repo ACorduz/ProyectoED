@@ -14,7 +14,7 @@ import EstructurasCorte2.BST_TreeComidaNombre;
 import EstructurasCorte2.HeapMinor_ComidaFecha;
 
 // Librerias ObjetosData
-import Data.Comida;
+import Data.Food;
 import EstructurasCorte2.NodoAVLComida;
 import java.util.List;
 
@@ -76,7 +76,7 @@ public class PruebasCRUD_Productos {
                 int     expirationDateDay = objetoComida.getInt("expirationDateDay");
 
                 // crear objeto comida
-                Comida comida = new Comida(index, typeProduct, nameProduct, quantity, emailDonor,  expirationDateYear,  expirationDateMonth, expirationDateDay);
+                Food comida = new Food(index, typeProduct, nameProduct, quantity, emailDonor,  expirationDateYear,  expirationDateMonth, expirationDateDay);
                 //System.out.println(comida.toString());
                 // metodo insert del avl 
                 AVL.root = AVL.insert(AVL.root, comida);
@@ -149,7 +149,7 @@ public class PruebasCRUD_Productos {
             
             // colocar primero la raiz
             JSONObject ObjC = productFood.getJSONObject(0);
-            Comida com = new Comida(
+            Food com = new Food(
                     ObjC.getInt("index"), ObjC.getString("typeProduct"),ObjC.getString("nameProduct"),
                     ObjC.getInt("quantity"), ObjC.getString("emailDonor"), ObjC.getInt("expirationDateYear"),
                     ObjC.getInt("expirationDateMonth"), ObjC.getInt("expirationDateDay"));
@@ -169,7 +169,7 @@ public class PruebasCRUD_Productos {
                 int     expirationDateDay = objetoComida.getInt("expirationDateDay");
 
                 // crear objeto comida
-                Comida comida = new Comida(index, typeProduct, nameProduct, quantity, emailDonor,  expirationDateYear,  expirationDateMonth, expirationDateDay);
+                Food comida = new Food(index, typeProduct, nameProduct, quantity, emailDonor,  expirationDateYear,  expirationDateMonth, expirationDateDay);
                 //System.out.println(comida.toString());
 
                 BST.insertar(comida); // metodo insert del HM 
@@ -235,7 +235,7 @@ public class PruebasCRUD_Productos {
                 int     expirationDateDay = objetoComida.getInt("expirationDateDay");
 
                 // crear objeto comida
-                Comida comida = new Comida(index, typeProduct, nameProduct, quantity, emailDonor,  expirationDateYear,  expirationDateMonth, expirationDateDay);
+                Food comida = new Food(index, typeProduct, nameProduct, quantity, emailDonor,  expirationDateYear,  expirationDateMonth, expirationDateDay);
                 //System.out.println(comida.toString());
 
                 HM.insert(comida); // metodo insert del HM 
@@ -259,10 +259,10 @@ public class PruebasCRUD_Productos {
     }
     
     // metodo de ordenamiento Ascendente AVL 
-    public List<Comida> OrdenamientoAVL(AVLTree_ComidaFecha AVL){
+    public List<Food> OrdenamientoAVL(AVLTree_ComidaFecha AVL){
         long startTime = System.nanoTime();
     
-        List<Comida>  list = AVL.recorrerEnOrden();
+        List<Food>  list = AVL.recorrerEnOrden();
         long endTime = System.nanoTime();
             Double tiempoTranscurrido = (endTime - startTime)/1000000.0;
             System.out.println("El tiempo Transcurrido del metodo metodo de ordenamiento Ascendente masivo en AVLTree_ComidaFecha es= " + tiempoTranscurrido);
@@ -272,10 +272,10 @@ public class PruebasCRUD_Productos {
     
 
     // metodo de ordenamiento Ascendente Heap minor 
-    public Comida[] OrdenamientoHeapMinor(HeapMinor_ComidaFecha Hm){
+    public Food[] OrdenamientoHeapMinor(HeapMinor_ComidaFecha Hm){
         long startTime = System.nanoTime();
     
-        Comida[] array = Hm.heapSort();
+        Food[] array = Hm.heapSort();
          
         long endTime = System.nanoTime();
             Double tiempoTranscurrido = (endTime - startTime)/1000000.0;

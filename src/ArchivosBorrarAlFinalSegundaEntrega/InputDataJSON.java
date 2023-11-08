@@ -10,7 +10,7 @@ import Estructure_LinkedList.LinkedList;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Data.Beneficiary;
 import Data.Donnor;
-import Data.Comida;
+import Data.Food;
 //Traer Las funcionalidades
 import functionalities.RegistroComida;
 

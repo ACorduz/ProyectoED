@@ -1,13 +1,13 @@
 package EstructurasCorte2;
-import Data.Comida;
+import Data.Food;
 
 
 public class NodeBSTComida {
-    public Comida comida;
+    public Food comida;
     public NodeBSTComida izquierdo, derecho; 
     
     // constructor
-    NodeBSTComida(Comida comida){
+    NodeBSTComida(Food comida){
         this.comida = comida;
         izquierdo = derecho = null;
     }       

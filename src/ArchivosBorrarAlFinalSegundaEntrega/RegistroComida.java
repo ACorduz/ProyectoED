@@ -5,7 +5,7 @@ import Estructure_DoubleLinkedList.Node;
 import Estructure_DinamicArray.DinamicArray;
 import Logic.InputDataJSON;
 import Business.Main;
-import Data.Comida;
+import Data.Food;
 import Data.serialization;
 
 
@@ -95,7 +95,7 @@ public class RegistroComida extends Main {
         DoubleLinkedList listMain = Main.getListOfProducts();
         Node head = listMain.getHead().getNext();
         while(head != null){
-            Comida fCompare = (Comida) head.getData();
+            Food fCompare = (Food) head.getData();
             // si el email del objeto comparado es igual al de la entrada entonces entra a la lista final 
             if(fCompare.getEmailDonor().equals(email)){
                 return(true);
@@ -107,12 +107,12 @@ public class RegistroComida extends Main {
     }
     
     // consultar y obtener todos los productos por un mismo Donador
-    public DoubleLinkedList<Comida> consultDataForEmailDonnorRF_DoubleLinkedList(String emailDonnorInput){
+    public DoubleLinkedList<Food> consultDataForEmailDonnorRF_DoubleLinkedList(String emailDonnorInput){
         DoubleLinkedList DoubleLinkedListOutPut = new DoubleLinkedList();
         DoubleLinkedList listMain = Main.getListOfProducts();
         Node head = listMain.getHead().getNext();
         while(head != null){
-            Comida fCompare = (Comida) head.getData();
+            Food fCompare = (Food) head.getData();
             // si el email del objeto comparado es igual al de la entrada entonces entra a la lista final 
             if(fCompare.getEmailDonor().equals(emailDonnorInput)){
                 DoubleLinkedListOutPut.pushFront(fCompare);
@@ -140,9 +140,9 @@ public class RegistroComida extends Main {
         
     public void InsertRFScan_DinamicArray(String nameProduct, int quantity,String emailDonor, int expirationDateYear, int expirationDateMonth, int expirationDateDay){
         // traer lista
-        DinamicArray<Comida> DinamicArrayFinal = Main.getListOfProducts_DA();
+        DinamicArray<Food> DinamicArrayFinal = Main.getListOfProducts_DA();
         // crearObjeto
-        Comida f = new Comida("Food", nameProduct,  quantity, emailDonor,  expirationDateYear,  expirationDateMonth,  expirationDateDay);
+        Food f = new Food("Food", nameProduct,  quantity, emailDonor,  expirationDateYear,  expirationDateMonth,  expirationDateDay);
         // insertarlo en lista
         DinamicArrayFinal.add(f);
         // guardarlo la lista en el Main- para luego poder ser guardado en la BD
@@ -150,9 +150,9 @@ public class RegistroComida extends Main {
         
     }
     
-    public void InsertRFObject_DinamicArray(Comida food){
+    public void InsertRFObject_DinamicArray(Food food){
         // traer lista
-        DinamicArray<Comida> DinamicArrayFinal = Main.getListOfProducts_DA();
+        DinamicArray<Food> DinamicArrayFinal = Main.getListOfProducts_DA();
 
         // insertarlo en lista
         DinamicArrayFinal.add(food);
@@ -162,10 +162,10 @@ public class RegistroComida extends Main {
         
     }
     
-    public void UpdateRF_DinamicArray(Comida obj,String nameProduct, int quantity,String emailDonor, int expirationDateYear, int expirationDateMonth, int expirationDateDay ){
-        DinamicArray<Comida> DinamicArrayFinal = Main.getListOfProducts_DA();
+    public void UpdateRF_DinamicArray(Food obj,String nameProduct, int quantity,String emailDonor, int expirationDateYear, int expirationDateMonth, int expirationDateDay ){
+        DinamicArray<Food> DinamicArrayFinal = Main.getListOfProducts_DA();
         
-        Comida f = new Comida("Food", nameProduct,  quantity, emailDonor,  expirationDateYear,  expirationDateMonth,  expirationDateDay);
+        Food f = new Food("Food", nameProduct,  quantity, emailDonor,  expirationDateYear,  expirationDateMonth,  expirationDateDay);
         boolean IsUpdate = DinamicArrayFinal.update(obj, f);
         if(IsUpdate){
             // guardar lista en main
@@ -178,8 +178,8 @@ public class RegistroComida extends Main {
         
     }
     
-    public void deleteRF_DinamicArray(Comida obj){
-        DinamicArray<Comida> DinamicArrayFinal = Main.getListOfProducts_DA();
+    public void deleteRF_DinamicArray(Food obj){
+        DinamicArray<Food> DinamicArrayFinal = Main.getListOfProducts_DA();
         int index = DinamicArrayFinal.getIndexFromValue(obj);
         if(index >= 0 && index < DinamicArrayFinal.size()){
             DinamicArrayFinal.remove(index);
@@ -190,10 +190,10 @@ public class RegistroComida extends Main {
     
     
     public boolean FindData_emailRF_DinamicArray(String emailCompare){
-        DinamicArray<Comida> DinamicArrayFinal = Main.getListOfProducts_DA();
+        DinamicArray<Food> DinamicArrayFinal = Main.getListOfProducts_DA();
         
         for(int i =0; i < DinamicArrayFinal.size(); i++){
-            Comida food = (Comida) DinamicArrayFinal.get(i);
+            Food food = (Food) DinamicArrayFinal.get(i);
             if(food.getEmailDonor().equals(emailCompare)){
                 return(true);
             }

@@ -6,7 +6,7 @@ import Estructure_LinkedList.Stack;
 import java.io.Serializable;
 
 
-public class DonadorCompania implements Serializable{
+public class CompanyDonor implements Serializable{
     private String typeCompany; // las compañias pueden ser de ropa, comida
     private String name;
     private String NIT;
@@ -17,7 +17,7 @@ public class DonadorCompania implements Serializable{
     
     // esta clase esta por si se quiere poner mas funciones al Donador de la compañia;
 
-    public DonadorCompania(String name,String NIT ,String adress,String locality,String typeCompany, String email, String password ) {
+    public CompanyDonor(String name,String NIT ,String adress,String locality,String typeCompany, String email, String password ) {
         this.name=name;
         this.NIT=NIT;
         this.adress=adress;

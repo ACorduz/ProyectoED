@@ -65,7 +65,7 @@ public class SerializacionAO <T>{
                         oos.writeObject(listForChooseProduct);
                         break;
                     case 1:
-                        DoubleLinkedList<Producto> listOfProducts = Main.getListOfProducts();
+                        DoubleLinkedList<Product> listOfProducts = Main.getListOfProducts();
                         //System.out.println("aqui llego");
                         oos.writeObject(listOfProducts);
                         break;
@@ -74,11 +74,11 @@ public class SerializacionAO <T>{
                         //oos.writeObject(listOfBeneficiaries);
                         break;
                     case 3:
-                        LinkedList<Donador> listOfDonors = Main.getListOfDonors();
+                        LinkedList<Donnor> listOfDonors = Main.getListOfDonors();
                         oos.writeObject(listOfDonors);
                         break;
                     case 4: // nueva pruebas
-                        DinamicArray <Comida> ListOfProducts_DA = Main.getListOfProducts_DA();
+                        DinamicArray <Food> ListOfProducts_DA = Main.getListOfProducts_DA();
                         oos.writeObject(ListOfProducts_DA);
                         break;
                     default:
@@ -169,19 +169,19 @@ public class SerializacionAO <T>{
                 Main.setListForChooseProduct(listForChooseProduct);
                 break;
             case 1:
-                DoubleLinkedList<Producto> listOfProducts = (DoubleLinkedList<Producto>) object; 
+                DoubleLinkedList<Product> listOfProducts = (DoubleLinkedList<Product>) object; 
                 Main.setListOfProducts(listOfProducts);
                 break;
             case 2:
-                LinkedList<Beneficiario> listOfBeneficiaries = (LinkedList<Beneficiario>) object;
+                LinkedList<Beneficiary> listOfBeneficiaries = (LinkedList<Beneficiary>) object;
                 //Main.setListOfBeneficiaries(listOfBeneficiaries);
                 break;
             case 3:
-                LinkedList<Donador> listOfDonors = (LinkedList<Donador>) object;
+                LinkedList<Donnor> listOfDonors = (LinkedList<Donnor>) object;
                 Main.setListOfDonors(listOfDonors);
                 break;
             case 4:
-                DinamicArray<Comida> listOfProducts_DA = (DinamicArray<Comida> ) object;
+                DinamicArray<Food> listOfProducts_DA = (DinamicArray<Food> ) object;
                 Main.setListOfProducts_DA(listOfProducts_DA);
                 break;
             default:

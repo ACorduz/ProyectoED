@@ -1,7 +1,7 @@
 
 package EstructurasCorte2;
 import EstructurasCorte2.NodoAVLComida;
-import Data.Comida;
+import Data.Food;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -70,7 +70,7 @@ public class AVLTree_ComidaFecha {
         return z;
     }
 
-    public NodoAVLComida insert(NodoAVLComida node, Comida producto) {
+    public NodoAVLComida insert(NodoAVLComida node, Food producto) {
         if (node == null) {
             return new NodoAVLComida(producto);
         } else {
@@ -156,13 +156,13 @@ public class AVLTree_ComidaFecha {
         inOrderTraversal(root);
     }
     
-    public List<Comida> recorrerEnOrden() {
-        List<Comida> listaEnOrden = new ArrayList<>();
+    public List<Food> recorrerEnOrden() {
+        List<Food> listaEnOrden = new ArrayList<>();
         recorrerEnOrden(root, listaEnOrden);
         return listaEnOrden;
     }
 
-    private void recorrerEnOrden(NodoAVLComida nodo, List<Comida> listaEnOrden) {
+    private void recorrerEnOrden(NodoAVLComida nodo, List<Food> listaEnOrden) {
         if (nodo != null) {
             recorrerEnOrden(nodo.izquierdo, listaEnOrden);
             listaEnOrden.add(nodo.producto);

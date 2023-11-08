@@ -3,7 +3,7 @@ package Data;
 
 import java.io.Serializable;
 
-public class Producto implements Serializable {
+public class Product implements Serializable {
     //  Es la superclase
  
     // ATRIBUTOS
@@ -13,9 +13,13 @@ public class Producto implements Serializable {
     private boolean estate;// el estado se refiere a si ya lo eligieron o no
     private int quantity;
     private String emailDonor; // el imail para luego saber quien publico este producto
+    private int expirationDateYear;
+    private int expirationDateMonth;
+    private int expirationDateDay;
+    
 
     // COSNTRUCTORES
-    public Producto(int index, String typeProduct,String nameProduct, int quantity, String emailDonor){
+    public Product(int index, String typeProduct,String nameProduct, int quantity, String emailDonor){
         this.index = index;
         this.typeProduct = typeProduct;
         this.nameProduct = nameProduct;
@@ -27,18 +31,20 @@ public class Producto implements Serializable {
     
 
      // luego el estado se va a elegir
-    public Producto(int index, String typeProduct, String nameProduct, boolean estate, int quantity, String emailDonor) {
-        this.index = index;
+
+    public Product( String typeProduct, String nameProduct, int quantity, String emailDonor, int expirationDateYear, int expirationDateMonth, int expirationDateDay) {       
         this.typeProduct = typeProduct;
         this.nameProduct = nameProduct;
-        this.estate = estate;
         this.quantity = quantity;
         this.emailDonor = emailDonor;
+        this.expirationDateYear = expirationDateYear;
+        this.expirationDateMonth = expirationDateMonth;
+        this.expirationDateDay = expirationDateDay;     
     }
-      
-    public Producto() {
-        
+
+    public Product() {
     }
+
 
     // METODOS SET, GET 
     public String getTypeProduct() {

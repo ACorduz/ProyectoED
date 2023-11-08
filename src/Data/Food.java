@@ -4,7 +4,7 @@ package Data;
 import java.io.Serializable;
 
 
-public class Comida extends Producto implements Serializable{
+public class Food extends Product implements Serializable{
     // la clase comida es la clase hija de producto
     
     //  ATRIBUTOS 
@@ -13,7 +13,7 @@ public class Comida extends Producto implements Serializable{
     private int expirationDateDay;
     
     // CONSTRUCTOR
-    public Comida(int index, String typeProduct,String nameProduct, int quantity,String emailDonor, int expirationDateYear, int expirationDateMonth, int expirationDateDay){
+    public Food(int index, String typeProduct,String nameProduct, int quantity,String emailDonor, int expirationDateYear, int expirationDateMonth, int expirationDateDay){
         // llamar al constructor de la superclase
         super(index, typeProduct, nameProduct,quantity, emailDonor);
         this.expirationDateYear = expirationDateYear ;

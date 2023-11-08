@@ -1,13 +1,13 @@
 package EstructurasCorte2;
-import Data.Usuario;
+import Data.User;
 
 public class NodoAVLUsuario {
-    public Usuario usuario;
+    public User usuario;
     public NodoAVLUsuario izquierdo;
     public NodoAVLUsuario derecho;
     public int altura;
     
-    public NodoAVLUsuario(Usuario usuario) {
+    public NodoAVLUsuario(User usuario) {
         this.usuario = usuario;
         this.altura = 0;
     }

@@ -1,13 +1,13 @@
 package EstructurasCorte2;
-import Data.Comida;
+import Data.Food;
 
 public class NodoAVLComida {
-    public Comida producto;
+    public Food producto;
     public NodoAVLComida izquierdo;
     public NodoAVLComida derecho;
     public int altura;
     
-    public NodoAVLComida(Comida producto) {
+    public NodoAVLComida(Food producto) {
         this.producto = producto;
         this.altura = 0;
     }
