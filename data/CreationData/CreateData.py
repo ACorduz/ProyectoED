@@ -13,9 +13,14 @@ def tipo_documento_falso():
     return (f"{tipo_documento}")
 
 # numeroDeDocumentoFalso
+numeros_generados = set()
+
 def numero_documento_falso():
-    numero = "".join(random.choices(string.digits, k=8)) 
-    return (numero)
+    while True:
+        numero = "".join(random.choices(string.digits, k=8))
+        if numero not in numeros_generados:
+            numeros_generados.add(numero)
+            return numero
 
 
 # Función para generar una contraseña falsa
