@@ -286,8 +286,8 @@ public class PruebasCRUD_Productos {
     // metodo para eliminar un valor de AVL Fecha
     public void PruebaDeleteAVL_fecha(AVLTree_ComidaFecha AVL, int year, int month, int day, String emailDonnor, String nameProduct ) {
         long startTime = System.nanoTime();
-            AVL.delete(AVL.root, year, month, day, emailDonnor, nameProduct);
-                 
+            String email =AVL.delete(AVL.root, year, month, day, emailDonnor, nameProduct).producto.getEmailDonor();
+            System.out.print(email);
         long endTime = System.nanoTime();
             Double tiempoTranscurrido = (endTime - startTime)/1000000.0;
             System.out.println("El tiempo Transcurrido del metodo delete  en AVLTree_ComidaFecha es= " + tiempoTranscurrido);

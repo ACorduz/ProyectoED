@@ -143,6 +143,7 @@ public class HeapMinor_ComidaFecha {
         for (int i = 0; i <= size; i++) {
             if (compareToComida(heapArray[i], year,  month,  day,  emailDonnor,  nameProduct ) == 0) {
                 index = i;
+                System.out.println("emailDonnor " + emailDonnor);
                 break;
             }
         }
@@ -185,8 +186,6 @@ public class HeapMinor_ComidaFecha {
     public Comida[] heapSort() {
         Comida[] arraySort = new  Comida[capacity];
 
-        siftDown(0);
-        
         for (int i = 0; i < arraySort.length; i++) {
             arraySort[i] = extractMin();
         }

@@ -104,9 +104,13 @@ public class AVLTree_ComidaFecha {
                 if (node.izquierdo == null || node.derecho == null) {
                     node = (node.izquierdo == null) ? node.derecho : node.izquierdo;
                 } else {
-                    NodoAVLComida mostLeftChild = mostLeftChild(node.derecho);
-                    node.producto = mostLeftChild.producto;
-                    node.derecho = delete(node.derecho, mostLeftChild.producto.getExpirationDateYear(), mostLeftChild.producto.getExpirationDateMonth(),mostLeftChild.producto.getExpirationDateDay(),mostLeftChild.producto.getEmailDonor(),mostLeftChild.producto.getNameProduct() );
+                    
+                    if(node.producto.getEmailDonor().compareTo(emailDonnor) == 0 && node.producto.getNameProduct().compareTo(nameProduct)== 0){
+                        NodoAVLComida mostLeftChild = mostLeftChild(node.derecho);
+                        node.producto = mostLeftChild.producto;
+                        node.derecho = delete(node.derecho, mostLeftChild.producto.getExpirationDateYear(), mostLeftChild.producto.getExpirationDateMonth(),mostLeftChild.producto.getExpirationDateDay(),mostLeftChild.producto.getEmailDonor(),mostLeftChild.producto.getNameProduct() );
+
+                    }
                 }
             }
         }
