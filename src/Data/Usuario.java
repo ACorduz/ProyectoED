@@ -7,43 +7,43 @@ import java.io.Serializable;
 public class Usuario implements Serializable{
     // la clase usuario es una superclase de las empresas donadores, y beneficiarios
     //Primero los atributos
-    private String name;
-    private String lastName;
+    private String firs_name;
+    private String last_name;
     protected String email;
-    private String typeDocument;
-    private String document; 
+    private String document;
+    private String numberDocument; 
     private String password;
-    private String TypeUser;
-    // los tipos de usuarios podrian ser los siguientes; 
-    // "Donador", "Beneficiario"
+    private String adress;
+    private String locality;
     
-    
-    public Usuario(String name,String lastName, String email,  String typeDocument, String document, String password, String TypeUser) {
-        this.name = name; 
+    public Usuario(String name,String lastName, String email,  String typeDocument, String document, String password, String adress, String locality) {
+        this.firs_name = name; 
+        this.last_name = lastName;
         this.email = email;
-        this.lastName = lastName; 
-        this.typeDocument = typeDocument;
+        this.document = typeDocument;
+        this.numberDocument = document;
         this.document = document;
         this.password = password;
-        this.TypeUser = TypeUser;
+        this.adress = adress;
+        this.locality = locality;
     }
 
     
     // metodos setter y getters
     public String getName() {
-        return name;
+        return firs_name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.firs_name = name;
     }
 
     public String getLastName() {
-        return lastName;
+        return last_name;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.last_name = lastName;
     }
 
     
@@ -56,11 +56,19 @@ public class Usuario implements Serializable{
     }
 
     public String getTypeDocument() {
-        return typeDocument;
+        return document;
     }
 
     public void setTypeDocument(String typeDocument) {
-        this.typeDocument = typeDocument;
+        this.document = typeDocument;
+    }
+    
+    public String getDocument() {
+        return numberDocument;
+    }
+
+    public void setDocument(String document) {
+        this.numberDocument = document;
     }
 
     public String getPassword() {
@@ -71,26 +79,26 @@ public class Usuario implements Serializable{
         this.password = password;
     }
 
-    public String getTypeUser() {
-        return TypeUser;
+    public String getAdress() {
+        return adress;
     }
 
-    public void setTypeUser(String TypeUser) {
-        this.TypeUser = TypeUser;
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 
-    public String getDocument() {
-        return document;
+    public String getLocality() {
+        return locality;
     }
 
-    public void setDocument(String document) {
-        this.document = document;
+    public void setLocality(String locality) {
+        this.locality = locality;
     }
     
 
     @Override
     public String toString() {
-        return "User{" + "name=" + name+ ", email=" + email + ", document=" + document +", " + "typeDocument"+ typeDocument + ", password=" + password + ", TypeUser=" + TypeUser + '}';
+        return "User{" + "name=" + firs_name+ ", email=" + email + ", document=" + numberDocument +", " + "typeDocument"+ document + ", password=" + password + "}";
     }
     
     

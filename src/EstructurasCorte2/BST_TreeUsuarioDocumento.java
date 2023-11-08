@@ -35,6 +35,25 @@ public class BST_TreeUsuarioDocumento{
         }      
     }
     
+public NodeBSTUsuario findd(Usuario keyFind, NodeBSTUsuario rootFind) {
+    if (rootFind == null) {
+        return null; // No se encontró el nodo
+    }
+
+    int comparacion = keyFind.getDocument().compareTo(rootFind.usuario.getDocument());
+
+    if (comparacion == 0) {
+        return rootFind; // Nodo encontrado
+    } else if (comparacion < 0) {
+        // El usuario buscado es menor, buscar en el subárbol izquierdo
+        return findd(keyFind, rootFind.izquierdo);
+    } else {
+        // El usuario buscado es mayor, buscar en el subárbol derecho
+        return findd(keyFind, rootFind.derecho);
+    }
+}
+
+    
     // encontrar nodos mas izq o der de forma recursiva
     public NodeBSTUsuario leftDescendant(NodeBSTUsuario node){
         // retornamos el nodo que encontremos mas cercano a la izquierda que sea diferente de null
@@ -117,7 +136,9 @@ public class BST_TreeUsuarioDocumento{
         if (nodo == null) {
             return nodo; // Nodo no encontrado
         }
-        int comparacion = Integer.parseInt(valor.getDocument()) - Integer.parseInt(nodo.usuario.getDocument());
+
+        int comparacion = valor.getDocument().compareTo(nodo.usuario.getDocument());
+
         // Recursivamente, busca el nodo a borrar en el subárbol izquierdo o derecho
         if (comparacion < 0) {
             nodo.izquierdo = borrarNodoRecursivo(nodo.izquierdo, valor);
@@ -131,18 +152,28 @@ public class BST_TreeUsuarioDocumento{
                 return nodo.izquierdo;
             }
 
-            // Si el nodo tiene dos hijos, obtén el sucesor inmediato (nodo más pequeño en el subárbol derecho)
-            nodo.usuario = leftDescendant(nodo.derecho).usuario;
+            // Si el nodo tiene dos hijos, obtén el sucesor inmediato
+            NodeBSTUsuario sucesorInmediato = findSmallestNode(nodo.derecho);
+
+            // Copia el valor del sucesor inmediato al nodo actual
+            nodo.usuario = sucesorInmediato.usuario;
 
             // Borra el sucesor inmediato
-            nodo.derecho = borrarNodoRecursivo(nodo.derecho, nodo.usuario);
+            nodo.derecho = borrarNodoRecursivo(nodo.derecho, sucesorInmediato.usuario);
         }
 
         return nodo;
     }
-    
+
     public NodeBSTUsuario borrar(Usuario key){
         return borrarNodoRecursivo(root, key);
+    }
+
+    private NodeBSTUsuario findSmallestNode(NodeBSTUsuario nodo) {
+        while (nodo.izquierdo != null) {
+            nodo = nodo.izquierdo;
+        }
+        return nodo;
     }
     
     
