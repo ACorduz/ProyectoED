@@ -93,9 +93,19 @@ public class MenuBeneficiario extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton2.setText("Filtrar por Nombre");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton3.setText("Fecha de Vencimiento");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Regresar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -186,6 +196,23 @@ public class MenuBeneficiario extends javax.swing.JFrame {
         Inicio inicio=new Inicio();
         inicio.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        
+        MenuProductosFecha menuprodfecha=new MenuProductosFecha();
+        menuprodfecha.setVisible(true);
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+         this.dispose();
+        MenuProductosAVL menuprodavl=new MenuProductosAVL();
+        menuprodavl.setVisible(true);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

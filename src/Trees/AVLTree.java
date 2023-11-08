@@ -83,8 +83,8 @@ public class AVLTree implements Serializable {
             } else if (comparacion > 0) {
                 node.derecho = insert(node.derecho, producto);
             } else {
-                // Si el nombre es igual, decide si asignarlo al hijo derecho o izquierdo
-                node.derecho = insert(node.derecho, producto);
+                // Si el nombre es igual, inserta el nuevo elemento en el lado izquierdo
+                node.izquierdo = insert(node.izquierdo, producto);
             }
             return rebalance(node);
         }

@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 public class MenuRegistroProductos extends javax.swing.JFrame {
     private String emailUsuario;
     private int rol;
+    private String email;
     /**
      * Creates new form MenuDonador
      */
@@ -259,7 +260,7 @@ public class MenuRegistroProductos extends javax.swing.JFrame {
         int año = Integer.parseInt(añov);
         int mes = Integer.parseInt(mesv);
         int dia = Integer.parseInt(diav);
-        String email=this.emailUsuario;
+        email=this.emailUsuario;
         
         if (Producto.isEmpty()|| cant.isEmpty()||categoria.isEmpty()||añov.isEmpty()||mesv.isEmpty()|| diav.isEmpty()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los datos");

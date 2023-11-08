@@ -7,37 +7,46 @@ package InterfazGrafica;
 import Data.Product;
 import Data.Serializador;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
+import Trees.AVLTree;
+import Trees.BinaryHeap;
+import Trees.NodoAVL;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
  * @author die_a
  */
-public class MenuProductosMasRecientes extends javax.swing.JFrame {
-    //private JTable jTable1;
+public class MenuProductosFecha extends javax.swing.JFrame {
     private DefaultTableModel mt = new DefaultTableModel();
     private int selectedRow = -1;
     private DoubleLinkedList<Product> listaProductos;
     private Map<String, String> productEmailMap = new HashMap<>(); // Asocia nombres de productos con correos electrónicos
-    //DefaultTableModel mt=new DefaultTableModel();
     /**
-     * Creates new form MenuProductosMasRecientes
+     * Creates new form MenuProductosFecha
      */
-    public MenuProductosMasRecientes() {
+    public MenuProductosFecha() {
+        //BinaryHeap hc=new BinaryHeap();
         initComponents();
-        
+        listaProductos = Serializador.deserializarObjeto("productos.dat");
+        BinaryHeap hc=new BinaryHeap();
+        for (int i = 0; i < listaProductos.size(); i++) {
+            Product producto = listaProductos.get(i);
+            String nombre = producto.getNameProduct();
+            String email=producto.getEmailDonor();
+            productEmailMap.put(nombre, email);
+
+            if (producto instanceof Product) {
+                Product comida = (Product) producto; // Realiza un casting a Comida
+                hc.insert(comida); // Agrega la comida a la pila prioritaria
+                
+            }
+        }
+        //hc.printHeap();
         String ids[] = {"Nombre", "Categoría", "Cantidad", "Expiración", "Seleccionar"};
         mt = new DefaultTableModel(ids, 0) {
             @Override
@@ -53,44 +62,24 @@ public class MenuProductosMasRecientes extends javax.swing.JFrame {
         // Configurar el renderizador y editor para la columna de casillas de verificación
         addCheckBox(4, jTable1);
         
-        // Obtener y mostrar los productos de la lista
-        listaProductos = Serializador.deserializarObjeto("productos.dat");
-        if (listaProductos != null) {
-            for (int i = 0; i < listaProductos.size(); i++) {
-                Product producto = listaProductos.get(i);
-                String nombre = producto.getNameProduct();
-                String categoria = producto.getTypeProduct();
-                int cantidad = producto.getQuantity();
-                String diaVencimiento = producto.getExpirationDate();
-                String email=producto.getEmailDonor();
-                productEmailMap.put(nombre, email); // Asociar el nombre del producto con su correo electrónico
-
-                mt.addRow(new Object[]{nombre, categoria, cantidad, diaVencimiento, false});
-            }
         
+        // Agrega los productos de la cola prioritaria a la tabla
+        while (!hc.isEmpty()) {
+            Product producto = hc.deleteMin(); // Extrae el producto con la mayor prioridad
+            // Agrega el producto a la tabla
+            mt.addRow(new Object[]{producto.getNameProduct(), producto.getTypeProduct(), producto.getQuantity(), producto.getExpirationDate(), false});
+        }
+
+        jTable1.setModel(mt);
+
+        // Añade un listener para manejar la selección de productos
         jTable1.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
-                int selectedRow = jTable1.getSelectedRow();
-                if (selectedRow != -1) {
-                    // Obtenemos los datos del producto seleccionado
-                    String nombre = (String) jTable1.getValueAt(selectedRow, 0);
-                    String categoria = (String) jTable1.getValueAt(selectedRow, 1);
-                    int cantidad = (int) jTable1.getValueAt(selectedRow, 2);
-                    String diaVencimiento = (String) jTable1.getValueAt(selectedRow, 3);
-                    
-                    // Realiza acciones con los datos seleccionados
-                    System.out.println("Producto seleccionado: " + nombre);
-                    System.out.println("Categoría: " + categoria);
-                    System.out.println("Cantidad: " + cantidad);
-                    System.out.println("Expiración: " + diaVencimiento);
-                    
-                    // Aquí puedes mostrar un diálogo o realizar otras acciones según tu necesidad
-                }
+                selectedRow = jTable1.getSelectedRow();
+                // Aquí puedes realizar acciones en función de la selección de productos
             }
         });
     }
-    }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -114,23 +103,23 @@ public class MenuProductosMasRecientes extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Productos Mas recientes");
+        jLabel1.setText("Productos por Fecha Vencimiento");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(173, 173, 173))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(0, 204, 102));
@@ -169,10 +158,10 @@ public class MenuProductosMasRecientes extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(74, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(63, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txt_botton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -181,8 +170,8 @@ public class MenuProductosMasRecientes extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txt_botton, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
@@ -195,71 +184,78 @@ public class MenuProductosMasRecientes extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 414, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(35, 35, 35)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(36, 36, 36)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_bottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_bottonActionPerformed
-        // TODO add your handling code here:                                          
-      int selectedCount = 0;
-    int selectedProductIndex = -1;
-    String selectedProductName = null;
+        // TODO add your handling code here:
+        int selectedCount = 0;
+        int selectedProductIndex = -1;
+        String selectedProductName = null;
 
-    for (int i = 0; i < jTable1.getRowCount(); i++) {
-        if ((Boolean) jTable1.getValueAt(i, 4)) {
-            selectedCount++;
-            selectedProductIndex = i;
-            selectedProductName = (String) jTable1.getValueAt(i, 0);
-        }
-    }
-
-    if (selectedCount == 0) {
-        JOptionPane.showMessageDialog(this, "No has seleccionado ningún producto.", "Error", JOptionPane.ERROR_MESSAGE);
-    } else if (selectedCount > 1) {
-        JOptionPane.showMessageDialog(this, "Solo se permite seleccionar un producto a la vez.", "Error", JOptionPane.ERROR_MESSAGE);
-    } else {
-         // Obtén el correo electrónico asociado al producto seleccionado
-        String selectedProductEmail = productEmailMap.get(selectedProductName);
-
-        // Muestra la información del producto seleccionado y el correo electrónico
-        System.out.println("Producto seleccionado: " + selectedProductName);
-        System.out.println("Correo electrónico del donador: " + selectedProductEmail);
-        JOptionPane.showMessageDialog(this, "Producto '" + selectedProductName + "' apartado con éxito. Contacta a " + selectedProductEmail+" que fue el donador", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        // Actualiza la cantidad de productos en la lista
-        listaProductos.removeProductByQuantity(selectedProductName);
-
-        // Actualiza la tabla jTable1
-        int selectedProductIndex2 = -1;
         for (int i = 0; i < jTable1.getRowCount(); i++) {
-            if (selectedProductName.equals((String) jTable1.getValueAt(i, 0))) {
-                selectedProductIndex2 = i;
-                break;
+            if ((Boolean) jTable1.getValueAt(i, 4)) {
+                selectedCount++;
+                selectedProductIndex = i;
+                selectedProductName = (String) jTable1.getValueAt(i, 0);
             }
         }
 
-        if (selectedProductIndex2 != -1) {
-            int currentQuantity = (int) jTable1.getValueAt(selectedProductIndex2, 2);
-            if (currentQuantity > 1) {
-                jTable1.setValueAt(currentQuantity - 1, selectedProductIndex2, 2);
-            } else {
-                mt.removeRow(selectedProductIndex2);
+        if (selectedCount == 0) {
+            JOptionPane.showMessageDialog(this, "No has seleccionado ningún producto.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (selectedCount > 1) {
+            JOptionPane.showMessageDialog(this, "Solo se permite seleccionar un producto a la vez.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            // Obtén el correo electrónico asociado al producto seleccionado
+            String selectedProductEmail = productEmailMap.get(selectedProductName);
+
+            // Muestra la información del producto seleccionado y el correo electrónico
+            System.out.println("Producto seleccionado: " + selectedProductName);
+            System.out.println("Correo electrónico del donador: " + selectedProductEmail);
+            JOptionPane.showMessageDialog(this, "Producto '" + selectedProductName + "' apartado con éxito. Contacta a " + selectedProductEmail+" que fue el donador", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            // Actualiza la cantidad de productos en la lista
+            listaProductos.removeProductByQuantity(selectedProductName);
+
+            // Actualiza la tabla jTable1
+            int selectedProductIndex2 = -1;
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                if (selectedProductName.equals((String) jTable1.getValueAt(i, 0))) {
+                    selectedProductIndex2 = i;
+                    break;
+                }
             }
+
+            if (selectedProductIndex2 != -1) {
+                int currentQuantity = (int) jTable1.getValueAt(selectedProductIndex2, 2);
+                if (currentQuantity > 1) {
+                    jTable1.setValueAt(currentQuantity - 1, selectedProductIndex2, 2);
+                } else {
+                    mt.removeRow(selectedProductIndex2);
+                }
+            }
+
+            Serializador.serializarObjeto(listaProductos, "productos.dat");
+
+            // Agrega aquí la lógica adicional que desees para el producto seleccionado
         }
-
-        Serializador.serializarObjeto(listaProductos, "productos.dat");
-
-
-        // Agrega aquí la lógica adicional que desees para el producto seleccionado
-    }
     }//GEN-LAST:event_txt_bottonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -267,7 +263,7 @@ public class MenuProductosMasRecientes extends javax.swing.JFrame {
         this.dispose();
         MenuBeneficiario menuben=new MenuBeneficiario();
         menuben.setVisible(true);
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -287,20 +283,20 @@ public class MenuProductosMasRecientes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuProductosMasRecientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuProductosFecha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuProductosMasRecientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuProductosFecha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuProductosMasRecientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuProductosFecha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuProductosMasRecientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuProductosFecha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuProductosMasRecientes().setVisible(true);
+                new MenuProductosFecha().setVisible(true);
             }
         });
     }
@@ -348,6 +344,9 @@ public class MenuProductosMasRecientes extends javax.swing.JFrame {
 
         return selectedCount;
     }
+    
+ 
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
