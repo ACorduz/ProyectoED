@@ -1,19 +1,19 @@
 
-package ArchivosBorrarAlFinalSegundaEntrega;
+package functionalities;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Estructure_DoubleLinkedList.Node;
 import Estructure_DinamicArray.DinamicArray;
-import ArchivosBorrarAlFinalSegundaEntrega.InputDataJSON;
+import Logic.InputDataJSON;
 import Business.Main;
 import Data.Comida;
-import Data.SerializacionAO;
+import Data.serialization;
 
 
 public class RegistroComida extends Main {
     private int typeOfFile = 1;
     private DoubleLinkedList doubleLinkedListJSON;
     private DinamicArray dinamicArrayJSON; 
-    private SerializacionAO ser = new SerializacionAO();
+    private serialization ser = new serialization();
     private int numberRowsRead;
     private int indexFileDoubleLL = ser.getIndexNamesFiles("listOfProductsSerialization.obj");
     private int indexFileDA = ser.getIndexNamesFiles("listOfProducts_DASerialization.obj");
@@ -36,7 +36,7 @@ public class RegistroComida extends Main {
         // traer lista
         DoubleLinkedList<Food> doubleLinkedListFinal = Main.getListOfProducts();
         // crearObjeto
-        Comida f = new Comida("Comida", nameProduct,  quantity, emailDonor,  expirationDateYear,  expirationDateMonth,  expirationDateDay);
+        Food f = new Food("Food", nameProduct,  quantity, emailDonor,  expirationDateYear,  expirationDateMonth,  expirationDateDay);
         // insertarlo en lista
         doubleLinkedListFinal.pushBack(f);
         
@@ -45,7 +45,7 @@ public class RegistroComida extends Main {
         //storeDataRF_DoubleLinkedList(1)
     }
     
-    public void InsertRFObject_DoubleLinkedList(Comida food){
+    public void InsertRFObject_DoubleLinkedList(Food food){
         // traer lista
         DoubleLinkedList<Food> doubleLinkedListFinal = Main.getListOfProducts();
 
@@ -58,9 +58,9 @@ public class RegistroComida extends Main {
     }
     
     // actualizar
-    public void UpdateRF_DoubleLinkedList(Comida obj,String nameProduct, int quantity,String emailDonor, int expirationDateYear, int expirationDateMonth, int expirationDateDay ){
+    public void UpdateRF_DoubleLinkedList(Food obj,String nameProduct, int quantity,String emailDonor, int expirationDateYear, int expirationDateMonth, int expirationDateDay ){
         DoubleLinkedList<Food> doubleLinkedListFinal = Main.getListOfProducts();
-        Comida f = new Comida("Comida", nameProduct,  quantity, emailDonor,  expirationDateYear,  expirationDateMonth,  expirationDateDay);
+        Food f = new Food("Food", nameProduct,  quantity, emailDonor,  expirationDateYear,  expirationDateMonth,  expirationDateDay);
         boolean IsUpdate = doubleLinkedListFinal.updateNode(obj, f);
         
         if(IsUpdate){
@@ -79,7 +79,7 @@ public class RegistroComida extends Main {
     }
     
     // buscar si un objeto esta en la lista 
-    public boolean findDataRF_DoubleLinkedList(Comida foodCompare){
+    public boolean findDataRF_DoubleLinkedList(Food foodCompare){
         // traer lista
         DoubleLinkedList<Food> doubleLinkedListFinal = Main.getListOfProducts();
         boolean exist = doubleLinkedListFinal.find(foodCompare);
@@ -89,7 +89,6 @@ public class RegistroComida extends Main {
         return(false);
     }
     */
-    
     public boolean findData_Email_RF_DoubleLinkedList(String email){
         // traer lista
   

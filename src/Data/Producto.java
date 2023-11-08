@@ -81,6 +81,13 @@ public class Producto implements Serializable {
     public void setEmailDonor(String emailDonor) {
         this.emailDonor = emailDonor;
     }
+    
+    public String getExpirationDate() {
+        String year = String.valueOf(expirationDateYear);
+        String month = String.format("%02d", expirationDateMonth); // Asegura que el mes tenga dos dígitos (por ejemplo, 03 en lugar de 3).
+        String day = String.format("%02d", expirationDateDay); // Asegura que el día tenga dos dígitos (por ejemplo, 09 en lugar de 9).
+        return year + "-" + month + "-" + day;
+    }
 
     public int getIndex() {
         return index;
@@ -93,10 +100,10 @@ public class Producto implements Serializable {
     @Override
     public String toString() {
     return "Product{" +
-            "\n  Type: " + typeProduct +
-            "\n  Name: " + nameProduct +
-            "\n  Estate: " + estate +
-            "\n  Quantity: " + quantity +
+            "\n  Tipo: " + typeProduct +
+            "\n  Nombre: " + nameProduct +
+            "\n  Fecha Vencimeinto: " + getExpirationDate() +
+            "\n  Cantidad: " + quantity +
             "\n  Email Donor: " + emailDonor +
             "\n}";
 }

@@ -1,6 +1,8 @@
 
 package Estructure_LinkedList;
 
+import Data.CompanyDonor;
+import Data.Donnor;
 import java.io.Serializable;
 
 
@@ -265,6 +267,55 @@ public class LinkedList <T> implements EstructureLinkedList<T>, Serializable{
     }
 
     return (T) current.getData();
+    }
+    
+    public int indexOf(T key) {
+        int index = 0;
+        Node current = head.getNext();
+
+        while (current != null) {
+            if (current.getData().equals(key)) {
+                return index;
+            }
+            current = current.getNext();
+            index++;
+        }
+
+        return -1; // Si no se encuentra el elemento en la lista.
+    }
+        public int indexOfDonnorByEmail(String email) {
+        int index = 0;
+        Node current = head.getNext();
+
+        while (current != null) {
+            if (current.getData() instanceof Donnor) {
+                Donnor donador = (Donnor) current.getData();
+                if (donador.getEmail().equals(email)) {
+                    return index;
+                }
+            }
+            current = current.getNext();
+            index++;
+        }
+
+        return -1; // Si no se encuentra el elemento en la lista.
+    }
+    public int indexOfCompanyByEmail(String email) {
+        int index = 0;
+        Node current = head.getNext();
+
+        while (current != null) {
+            if (current.getData() instanceof CompanyDonor) {
+                CompanyDonor empresa = (CompanyDonor) current.getData();
+                if (empresa.getEmail().equals(email)) {
+                    return index;
+                }
+            }
+            current = current.getNext();
+            index++;
+        }
+
+        return -1; // Si no se encuentra el elemento en la lista.
     }
     @Override
     public String toString() {
