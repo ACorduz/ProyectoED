@@ -10,11 +10,18 @@ import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Trees.AVLTree;
 import Trees.BinaryHeap;
 import Trees.NodoAVL;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.UIManager;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 /**
@@ -32,6 +39,7 @@ public class MenuProductosFecha extends javax.swing.JFrame {
     public MenuProductosFecha() {
         //BinaryHeap hc=new BinaryHeap();
         initComponents();
+        applyCustomDesign();
         listaProductos = Serializador.deserializarObjeto("productos.dat");
         BinaryHeap hc=new BinaryHeap();
         for (int i = 0; i < listaProductos.size(); i++) {
@@ -92,6 +100,7 @@ public class MenuProductosFecha extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -105,24 +114,30 @@ public class MenuProductosFecha extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Productos por Fecha Vencimiento");
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/calendario.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(115, 115, 115)
+                .addContainerGap(359, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addGap(215, 215, 215)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(0, 204, 102));
+        jPanel2.setBackground(new java.awt.Color(90, 213, 198));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,7 +152,9 @@ public class MenuProductosFecha extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        txt_botton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_botton.setBackground(new java.awt.Color(0, 102, 102));
+        txt_botton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txt_botton.setForeground(new java.awt.Color(255, 255, 255));
         txt_botton.setText("Apartar");
         txt_botton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,7 +162,9 @@ public class MenuProductosFecha extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(255, 102, 102));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Regresar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,26 +176,26 @@ public class MenuProductosFecha extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(178, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txt_botton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(49, 49, 49))
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 787, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(121, 121, 121))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_botton, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_botton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(59, 59, 59))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -194,12 +213,12 @@ public class MenuProductosFecha extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 414, Short.MAX_VALUE))
+                .addGap(0, 625, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(35, 35, 35)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(36, 36, 36)))
+                    .addContainerGap()))
         );
 
         pack();
@@ -262,6 +281,8 @@ public class MenuProductosFecha extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
         MenuBeneficiario menuben=new MenuBeneficiario();
+        menuben.setSize(1100, 730);  // Establece las dimensiones fijas (ancho x alto) que desees
+        menuben.setLocationRelativeTo(null);
         menuben.setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -345,12 +366,56 @@ public class MenuProductosFecha extends javax.swing.JFrame {
         return selectedCount;
     }
     
+     private void applyCustomDesign() {
+    // Configuración de diseño de la tabla
+    jTable1.setBackground(new Color(255, 255, 255));
+    jTable1.setForeground(new Color(0, 0, 0));
+    jTable1.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+
+    // Configurar la alineación del texto en las celdas
+    DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+    centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+    jTable1.setDefaultRenderer(Object.class, centerRenderer);
+
+    // Configuración del borde y espaciado entre celdas
+    jTable1.setBorder(BorderFactory.createLineBorder(new Color(0, 102, 102), 2));
+    jTable1.setRowHeight(30);
+
+    // Configuración de los encabezados de la tabla
+    JTableHeader header = jTable1.getTableHeader();
+    header.setBackground(new Color(0, 102, 102));
+    header.setForeground(Color.BLACK);
+    header.setFont(new Font("Segoe UI", Font.BOLD, 18));
+
+    // Configuración de diseño de las casillas de verificación
+    UIManager.put("CheckBox.font", new Font("Segoe UI", Font.PLAIN, 14));
+    UIManager.put("CheckBox.foreground", new Color(0, 0, 0));
+
+    // Configuración de diseño de los botones
+    txt_botton.setBackground(new Color(0, 102, 102));
+    txt_botton.setForeground(Color.WHITE);
+    txt_botton.setFont(new Font("Segoe UI", Font.BOLD, 16));
+    txt_botton.setFocusPainted(false); // Quitar el borde de enfoque
+
+    //jButton1.setBackground(new Color(0, 102, 102));
+    jButton1.setForeground(Color.WHITE);
+    jButton1.setFont(new Font("Segoe UI", Font.BOLD, 16));
+    jButton1.setFocusPainted(false); // Quitar el borde de enfoque
+
+    // Agregar efecto de resaltado al pasar el ratón sobre la tabla
+    jTable1.setSelectionBackground(new Color(0, 102, 102));
+    jTable1.setSelectionForeground(Color.WHITE);
+    jTable1.setShowGrid(true);
+    jTable1.setGridColor(new Color(0, 102, 102));
+}
+    
  
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
