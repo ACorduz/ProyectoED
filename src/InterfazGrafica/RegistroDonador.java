@@ -360,6 +360,8 @@ public class RegistroDonador extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Registro exitoso");
             // Después de guardar, regresar al menú de inicio
             Inicio menuInicio = new Inicio();
+             menuInicio.setSize(1100, 730);  // Establece las dimensiones fijas (ancho x alto) que desees
+            menuInicio.setLocationRelativeTo(null);
             menuInicio.setVisible(true);
 
             // Cierra la ventana actual si es necesario

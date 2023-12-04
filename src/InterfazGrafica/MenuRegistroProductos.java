@@ -108,16 +108,21 @@ public class MenuRegistroProductos extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Formulario");
 
-        txt_producto.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        txt_producto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_producto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txt_producto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_productoActionPerformed(evt);
+            }
+        });
 
-        txt_categoria.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        txt_categoria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_categoria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        txt_cantidad.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        txt_cantidad.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_cantidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        txt_añov.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        txt_añov.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_añov.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txt_añov.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,10 +130,10 @@ public class MenuRegistroProductos extends javax.swing.JFrame {
             }
         });
 
-        txt_mesv.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        txt_mesv.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_mesv.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        txt_diav.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        txt_diav.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_diav.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel7.setBackground(new java.awt.Color(0, 0, 0));
@@ -377,6 +382,10 @@ public class MenuRegistroProductos extends javax.swing.JFrame {
         inicio.setLocationRelativeTo(null);
         inicio.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txt_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_productoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_productoActionPerformed
 
     /**
      * @param args the command line arguments

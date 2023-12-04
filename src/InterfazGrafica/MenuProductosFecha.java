@@ -368,6 +368,8 @@ public class MenuProductosFecha extends javax.swing.JFrame {
         return selectedCount;
     }
     
+    
+    
      private void applyCustomDesign() {
     // Configuración de diseño de la tabla
     jTable1.setBackground(new Color(255, 255, 255));
