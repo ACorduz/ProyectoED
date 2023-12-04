@@ -6,14 +6,15 @@ package InterfazGrafica;
 
 import Data.Producto;
 import Data.Serializador;
+import EstructurasCorte3.ChainingHashTableString;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import Trees.AVLTree;
 import Trees.BinaryHeap;
 import Trees.NodoAVL;
 import java.awt.Color;
 import java.awt.Font;
-import java.util.HashMap;
-import java.util.Map;
+//import java.util.HashMap;
+//import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,7 +33,8 @@ public class MenuProductosFecha extends javax.swing.JFrame {
     private DefaultTableModel mt = new DefaultTableModel();
     private int selectedRow = -1;
     private DoubleLinkedList<Producto> listaProductos;
-    private Map<String, String> productEmailMap = new HashMap<>(); // Asocia nombres de productos con correos electrónicos
+    //private Map<String, String> productEmailMap = new HashMap<>(); // Asocia nombres de productos con correos electrónicos
+    private ChainingHashTableString<String> productEmailMap = new ChainingHashTableString<>(10);
     /**
      * Creates new form MenuProductosFecha
      */
@@ -46,7 +48,7 @@ public class MenuProductosFecha extends javax.swing.JFrame {
             Producto producto = listaProductos.get(i);
             String nombre = producto.getNameProduct();
             String email=producto.getEmailDonor();
-            productEmailMap.put(nombre, email);
+            productEmailMap.insert(nombre, email);
 
             if (producto instanceof Producto) {
                 Producto comida = (Producto) producto; // Realiza un casting a Comida
@@ -244,7 +246,7 @@ public class MenuProductosFecha extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Solo se permite seleccionar un producto a la vez.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             // Obtén el correo electrónico asociado al producto seleccionado
-            String selectedProductEmail = productEmailMap.get(selectedProductName);
+            String selectedProductEmail = productEmailMap.find(selectedProductName);
 
             // Muestra la información del producto seleccionado y el correo electrónico
             System.out.println("Producto seleccionado: " + selectedProductName);

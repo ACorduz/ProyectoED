@@ -6,6 +6,7 @@ package InterfazGrafica;
 
 import Data.Producto;
 import Data.Serializador;
+import EstructurasCorte3.ChainingHashTableString;
 import Estructure_DoubleLinkedList.DoubleLinkedList;
 import java.awt.Color;
 import java.awt.Font;
@@ -20,8 +21,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import java.util.HashMap;
-import java.util.Map;
+//import java.util.HashMap;
+//import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
@@ -37,7 +38,8 @@ public class MenuProductosMasRecientes extends javax.swing.JFrame {
     private DefaultTableModel mt = new DefaultTableModel();
     private int selectedRow = -1;
     private DoubleLinkedList<Producto> listaProductos;
-    private Map<String, String> productEmailMap = new HashMap<>(); // Asocia nombres de productos con correos electrónicos
+    //private Map<String, String> productEmailMap = new HashMap<>(); // Asocia nombres de productos con correos electrónicos
+    private ChainingHashTableString<String> productEmailMap = new ChainingHashTableString<>(10);
     //DefaultTableModel mt=new DefaultTableModel();
     /**
      * Creates new form MenuProductosMasRecientes
@@ -71,7 +73,7 @@ public class MenuProductosMasRecientes extends javax.swing.JFrame {
                 int cantidad = producto.getQuantity();
                 String diaVencimiento = producto.getExpirationDate();
                 String email=producto.getEmailDonor();
-                productEmailMap.put(nombre, email); // Asociar el nombre del producto con su correo electrónico
+                productEmailMap.insert(nombre, email); // Asociar el nombre del producto con su correo electrónico
 
                 mt.addRow(new Object[]{nombre, categoria, cantidad, diaVencimiento, false});
             }
@@ -251,7 +253,7 @@ public class MenuProductosMasRecientes extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Solo se permite seleccionar un producto a la vez.", "Error", JOptionPane.ERROR_MESSAGE);
     } else {
          // Obtén el correo electrónico asociado al producto seleccionado
-        String selectedProductEmail = productEmailMap.get(selectedProductName);
+        String selectedProductEmail = productEmailMap.find(selectedProductName);
 
         // Muestra la información del producto seleccionado y el correo electrónico
         System.out.println("Producto seleccionado: " + selectedProductName);
